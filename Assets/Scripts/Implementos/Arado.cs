@@ -18,7 +18,7 @@ public class Arado : MonoBehaviour
     public int materialAradoIndex = 1; // Índice del material del arado en el array de materiales
 
     public float profundidadSurco = 0.01f; // Profundidad del arado en el terreno
-    public int size = 3; // Tamaño del área afectada por el arado
+    public int size = 20; // Tamaño del área afectada por el arado
 
     bool aradoActivo = false; // Estado del arado
 
@@ -54,7 +54,7 @@ public class Arado : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(activarArado))
+        if (Input.GetKeyDown(activarArado))
         {
             aradoActivo = !aradoActivo; // Cambiar el estado del arado
             //GetComponent<Renderer>().material = aradoActivo ? materialArado : null; // Cambiar el material del arado
@@ -62,7 +62,7 @@ public class Arado : MonoBehaviour
         }
 
 
-        if(!aradoActivo) return; // Si el arado no está activo, salir del método
+        if (!aradoActivo) return; // Si el arado no está activo, salir del método
 
         // Si el arado está activo, reproducir las partículas de tierra
         if (aradoActivo && instanciaParticulas != null && !instanciaParticulas.isPlaying) // Verifica si las partículas no están reproduciéndose
@@ -145,7 +145,7 @@ public class Arado : MonoBehaviour
                 data.SetHeights(startX, startZ, heights);
 
                 terrain.Flush();
-              // DetectarTerrenoArado(); // Llamar al método para detectar el terreno arado
+                // DetectarTerrenoArado(); // Llamar al método para detectar el terreno arado
 
                 Debug.Log("Terreno arado en: " + hit.point + " con profundidad: " + profundidadSurco);
 

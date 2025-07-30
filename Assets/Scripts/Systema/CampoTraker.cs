@@ -4,7 +4,7 @@ using UnityEngine;
 public class CampoTracker : MonoBehaviour
 {
     public Terrain terreno;
-    public string nombreLayerArado = "Arado";
+    public string nombreLayerArado = "TerrainLayer_B";
     public float progresoActual;
 
     private int indexLayerArado;
