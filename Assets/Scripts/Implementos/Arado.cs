@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,6 +22,15 @@ public class Arado : MonoBehaviour
     public int size = 20; // Tamaño del área afectada por el arado
 
     bool aradoActivo = false; // Estado del arado
+
+    //para uqe se mueva el arado es una animacion 
+    [SerializeField] private Transform modeloVisual; // Parte visual del arado que se baja
+    [SerializeField] private float alturaReposo = 0f; // Altura original del arado
+    [SerializeField] private float alturaTrabajo = -0.7f; // Altura cuando está arando
+    [SerializeField] private float velocidadMovimiento = 2f; // Velocidad de bajada/subida
+
+    private Coroutine movimientoArado;
+
 
     // Start is called before the first frame update
     void Start()
@@ -56,10 +66,15 @@ public class Arado : MonoBehaviour
     {
         if (Input.GetKeyDown(activarArado))
         {
-            aradoActivo = !aradoActivo; // Cambiar el estado del arado
-            //GetComponent<Renderer>().material = aradoActivo ? materialArado : null; // Cambiar el material del arado
+            aradoActivo = !aradoActivo;
             Debug.Log("Arado " + (aradoActivo ? "activado" : "desactivado"));
+
+            if (movimientoArado != null) StopCoroutine(movimientoArado);
+
+            float destinoY = aradoActivo ? alturaTrabajo : alturaReposo;
+            movimientoArado = StartCoroutine(MoverArado(destinoY));
         }
+
 
 
         if (!aradoActivo) return; // Si el arado no está activo, salir del método
@@ -70,10 +85,12 @@ public class Arado : MonoBehaviour
             instanciaParticulas.transform.position = puntoRaycast.position; // Asegurarse de que las partículas se posicionen correctamente
             instanciaParticulas.Play(); // Reproducir las partículas de tierra
         }
-        else if (!aradoActivo /*&& instanciaParticulas != null && instanciaParticulas.isPlaying*/) // Si el arado no está activo, detener las partículas
+        else if (!aradoActivo && instanciaParticulas != null && instanciaParticulas.isPlaying) // Si el arado no está activo, detener las partículas
         {
             instanciaParticulas.Stop(); // Detener las partículas de tierra
         }
+
+
 
         if (Physics.Raycast(puntoRaycast.position, Vector3.down, out RaycastHit hit, distanciaDeteccion))
         {
@@ -163,17 +180,19 @@ public class Arado : MonoBehaviour
         }
 
     }
-    //void DetectarTerrenoArado()
-    //{
-    //   RaycastHit hit;
-    //    Vector3 origen = transform.position + Vector3.up * 1f; // levanta el rayo un poco
-    //    if (Physics.Raycast(origen, Vector3.down, out hit, 3f))
-    //    {
-    //        Debug.Log($"Raycast tocó: {hit.collider.name}");
-    //        if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Suelo"))
-    //       {Debug.Log("Terreno arable detectado");
-    //            campoTracker.MarcarCelda(hit.point);
-    //        }
-    //    }
-    //}
+
+    private IEnumerator MoverArado(float destinoY)
+    {
+        Vector3 inicio = modeloVisual.localPosition;
+        Vector3 destino = new Vector3(inicio.x, destinoY, inicio.z);
+
+        float t = 0;
+        while (t < 1)
+        {
+            t += Time.deltaTime * velocidadMovimiento;
+            modeloVisual.localPosition = Vector3.Lerp(inicio, destino, t);
+            yield return null;
+        }
+    }
+
 }

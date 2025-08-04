@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,6 +12,8 @@ public class Sembradora : MonoBehaviour
     public ParticleSystem particulasSembrado;
     public Transform puntoRaycast;
     public float distanciaDeteccion = 5f;
+    [SerializeField] private float anchoSembradoraMetros = 9f; // Ajustalo al tamaño real
+
 
     private TerrainData data;
     private int terrainHeightmapWidth;
@@ -22,13 +25,21 @@ public class Sembradora : MonoBehaviour
     public GameObject prefabSemilla; // Prefab visual de la semilla
     public float espacioEntreSemillas = 1f; // Separación entre semillas visuales
     [SerializeField] private float radioPozo = 0.5f;
-    [SerializeField] private float profundidadPozo = 0.01f; // Ojo, estos valores son proporcionales a la altura total del terrain
+    [SerializeField] private float profundidadPozo = 0.001f; // Ojo, estos valores son proporcionales a la altura total del terrain
 
 
     //    private List<GameObject> semillasInstanciadas = new List<GameObject>();
 
     private Vector3 ultimaPosicionSembrada;
     public float distanciaEntreSemillas = 1.0f;
+
+    //para uqe se mueva el arado es una animacion 
+    [SerializeField] private Transform modeloVisual; // Parte visual del arado que se baja
+    [SerializeField] private float alturaReposo = 0f; // Altura original del arado
+    [SerializeField] private float alturaTrabajo = -1f; // Altura cuando está arando
+    [SerializeField] private float velocidadMovimiento = 2f; // Velocidad de bajada/subida
+
+    private Coroutine movimientoSembradora;
 
 
 
@@ -62,9 +73,14 @@ public class Sembradora : MonoBehaviour
        // Vector3 origen = transform.position + Vector3.up;
         if (Input.GetKeyDown(activarSembradora))
         {
-            sembradoraActivo = !sembradoraActivo; // Cambiar el estado del arado
-            //GetComponent<Renderer>().material = aradoActivo ? materialArado : null; // Cambiar el material del arado
-            Debug.Log("Arado de disco " + (sembradoraActivo ? "activado" : "desactivado"));
+            sembradoraActivo = !sembradoraActivo; // Cambiar el estado de la sembradora
+            Debug.Log("Sembradora" + (sembradoraActivo ? "activado" : "desactivado"));
+            if (movimientoSembradora != null) StopCoroutine(movimientoSembradora);
+
+            float destinoY = sembradoraActivo ? alturaTrabajo : alturaReposo;
+            movimientoSembradora = StartCoroutine(MoverSembradora(destinoY));
+
+         
         }
 
         if (!sembradoraActivo) return; // Si el arado no está activo, salir del método
@@ -96,9 +112,11 @@ public class Sembradora : MonoBehaviour
                 int mapX = Mathf.RoundToInt((pos.x / data.size.x) * data.alphamapWidth);
                 int mapZ = Mathf.RoundToInt((pos.z / data.size.z) * data.alphamapHeight);
 
-                int size = Mathf.RoundToInt(radioSembrado);
+                //int size = Mathf.RoundToInt(radioSembrado);
+                int size = Mathf.RoundToInt((anchoSembradoraMetros / data.size.x) * data.alphamapWidth);
 
-                mapX = Mathf.Clamp(mapX, 0, data.alphamapWidth - 1);
+
+                    mapX = Mathf.Clamp(mapX, 0, data.alphamapWidth - 1);
                 mapZ = Mathf.Clamp(mapZ, 0, data.alphamapHeight - 1);
 
                 int clampedSizeX = Mathf.Min(size, data.alphamapWidth - mapX);
@@ -113,14 +131,18 @@ public class Sembradora : MonoBehaviour
 
                 Debug.Log($"mapX: {mapX}, mapZ: {mapZ}, size: {size}, width: {data.alphamapWidth}, height: {data.alphamapHeight}");
 
-                float[,,] mapa = data.GetAlphamaps(mapX, mapZ, clampedSizeX, clampedSizeZ);
+                //float[,,] mapa = data.GetAlphamaps(mapX, mapZ, clampedSizeX, clampedSizeZ);
+                int halfSize = size / 2;
+                mapX = Mathf.Clamp(mapX - halfSize, 0, data.alphamapWidth - size);
+                mapZ = Mathf.Clamp(mapZ - halfSize, 0, data.alphamapHeight - size);
 
+                float[,,] mapa = data.GetAlphamaps(mapX, mapZ, size, size);
 
                 int capaSembradaIndex = GetLayerIndex("TerrenoSembradoLayer");
 
-                for (int x = 0; x < clampedSizeX; x++)
+                for (int x = 0; x < size; x++)
                 {
-                    for (int z = 0; z < clampedSizeZ; z++)
+                    for (int z = 0; z < size; z++)
                     {
                         for (int l = 0; l < data.alphamapLayers; l++)
                         {
@@ -137,8 +159,12 @@ public class Sembradora : MonoBehaviour
                 {
                     Vector3 spwanposition = hit.point + Vector3.up * 0.1f; // Ajustar la posición para que no esté enterrada
                     GameObject semilla = Instantiate(prefabSemilla, spwanposition, Quaternion.identity);
-                    HacerPozoEnTerreno(hit.point, radioPozo, profundidadPozo);
-                   //semilla.transform.SetParent(this.transform); // Opcional
+
+                    HacerSurcos(hit.point, anchoSembradoraMetros, 0.3f, profundidadPozo);
+
+                   //HacerPozoEnTerreno(hit.point, radioPozo, profundidadPozo);
+
+                  //semilla.transform.SetParent(this.transform); // Opcional
                 }
 
                 if (particulasSembrado && !particulasSembrado.isPlaying)
@@ -231,6 +257,34 @@ public class Sembradora : MonoBehaviour
             mapZ - pozoRadius / 2,
             heights
         );
+    }
+
+    private void HacerSurcos(Vector3 posicionCentral, float anchoTotal, float espacioEntreSurcos, float profundidad)
+    {
+        int cantidadSurcos = Mathf.FloorToInt(anchoTotal / espacioEntreSurcos);
+        Vector3 direccionDerecha = transform.forward;
+
+        for (int i = 0; i < cantidadSurcos; i++)
+        {
+            float offset = (-anchoTotal / 2f) + (i * espacioEntreSurcos);
+            Vector3 posicionSurco = posicionCentral + direccionDerecha * offset;
+
+            // Generar pozo en esa posición
+            HacerPozoEnTerreno(posicionSurco, 0.3f, profundidad);
+        }
+    }
+    private IEnumerator MoverSembradora(float destinoY)
+    {
+        Vector3 inicio = modeloVisual.localPosition;
+        Vector3 destino = new Vector3(inicio.x, destinoY, inicio.z);
+
+        float t = 0;
+        while (t < 1)
+        {
+            t += Time.deltaTime * velocidadMovimiento;
+            modeloVisual.localPosition = Vector3.Lerp(inicio, destino, t);
+            yield return null;
+        }
     }
 
 

@@ -14,10 +14,19 @@ public class AradoDisco : MonoBehaviour
     public LayerMask Suelo; // Capa del suelo para detectar colisiones
     public int materialAradoIndex = 1; // Índice del material del arado en el array de materiales
 
-    public float profundidadSurco = 0.1f; // Profundidad del arado en el terreno
-    public int size = 3; // Tamaño del área afectada por el arado
+    public float profundidadSurco = 0.005f; // Profundidad del arado en el terreno
+    public int size = 30; // Tamaño del área afectada por el arado
 
     bool aradoActivo = false; // Estado del arado
+
+    //animacion del arado de disco
+    [SerializeField] private Transform modeloVisual; // Parte visual del arado que se baja
+    [SerializeField] private float alturaReposo = 0f; // Altura original del arado
+    [SerializeField] private float alturaTrabajo = -1.8f; // Altura cuando está arando
+    [SerializeField] private float velocidadMovimiento = 2f; // Velocidad de bajada/subida
+
+    private Coroutine movimientoArado;
+
 
     // Start is called before the first frame update
     void Start()
@@ -54,8 +63,11 @@ public class AradoDisco : MonoBehaviour
         if (Input.GetKeyDown(activarArado))
         {
             aradoActivo = !aradoActivo; // Cambiar el estado del arado
-            //GetComponent<Renderer>().material = aradoActivo ? materialArado : null; // Cambiar el material del arado
             Debug.Log("Arado de disco " + (aradoActivo ? "activado" : "desactivado"));
+            if (movimientoArado != null) StopCoroutine(movimientoArado);
+
+            float destinoY = aradoActivo ? alturaTrabajo : alturaReposo;
+            movimientoArado = StartCoroutine(MoverArado(destinoY));
         }
 
         if (!aradoActivo) return; // Si el arado no está activo, salir del método
@@ -66,7 +78,7 @@ public class AradoDisco : MonoBehaviour
             instanciaParticulas.transform.position = puntoRaycast.position; // Asegurarse de que las partículas se posicionen correctamente
             instanciaParticulas.Play(); // Reproducir las partículas de tierra
         }
-        else if (!aradoActivo /*&& instanciaParticulas != null && instanciaParticulas.isPlaying*/) // Si el arado no está activo, detener las partículas
+        else if (!aradoActivo && instanciaParticulas != null && instanciaParticulas.isPlaying) // Si el arado no está activo, detener las partículas
         {
             instanciaParticulas.Stop(); // Detener las partículas de tierra
         }
@@ -76,7 +88,6 @@ public class AradoDisco : MonoBehaviour
         {
             Debug.DrawRay(puntoRaycast.position, Vector3.down * distanciaDeteccion, Color.red);
 
-            //Terrain terrain = hit.collider.GetComponent<Terrain>();
             if (terrain != null)
             {
                 // Si el rayo detecta un terreno, activar el arado
@@ -163,5 +174,18 @@ public class AradoDisco : MonoBehaviour
             Debug.Log("No hay suelo debajo del arado");
         }
 
+    }
+    private IEnumerator MoverArado(float destinoY)
+    {
+        Vector3 inicio = modeloVisual.localPosition;
+        Vector3 destino = new Vector3(inicio.x, destinoY, inicio.z);
+
+        float t = 0;
+        while (t < 1)
+        {
+            t += Time.deltaTime * velocidadMovimiento;
+            modeloVisual.localPosition = Vector3.Lerp(inicio, destino, t);
+            yield return null;
+        }
     }
 }
