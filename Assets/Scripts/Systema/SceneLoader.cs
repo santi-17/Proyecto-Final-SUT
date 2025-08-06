@@ -4,8 +4,8 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour
 {
-    [DllImport("__Internal")]
-    private static extern void LogDesdeUnity(string menssage);
+    //[DllImport("__Internal")]
+    //private static extern void LogDesdeUnity(string menssage);
 
     // Start is called before the first frame update
     void Start()
