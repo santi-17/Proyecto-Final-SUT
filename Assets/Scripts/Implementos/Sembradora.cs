@@ -23,7 +23,7 @@ public class Sembradora : MonoBehaviour
 
     //spawn de semillas 
     public GameObject prefabSemilla; // Prefab visual de la semilla
-    public float espacioEntreSemillas = 1f; // Separación entre semillas visuales
+    public float espacioEntreSemillas = 2f; // Separación entre semillas visuales
     [SerializeField] private float radioPozo = 0.5f;
     [SerializeField] private float profundidadPozo = 0.001f; // Ojo, estos valores son proporcionales a la altura total del terrain
 
@@ -80,18 +80,23 @@ public class Sembradora : MonoBehaviour
             float destinoY = sembradoraActivo ? alturaTrabajo : alturaReposo;
             movimientoSembradora = StartCoroutine(MoverSembradora(destinoY));
 
+            if (sembradoraActivo)
+            {
+                ultimaPosicionSembrada = transform.position; // Actualizar la última posición sembrada al activar
+            }
+
          
         }
 
         if (!sembradoraActivo) return; // Si el arado no está activo, salir del método
         // Si el arado está activo, reproducir las partículas de tierra
         
-        if (sembradoraActivo && particulasSembrado != null && !particulasSembrado.isPlaying) // Verifica si las partículas no están reproduciéndose
+        if (sembradoraActivo && particulasSembrado != null) // Verifica si las partículas no están reproduciéndose
         {
             particulasSembrado.transform.position = puntoRaycast.position; // Asegurarse de que las partículas se posicionen correctamente
             particulasSembrado.Play(); // Reproducir las partículas de tierra
         }
-        else if (!sembradoraActivo /*&& instanciaParticulas != null && instanciaParticulas.isPlaying*/) // Si el arado no está activo, detener las partículas
+        else if (!sembradoraActivo && particulasSembrado != null) // Si el arado no está activo, detener las partículas
         {
             particulasSembrado.Stop(); // Detener las partículas de tierra
         }
@@ -162,10 +167,11 @@ public class Sembradora : MonoBehaviour
 
                     HacerSurcos(hit.point, anchoSembradoraMetros, 0.3f, profundidadPozo);
 
-                   //HacerPozoEnTerreno(hit.point, radioPozo, profundidadPozo);
+                    StartCoroutine(CubrirSemilla(hit.point, radioPozo, 0.005f));
+                        //HacerPozoEnTerreno(hit.point, radioPozo, profundidadPozo);
 
-                  //semilla.transform.SetParent(this.transform); // Opcional
-                }
+                        //semilla.transform.SetParent(this.transform); // Opcional
+                    }
 
                 if (particulasSembrado && !particulasSembrado.isPlaying)
                 {
@@ -193,37 +199,6 @@ public class Sembradora : MonoBehaviour
         }
         Debug.LogError("No se encontró la capa: " + nombre);
         return 0;
-    }
-
-    private void PintarTerreno(RaycastHit hit)
-    {
-        Terrain terrain = Terrain.activeTerrain;
-        TerrainData terrainData = terrain.terrainData;
-
-        Vector3 terrainPosition = hit.point - terrain.transform.position;
-
-        int mapX = Mathf.FloorToInt((terrainPosition.x / terrainData.size.x) * terrainData.alphamapWidth);
-        int mapZ = Mathf.FloorToInt((terrainPosition.z / terrainData.size.z) * terrainData.alphamapHeight);
-
-        int size = 5; // tamaño del área a pintar
-        int layerIndex = GetLayerIndex("TerrenoSembradoLayer");
-
-        if (layerIndex == -1) return;
-
-        float[,,] alphas = terrainData.GetAlphamaps(mapX, mapZ, size, size);
-
-        for (int x = 0; x < size; x++)
-        {
-            for (int z = 0; z < size; z++)
-            {
-                for (int i = 0; i < terrainData.alphamapLayers; i++)
-                {
-                    alphas[x, z, i] = (i == layerIndex) ? 1f : 0f;
-                }
-            }
-        }
-
-        terrainData.SetAlphamaps(mapX, mapZ, alphas);
     }
 
     private void HacerPozoEnTerreno(Vector3 posicion, float radio, float profundidad)
@@ -285,6 +260,40 @@ public class Sembradora : MonoBehaviour
             modeloVisual.localPosition = Vector3.Lerp(inicio, destino, t);
             yield return null;
         }
+    }
+    IEnumerator CubrirSemilla(Vector3 posicion, float radio, float alturaCobertura)
+    {
+        yield return new WaitForSeconds(0.5f); // espera a que la semilla caiga
+
+        Vector3 terrainPosition = posicion - terreno.transform.position;
+
+        int mapX = Mathf.RoundToInt((terrainPosition.x / terreno.terrainData.size.x) * terrainHeightmapWidth);
+        int mapZ = Mathf.RoundToInt((terrainPosition.z / terreno.terrainData.size.z) * terrainHeightmapHeight);
+
+        int coberturaRadius = Mathf.RoundToInt(radio * terrainHeightmapWidth / terreno.terrainData.size.x);
+
+        float[,] alturas = data.GetHeights(
+            mapX - coberturaRadius / 2,
+            mapZ - coberturaRadius / 2,
+            coberturaRadius,
+            coberturaRadius
+        );
+
+        for (int x = 0; x < coberturaRadius; x++)
+        {
+            for (int z = 0; z < coberturaRadius; z++)
+            {
+                float distance = Vector2.Distance(new Vector2(x, z), new Vector2(coberturaRadius / 2, coberturaRadius / 2));
+                float falloff = Mathf.Clamp01(1f - distance / (coberturaRadius / 2f));
+                alturas[x, z] += alturaCobertura * falloff;
+            }
+        }
+
+        data.SetHeights(
+            mapX - coberturaRadius / 2,
+            mapZ - coberturaRadius / 2,
+            alturas
+        );
     }
 
 

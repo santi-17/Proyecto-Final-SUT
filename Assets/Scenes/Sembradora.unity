@@ -417,6 +417,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1819971919}
     - target: {fileID: 2402330367690166815, guid: 4dab9c2a687282a4d89c6c1f74b3775c, type: 3}
+      propertyPath: espacioEntreSemillas
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2402330367690166815, guid: 4dab9c2a687282a4d89c6c1f74b3775c, type: 3}
       propertyPath: anchoSembradoraMetros
       value: 9
       objectReference: {fileID: 0}
@@ -974,6 +978,14 @@ PrefabInstance:
     - target: {fileID: 1051060582337974575, guid: c7fe524af1c368e4e8c573f607bafd0c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9221387913048074917, guid: c7fe524af1c368e4e8c573f607bafd0c, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9221387913048074917, guid: c7fe524af1c368e4e8c573f607bafd0c, type: 3}
+      propertyPath: moveWithTransform
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
