@@ -1887,7 +1887,7 @@ Canvas:
   serializedVersion: 3
   m_RenderMode: 1
   m_Camera: {fileID: 963194227}
-  m_PlaneDistance: 100
+  m_PlaneDistance: 50
   m_PixelPerfect: 1
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
@@ -2171,6 +2171,67 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2144769719}
   m_CullTransparentMesh: 1
+--- !u!1001 &48674518613434661
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4070170255225430123, guid: 3dac046600e56c44cb390d3c7d59d610, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -35.18
+      objectReference: {fileID: 0}
+    - target: {fileID: 4070170255225430123, guid: 3dac046600e56c44cb390d3c7d59d610, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 39.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4070170255225430123, guid: 3dac046600e56c44cb390d3c7d59d610, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 128.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4070170255225430123, guid: 3dac046600e56c44cb390d3c7d59d610, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4070170255225430123, guid: 3dac046600e56c44cb390d3c7d59d610, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4070170255225430123, guid: 3dac046600e56c44cb390d3c7d59d610, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4070170255225430123, guid: 3dac046600e56c44cb390d3c7d59d610, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4070170255225430123, guid: 3dac046600e56c44cb390d3c7d59d610, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4070170255225430123, guid: 3dac046600e56c44cb390d3c7d59d610, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4070170255225430123, guid: 3dac046600e56c44cb390d3c7d59d610, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4169906421418486019, guid: 3dac046600e56c44cb390d3c7d59d610, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8066801308450860497, guid: 3dac046600e56c44cb390d3c7d59d610, type: 3}
+      propertyPath: m_Name
+      value: ParticulasFitoSanitario
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3dac046600e56c44cb390d3c7d59d610, type: 3}
 --- !u!1001 &947720014590385276
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2860,3 +2921,4 @@ SceneRoots:
   - {fileID: 7530621909494004128}
   - {fileID: 5378102609822622861}
   - {fileID: 4754537321359014524}
+  - {fileID: 48674518613434661}
