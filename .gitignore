@@ -75,6 +75,9 @@ mono_crash.*
 
 /[Ww]eb[Gg][Ll]/
 
+WebGLBuild/
+[Ww]eb[Gg][Ll]*/
+
 
 # Crashlytics generated file
 crashlytics-build.properties
