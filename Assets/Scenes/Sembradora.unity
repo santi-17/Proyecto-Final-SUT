@@ -696,6 +696,54 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &724525845
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 724525847}
+  - component: {fileID: 724525846}
+  m_Layer: 0
+  m_Name: CampoTracker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &724525846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 724525845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d4d3ffe52c2de74a98575bc9ca12a73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  terreno: {fileID: 273688540}
+  nombreLayerArado: TerrenoSembradoLayer
+  progresoActual: 0
+  textoProgreso: {fileID: 1314121070}
+--- !u!4 &724525847
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 724525845}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4.482728, y: 28.733849, z: -6.620432}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &905705838 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6211349017258956707, guid: 2472f5f2e59cb0f42aa974d204ba7017, type: 3}
@@ -1001,6 +1049,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a2185682c1ad2b8429e844ee83ae7742, type: 3}
+--- !u!114 &1314121070 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6756188029371357723, guid: a2185682c1ad2b8429e844ee83ae7742, type: 3}
+  m_PrefabInstance: {fileID: 1314121069}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!54 &1745230549 stripped
 Rigidbody:
   m_CorrespondingSourceObject: {fileID: 3558406741897152668, guid: 2472f5f2e59cb0f42aa974d204ba7017, type: 3}
@@ -1376,3 +1435,4 @@ SceneRoots:
   - {fileID: 967942391}
   - {fileID: 1314121069}
   - {fileID: 138970610}
+  - {fileID: 724525847}

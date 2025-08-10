@@ -287,13 +287,25 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5255175847286546655, guid: a6455d60c55c59741b15f69cca6f0f6c, type: 3}
+      propertyPath: size
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5255175847286546655, guid: a6455d60c55c59741b15f69cca6f0f6c, type: 3}
       propertyPath: terrain
       value: 
       objectReference: {fileID: 1696644305}
     - target: {fileID: 5255175847286546655, guid: a6455d60c55c59741b15f69cca6f0f6c, type: 3}
+      propertyPath: modeloVisual
+      value: 
+      objectReference: {fileID: 1783567807}
+    - target: {fileID: 5255175847286546655, guid: a6455d60c55c59741b15f69cca6f0f6c, type: 3}
       propertyPath: particulasTierra
       value: 
       objectReference: {fileID: 1971078959}
+    - target: {fileID: 5255175847286546655, guid: a6455d60c55c59741b15f69cca6f0f6c, type: 3}
+      propertyPath: profundidadSurco
+      value: 0.005
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1397,7 +1409,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2256821548175640600, guid: a6455d60c55c59741b15f69cca6f0f6c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 260.4395
+      value: 224.05
       objectReference: {fileID: 0}
     - target: {fileID: 2256821548175640600, guid: a6455d60c55c59741b15f69cca6f0f6c, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1436,13 +1448,25 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5255175847286546655, guid: a6455d60c55c59741b15f69cca6f0f6c, type: 3}
+      propertyPath: size
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5255175847286546655, guid: a6455d60c55c59741b15f69cca6f0f6c, type: 3}
       propertyPath: terrain
       value: 
       objectReference: {fileID: 668009429}
     - target: {fileID: 5255175847286546655, guid: a6455d60c55c59741b15f69cca6f0f6c, type: 3}
+      propertyPath: modeloVisual
+      value: 
+      objectReference: {fileID: 1644916907}
+    - target: {fileID: 5255175847286546655, guid: a6455d60c55c59741b15f69cca6f0f6c, type: 3}
       propertyPath: particulasTierra
       value: 
       objectReference: {fileID: 1971078959}
+    - target: {fileID: 5255175847286546655, guid: a6455d60c55c59741b15f69cca6f0f6c, type: 3}
+      propertyPath: profundidadSurco
+      value: 0.005
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1530,7 +1554,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5255175847286546655, guid: a6455d60c55c59741b15f69cca6f0f6c, type: 3}
       propertyPath: size
-      value: 30
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 5255175847286546655, guid: a6455d60c55c59741b15f69cca6f0f6c, type: 3}
       propertyPath: terrain
@@ -1542,7 +1566,7 @@ PrefabInstance:
       objectReference: {fileID: 1596641645}
     - target: {fileID: 5255175847286546655, guid: a6455d60c55c59741b15f69cca6f0f6c, type: 3}
       propertyPath: alturaTrabajo
-      value: -1.8
+      value: -1.2
       objectReference: {fileID: 0}
     - target: {fileID: 5255175847286546655, guid: a6455d60c55c59741b15f69cca6f0f6c, type: 3}
       propertyPath: particulasTierra
@@ -1550,7 +1574,7 @@ PrefabInstance:
       objectReference: {fileID: 1971078959}
     - target: {fileID: 5255175847286546655, guid: a6455d60c55c59741b15f69cca6f0f6c, type: 3}
       propertyPath: profundidadSurco
-      value: 0.005
+      value: 0.002
       objectReference: {fileID: 0}
     - target: {fileID: 7523834833560495119, guid: a6455d60c55c59741b15f69cca6f0f6c, type: 3}
       propertyPath: m_Size.x
@@ -1585,6 +1609,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 1666862991120398656, guid: a6455d60c55c59741b15f69cca6f0f6c, type: 3}
   m_PrefabInstance: {fileID: 1596641644}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1644916907 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1666862991120398656, guid: a6455d60c55c59741b15f69cca6f0f6c, type: 3}
+  m_PrefabInstance: {fileID: 1490194305}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1696644303
 GameObject:
@@ -1679,6 +1708,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1783567807 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1666862991120398656, guid: a6455d60c55c59741b15f69cca6f0f6c, type: 3}
+  m_PrefabInstance: {fileID: 422197788}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1971078958
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -771,7 +771,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6831501045932217748, guid: 518b18fcb5027bb42ad0703797be7fa1, type: 3}
       propertyPath: size
-      value: 20
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 6831501045932217748, guid: 518b18fcb5027bb42ad0703797be7fa1, type: 3}
       propertyPath: terrain
@@ -797,6 +797,10 @@ PrefabInstance:
       propertyPath: particulasTierra
       value: 
       objectReference: {fileID: 1761835295}
+    - target: {fileID: 6831501045932217748, guid: 518b18fcb5027bb42ad0703797be7fa1, type: 3}
+      propertyPath: profundidadSurco
+      value: 0.0003
+      objectReference: {fileID: 0}
     - target: {fileID: 6831501045932217748, guid: 518b18fcb5027bb42ad0703797be7fa1, type: 3}
       propertyPath: cuchillaIzquierda
       value: 

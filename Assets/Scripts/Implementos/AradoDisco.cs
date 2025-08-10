@@ -14,52 +14,42 @@ public class AradoDisco : MonoBehaviour
     public LayerMask Suelo; // Capa del suelo para detectar colisiones
     public int materialAradoIndex = 1; // Índice del material del arado en el array de materiales
 
-    public float profundidadSurco = 0.005f; // Profundidad del arado en el terreno
-    public int size = 30; // Tamaño del área afectada por el arado
+    public float profundidadSurco = 0.002f; // Profundidad del arado en el terreno
+    public int size = 50; // Tamaño del área afectada por el arado
 
     bool aradoActivo = false; // Estado del arado
 
     //animacion del arado de disco
     [SerializeField] private Transform modeloVisual; // Parte visual del arado que se baja
     [SerializeField] private float alturaReposo = 0f; // Altura original del arado
-    [SerializeField] private float alturaTrabajo = -1.8f; // Altura cuando está arando
+    [SerializeField] private float alturaTrabajo = -1.2f; // Altura cuando está arando
     [SerializeField] private float velocidadMovimiento = 2f; // Velocidad de bajada/subida
 
     private Coroutine movimientoArado;
+    private float tiempoEntreArados = 0.25f; // Tiempo entre cada arado
+    private float temporizadorArado = 0f;
+
+    private Vector3 ultimaPosicion;
+    private float velocidadDeMovimiento;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        profundidadSurco = 0.1f;
+        ultimaPosicion = transform.position;
         //Terrain terrain = GetComponent<Terrain>();
         if (particulasTierra != null)
         {
             instanciaParticulas = Instantiate(particulasTierra, transform);
             instanciaParticulas.Stop();
         }
-        if (terrain != null)
-        {
-            TerrainData data = terrain.terrainData;
-
-            float[,] alturas = data.GetHeights(0, 0, data.heightmapResolution, data.heightmapResolution);
-            for (int x = 0; x < data.heightmapResolution; x++)
-            {
-                for (int z = 0; z < data.heightmapResolution; z++)
-                {
-                    alturas[z, x] = 0.5f; // mitad de la altura máxima
-                }
-            }
-
-            data.SetHeights(0, 0, alturas);
-            terrain.Flush();
-            Debug.Log("Terreno elevado a 0.5f");
-        }
     }
 
     // Update is called once per frame
     void Update()
     {
+        velocidadDeMovimiento = (transform.position - ultimaPosicion).magnitude / Time.deltaTime;
+        ultimaPosicion = transform.position;
         if (Input.GetKeyDown(activarArado))
         {
             aradoActivo = !aradoActivo; // Cambiar el estado del arado
@@ -70,7 +60,12 @@ public class AradoDisco : MonoBehaviour
             movimientoArado = StartCoroutine(MoverArado(destinoY));
         }
 
-        if (!aradoActivo) return; // Si el arado no está activo, salir del método
+        if (!aradoActivo)
+        {
+            terrain.Flush();
+            return; // Si el arado no está activo, salir del método
+        }
+        if (velocidadMovimiento < 0.1f) {return;}
 
         // Si el arado está activo, reproducir las partículas de tierra
         if (aradoActivo && instanciaParticulas != null && !instanciaParticulas.isPlaying) // Verifica si las partículas no están reproduciéndose
@@ -83,7 +78,35 @@ public class AradoDisco : MonoBehaviour
             instanciaParticulas.Stop(); // Detener las partículas de tierra
         }
 
+        if (aradoActivo)
+        {
+            temporizadorArado -= Time.deltaTime;
+            if (temporizadorArado <= 0f)
+            {
+                if (velocidadDeMovimiento > 0.1f) ArarTerreno();
+                else return;
+                
+                temporizadorArado = tiempoEntreArados;
+            }
+        }
 
+    }
+    private IEnumerator MoverArado(float destinoY)
+    {
+        Vector3 inicio = modeloVisual.localPosition;
+        Vector3 destino = new Vector3(inicio.x, destinoY, inicio.z);
+
+        float t = 0;
+        while (t < 1)
+        {
+            t += Time.deltaTime * velocidadMovimiento;
+            modeloVisual.localPosition = Vector3.Lerp(inicio, destino, t);
+            yield return null;
+        }
+    }
+
+    private void ArarTerreno() 
+    {
         if (Physics.Raycast(puntoRaycast.position, Vector3.down, out RaycastHit hit, distanciaDeteccion))
         {
             Debug.DrawRay(puntoRaycast.position, Vector3.down * distanciaDeteccion, Color.red);
@@ -91,13 +114,11 @@ public class AradoDisco : MonoBehaviour
             if (terrain != null)
             {
                 // Si el rayo detecta un terreno, activar el arado
-                Debug.Log("Arando de disco el terreno en: " + hit.point);
+                //Debug.Log("Disquera usa el terreno en: " + hit.point);
                 // Aquí puedes agregar la lógica para arar el terreno, como cambiar su textura o estado
+
                 Vector3 terrainPos = hit.point - terrain.transform.position;
                 TerrainData data = terrain.terrainData;
-                float profundidadEnMetros = 0.1f;
-                float alturaMaxima = data.size.y;
-                float profundidadSurco = profundidadEnMetros / alturaMaxima;
 
                 int heightmapX = (int)((terrainPos.x / data.size.x) * data.heightmapResolution);
                 int heightmapZ = (int)((terrainPos.z / data.size.z) * data.heightmapResolution);
@@ -115,6 +136,7 @@ public class AradoDisco : MonoBehaviour
                 int startAlphaX = Mathf.Clamp(alphamapX - size / 2, 0, data.alphamapWidth - 1);
                 int startAlphaZ = Mathf.Clamp(alphamapZ - size / 2, 0, data.alphamapHeight - 1);
 
+                //Cambiar la textura del terreno (splatmap)
                 float[,,] splatmap = data.GetAlphamaps(startAlphaX, startAlphaZ, size, size);
 
                 for (int x = 0; x < size; x++)
@@ -122,13 +144,11 @@ public class AradoDisco : MonoBehaviour
                     for (int z = 0; z < size; z++)
                     {
                         for (int i = 0; i < data.alphamapLayers; i++)
-                            splatmap[x, z, i] = 0;
+                            splatmap [x, z, i] = 0;
 
                         splatmap[x, z, materialAradoIndex] = 1;
                     }
                 }
-
-                //splatmap[0, 0, materialAradoIndex] = 1;
 
                 data.SetAlphamaps(startAlphaX, startAlphaZ, splatmap);
 
@@ -139,53 +159,37 @@ public class AradoDisco : MonoBehaviour
                 {
                     for (int z = 0; z < size; z++)
                     {
-                        float valorAntes = heights[z, x];
+                        float distanciaCentro = Vector2.Distance(new Vector2(x, z), new Vector2(size / 2f, size / 2f)); // Distancia al centro del área afectada
 
-                        float distanciaCentro = Mathf.Abs(x - size / 2);
-                        float factor = 1f - (distanciaCentro / (size / 2f));
-                        heights[z, x] -= profundidadSurco * factor;
-                        //heights[z, x] -= profundidadSurco;
-                        Debug.Log($"Altura antes: {valorAntes}, después: {heights[z, x]}");
-                        Debug.Log($"Modificando altura en ({z},{x}) de {heights[z, x] + profundidadSurco} a {heights[z, x]}");
+                        float falloff = Mathf.Clamp01(1f - (distanciaCentro / (size / 2f))); // Factor de caída basado en la distancia al centro
 
-                        //heights[z, x] -= profundidadSurco; // Reducir la altura del terreno
+                        float factor = Random.Range(0.7f, 1.3f); //Le doy irregularidad al terreno //1f - (distanciaCentro / (size / 2f));
+
+                        heights[z, x] -= profundidadSurco * falloff * factor; // Reducir la altura del terreno
                         heights[z, x] = Mathf.Clamp01(heights[z, x]); // Asegurarse de que la altura no se salga de los límites
-
 
                     }
                 }
 
                 data.SetHeights(startX, startZ, heights);
 
-                terrain.Flush();
-
-                Debug.Log("Terreno arado  de disco en: " + hit.point + " con profundidad: " + profundidadSurco);
+               //   terrain.Flush();
 
             }
             else
             {
                 Debug.LogWarning("El objeto no tiene un Renderer para cambiar el material.");
             }
-
+            if (instanciaParticulas != null && !instanciaParticulas.isPlaying)
+            {
+                instanciaParticulas.transform.position = puntoRaycast.position;
+                instanciaParticulas.Play();
+            }
         }
         else
         {
             // Si no se detecta el suelo, desactivar el arado
             Debug.Log("No hay suelo debajo del arado");
-        }
-
-    }
-    private IEnumerator MoverArado(float destinoY)
-    {
-        Vector3 inicio = modeloVisual.localPosition;
-        Vector3 destino = new Vector3(inicio.x, destinoY, inicio.z);
-
-        float t = 0;
-        while (t < 1)
-        {
-            t += Time.deltaTime * velocidadMovimiento;
-            modeloVisual.localPosition = Vector3.Lerp(inicio, destino, t);
-            yield return null;
         }
     }
 }
