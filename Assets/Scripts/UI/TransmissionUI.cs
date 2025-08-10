@@ -10,9 +10,9 @@ public class TransmissionUI : MonoBehaviour
     {
         if (transmission == null || gearText == null) return;
 
-        string mode = transmission.isAutomatic ? "Auto" : "Manual";
+        string mode = transmission.isAutomatic ? "A" : "M";
         string gear = transmission.GetCurrentGear().ToString();
 
-        gearText.text = $"Modo: {mode} | Marcha: {gear}";
+        gearText.text = $"{mode} | {gear}";
     }
 }

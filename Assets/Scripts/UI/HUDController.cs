@@ -10,10 +10,15 @@ public class HUDController : MonoBehaviour
     
     public TextMeshProUGUI velocidad; // Referencia al componente TextMeshProUGUI para mostrar la velocidad
     public TextMeshProUGUI rpm; // Referencia al componente TextMeshProUGUI para mostrar el nivel de combustible
+    public TextMeshProUGUI tiempoText; 
     public float maxRpm = 6000f; // RPM máximo del motor
+
 
     [SerializeField] private CampoTracker campoTracker;
     [SerializeField] private TextMeshProUGUI progresoText;
+
+
+    private float tiempoTranscurrido = 0f;
 
     // Start is called before the first frame update
     void Start()
@@ -26,7 +31,7 @@ public class HUDController : MonoBehaviour
     {
         float velocidadActual = rb.velocity.magnitude*3.6f; // Obtener la velocidad actual del Rigidbody de m/s a km/h
         //velocidad.text = "Velocidad: " + velocidadActual.ToString("F2") + " km/h"; // Actualizar el texto de velocidad
-        velocidad.text = $"Velocidad: {velocidadActual:F1} km/h";
+        velocidad.text = $"{velocidadActual:F1} km/h";
 
         //float rpmActual = (rb.velocity.magnitude / 3.6f) * (maxRpm / 100); // Calcular el RPM actual basado en la velocidad
         float rmpActual = Mathf.Clamp(velocidadActual * 100, 800, maxRpm); // Calcular el RPM actual basado en la velocidad y limitarlo al máximo
@@ -35,5 +40,11 @@ public class HUDController : MonoBehaviour
 
         // Actualizar el progreso del campo
         //progresoText.text = "Progreso: " + (campoTracker.ObtenerProgreso() * 100f).ToString("F2") + "%";
+
+        //seteo el tiempo transcurrido en la sesion
+        tiempoTranscurrido += Time.deltaTime;
+        System.TimeSpan tiempo = System.TimeSpan.FromSeconds(tiempoTranscurrido);
+        tiempoText.text = $"Tiempo {tiempo.Minutes:D2}:{tiempo.Seconds:D2}";
+        
     }
 }

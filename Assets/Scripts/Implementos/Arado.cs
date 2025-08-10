@@ -32,6 +32,8 @@ public class Arado : MonoBehaviour
     private Coroutine movimientoArado;
 
 
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -160,6 +162,7 @@ public class Arado : MonoBehaviour
                 }
 
                 data.SetHeights(startX, startZ, heights);
+
 
                 terrain.Flush();
                 // DetectarTerrenoArado(); // Llamar al método para detectar el terreno arado
