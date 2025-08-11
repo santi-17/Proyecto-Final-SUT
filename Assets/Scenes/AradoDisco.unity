@@ -136,7 +136,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2033895037440936169, guid: 2472f5f2e59cb0f42aa974d204ba7017, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -85.8
+      value: -87
       objectReference: {fileID: 0}
     - target: {fileID: 2384795349400648593, guid: 2472f5f2e59cb0f42aa974d204ba7017, type: 3}
       propertyPath: m_LocalPosition.x
@@ -193,6 +193,14 @@ PrefabInstance:
     - target: {fileID: 5317136795337489996, guid: 2472f5f2e59cb0f42aa974d204ba7017, type: 3}
       propertyPath: m_Center.z
       value: 4.213166
+      objectReference: {fileID: 0}
+    - target: {fileID: 8136933842852042458, guid: 2472f5f2e59cb0f42aa974d204ba7017, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 125
+      objectReference: {fileID: 0}
+    - target: {fileID: 8136933842852042458, guid: 2472f5f2e59cb0f42aa974d204ba7017, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -229
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -288,7 +296,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5255175847286546655, guid: a6455d60c55c59741b15f69cca6f0f6c, type: 3}
       propertyPath: size
-      value: 25
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 5255175847286546655, guid: a6455d60c55c59741b15f69cca6f0f6c, type: 3}
       propertyPath: terrain
@@ -299,12 +307,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1783567807}
     - target: {fileID: 5255175847286546655, guid: a6455d60c55c59741b15f69cca6f0f6c, type: 3}
+      propertyPath: alturaTrabajo
+      value: -1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5255175847286546655, guid: a6455d60c55c59741b15f69cca6f0f6c, type: 3}
       propertyPath: particulasTierra
       value: 
       objectReference: {fileID: 1971078959}
     - target: {fileID: 5255175847286546655, guid: a6455d60c55c59741b15f69cca6f0f6c, type: 3}
       propertyPath: profundidadSurco
-      value: 0.005
+      value: 0.002
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -615,6 +627,18 @@ PrefabInstance:
       propertyPath: transmission
       value: 
       objectReference: {fileID: 212228502}
+    - target: {fileID: 4718376607098918367, guid: a2185682c1ad2b8429e844ee83ae7742, type: 3}
+      propertyPath: m_text
+      value: 'Campo Disquera : 0.00%'
+      objectReference: {fileID: 0}
+    - target: {fileID: 4718376607098918367, guid: a2185682c1ad2b8429e844ee83ae7742, type: 3}
+      propertyPath: m_margin.z
+      value: -51.38086
+      objectReference: {fileID: 0}
+    - target: {fileID: 6756188029371357723, guid: a2185682c1ad2b8429e844ee83ae7742, type: 3}
+      propertyPath: m_text
+      value: 'Campo Disquera : 0.00%'
+      objectReference: {fileID: 0}
     - target: {fileID: 6936375095357368960, guid: a2185682c1ad2b8429e844ee83ae7742, type: 3}
       propertyPath: m_Name
       value: Canvas
@@ -634,6 +658,14 @@ PrefabInstance:
     - target: {fileID: 8932669151092163873, guid: a2185682c1ad2b8429e844ee83ae7742, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -265.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8941734362811389441, guid: a2185682c1ad2b8429e844ee83ae7742, type: 3}
+      propertyPath: m_text
+      value: 'Campo Disquera : 0.00%'
+      objectReference: {fileID: 0}
+    - target: {fileID: 8941734362811389441, guid: a2185682c1ad2b8429e844ee83ae7742, type: 3}
+      propertyPath: m_margin.z
+      value: -39.14081
       objectReference: {fileID: 0}
     - target: {fileID: 9124060190353398634, guid: a2185682c1ad2b8429e844ee83ae7742, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -1449,7 +1481,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5255175847286546655, guid: a6455d60c55c59741b15f69cca6f0f6c, type: 3}
       propertyPath: size
-      value: 25
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 5255175847286546655, guid: a6455d60c55c59741b15f69cca6f0f6c, type: 3}
       propertyPath: terrain
@@ -1460,12 +1492,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1644916907}
     - target: {fileID: 5255175847286546655, guid: a6455d60c55c59741b15f69cca6f0f6c, type: 3}
+      propertyPath: alturaTrabajo
+      value: -1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5255175847286546655, guid: a6455d60c55c59741b15f69cca6f0f6c, type: 3}
       propertyPath: particulasTierra
       value: 
       objectReference: {fileID: 1971078959}
     - target: {fileID: 5255175847286546655, guid: a6455d60c55c59741b15f69cca6f0f6c, type: 3}
       propertyPath: profundidadSurco
-      value: 0.005
+      value: 0.002
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

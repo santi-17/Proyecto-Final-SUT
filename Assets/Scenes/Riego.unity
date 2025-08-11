@@ -262,6 +262,14 @@ PrefabInstance:
       propertyPath: transmission
       value: 
       objectReference: {fileID: 716831755}
+    - target: {fileID: 4718376607098918367, guid: a2185682c1ad2b8429e844ee83ae7742, type: 3}
+      propertyPath: m_text
+      value: 'Campo Riego : 0.00%'
+      objectReference: {fileID: 0}
+    - target: {fileID: 6756188029371357723, guid: a2185682c1ad2b8429e844ee83ae7742, type: 3}
+      propertyPath: m_text
+      value: 'Campo Riego : 0.00%'
+      objectReference: {fileID: 0}
     - target: {fileID: 6936375095357368960, guid: a2185682c1ad2b8429e844ee83ae7742, type: 3}
       propertyPath: m_Name
       value: Canvas
@@ -281,6 +289,10 @@ PrefabInstance:
     - target: {fileID: 8932669151092163873, guid: a2185682c1ad2b8429e844ee83ae7742, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -273.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8941734362811389441, guid: a2185682c1ad2b8429e844ee83ae7742, type: 3}
+      propertyPath: m_text
+      value: 'Campo Riego : 0.00%'
       objectReference: {fileID: 0}
     - target: {fileID: 9124060190353398634, guid: a2185682c1ad2b8429e844ee83ae7742, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -411,6 +423,14 @@ PrefabInstance:
     - target: {fileID: 3049972759451345195, guid: 2472f5f2e59cb0f42aa974d204ba7017, type: 3}
       propertyPath: m_Name
       value: Tractor
+      objectReference: {fileID: 0}
+    - target: {fileID: 8136933842852042458, guid: 2472f5f2e59cb0f42aa974d204ba7017, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 125
+      objectReference: {fileID: 0}
+    - target: {fileID: 8136933842852042458, guid: 2472f5f2e59cb0f42aa974d204ba7017, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -229
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

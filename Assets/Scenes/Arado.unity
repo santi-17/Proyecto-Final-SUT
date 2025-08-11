@@ -1035,6 +1035,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6831501045932217748, guid: 518b18fcb5027bb42ad0703797be7fa1, type: 3}
+      propertyPath: size
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 6831501045932217748, guid: 518b18fcb5027bb42ad0703797be7fa1, type: 3}
       propertyPath: terrain
       value: 
       objectReference: {fileID: 1914789643}
@@ -1046,6 +1050,14 @@ PrefabInstance:
       propertyPath: modeloVisual
       value: 
       objectReference: {fileID: 1513835237}
+    - target: {fileID: 6831501045932217748, guid: 518b18fcb5027bb42ad0703797be7fa1, type: 3}
+      propertyPath: alturaTrabajo
+      value: -0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6831501045932217748, guid: 518b18fcb5027bb42ad0703797be7fa1, type: 3}
+      propertyPath: profundidadSurco
+      value: 0.0003
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1193,19 +1205,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8136933842852042458, guid: 2472f5f2e59cb0f42aa974d204ba7017, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 116
+      value: 125
+      objectReference: {fileID: 0}
+    - target: {fileID: 8136933842852042458, guid: 2472f5f2e59cb0f42aa974d204ba7017, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -229
       objectReference: {fileID: 0}
     - target: {fileID: 8136933842852042458, guid: 2472f5f2e59cb0f42aa974d204ba7017, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.99433184
+      value: 0.997928
       objectReference: {fileID: 0}
     - target: {fileID: 8136933842852042458, guid: 2472f5f2e59cb0f42aa974d204ba7017, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.10632149
+      value: 0.064340755
       objectReference: {fileID: 0}
     - target: {fileID: 8136933842852042458, guid: 2472f5f2e59cb0f42aa974d204ba7017, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 12.207
+      value: 7.378
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1650,6 +1666,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6831501045932217748, guid: 518b18fcb5027bb42ad0703797be7fa1, type: 3}
+      propertyPath: size
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 6831501045932217748, guid: 518b18fcb5027bb42ad0703797be7fa1, type: 3}
       propertyPath: terrain
       value: 
       objectReference: {fileID: 524983230}
@@ -1661,6 +1681,14 @@ PrefabInstance:
       propertyPath: modeloVisual
       value: 
       objectReference: {fileID: 2024416327}
+    - target: {fileID: 6831501045932217748, guid: 518b18fcb5027bb42ad0703797be7fa1, type: 3}
+      propertyPath: alturaTrabajo
+      value: -0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6831501045932217748, guid: 518b18fcb5027bb42ad0703797be7fa1, type: 3}
+      propertyPath: profundidadSurco
+      value: 0.0003
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

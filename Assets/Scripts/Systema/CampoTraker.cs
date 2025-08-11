@@ -66,7 +66,6 @@ public class CampoTracker : MonoBehaviour
 
         progresoActual = (float)celdasAradas / totalCeldas;
         float porcentaje = progresoActual * 100f;
-        Debug.Log($"Progreso del campo arado: {(progresoActual * 100f):F2}%");
 
 
         if (textoProgreso != null)
