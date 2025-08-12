@@ -19,7 +19,7 @@ public class Arado : MonoBehaviour
     public int materialAradoIndex = 1; // Índice del material del arado en el array de materiales
 
     public float profundidadSurco = 0.0003f; // Profundidad del arado en el terreno
-    public int size = 50; // Tamaño del área afectada por el arado
+    public int size = 70; // Tamaño del área afectada por el arado
 
     bool aradoActivo = false; // Estado del arado
 
@@ -128,14 +128,10 @@ public class Arado : MonoBehaviour
                 // Aquí puedes agregar la lógica para arar el terreno, como cambiar su textura o estado
                 Vector3 terrainPos = hit.point - terrain.transform.position;
                 TerrainData data = terrain.terrainData;
-                //float profundidadEnMetros = 0.01f; // esto es lo que vos querés, por ejemplo 1 metro
-                //float alturaMaxima = data.size.y;
-                //float profundidadSurco = profundidadEnMetros / alturaMaxima;
 
                 int heightmapX = (int)((terrainPos.x / data.size.x) * data.heightmapResolution);
                 int heightmapZ = (int)((terrainPos.z / data.size.z) * data.heightmapResolution);
 
-                //int size = 5; // tamaño del área pintada
                 // Asegurarse de que el área afectada no se salga de los límites del heightmap
                 int startX = Mathf.Clamp(heightmapX - size / 2, 0, data.heightmapResolution - 1);
                 int startZ = Mathf.Clamp(heightmapZ - size / 2, 0, data.heightmapResolution - 1);
@@ -187,9 +183,6 @@ public class Arado : MonoBehaviour
 
                 data.SetHeights(startX, startZ, heights);
 
-
-                //terrain.Flush();
-                
             }
             else
             {

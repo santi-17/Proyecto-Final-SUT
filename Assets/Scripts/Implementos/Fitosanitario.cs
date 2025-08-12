@@ -1,24 +1,28 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Fitosanitario : MonoBehaviour
 {
-    public KeyCode teclaActivar = KeyCode.T; // La tecla que se debe presionar para activar el riego
-    public bool fitosanitarioActivo = false; // El estado del riego, activo o inactivo
+    public KeyCode teclaActivar = KeyCode.T; // La tecla que se debe presionar para activar el fitosanitario
+    public bool fitosanitarioActivo = false; // El estado del fitosanitario, activo o inactivo
 
 
     public ParticleSystem[] aspersores; // Array de las particulas de los aspersores que se activarán al presionar la tecla
-    public Terrain terreno; // El terreno donde se aplicará el riego
+    public Terrain terreno; // El terreno donde se aplicará el fitosanitario
     public int indiceCapaHumedad = 2; // El índice de la capa de humedad en el terreno
-    public float radioFitosanitario = 15f; // El radio del área de riego
+    public float radioFitosanitario = 5f; // El radio del área del fitosanitario
+    public float intervaloDeActualizacion = 0.5f; // Intervalo de actualización del fitosanitario
+
+    private TerrainData data; 
+    private float tiempoUltimaActualizacion; // Tiempo de la última actualización del fitosanitario 
 
 
     // Start is called before the first frame update
     void Start()
-    {
-        InvokeRepeating("PintarTerreno", 0f, 0.5f); // Cada 0.5 segundos
-
+    {  
+        data = terreno.terrainData;
     }
 
     // Update is called once per frame
@@ -30,9 +34,10 @@ public class Fitosanitario : MonoBehaviour
             ActivarAspersores(fitosanitarioActivo);
         }
 
-        if (fitosanitarioActivo)
+        if (fitosanitarioActivo && Time.time - tiempoUltimaActualizacion >= intervaloDeActualizacion)
         {
             PintarTerreno();
+            tiempoUltimaActualizacion = Time.time;
         }
 
     }
@@ -48,45 +53,37 @@ public class Fitosanitario : MonoBehaviour
 
     void PintarTerreno()
     {
-        if (!fitosanitarioActivo) return;
+        int size = Mathf.RoundToInt((radioFitosanitario / data.size.x) * data.alphamapWidth); // tamaño del área a pintar
+        int paintSize = size * 2 + 1; // tamaño del área a pintar (diámetro)
+     
         foreach (var aspersor in aspersores)
         {
-            Vector3 posicion = aspersor.transform.position;
-            //Vector3Int mapaCoord;
-            //float[,,] alphas = terreno.terrainData.GetAlphamaps(0, 0, terreno.terrainData.alphamapWidth, terreno.terrainData.alphamapHeight);
+            Vector3 posicion = aspersor.transform.position - terreno.transform.position;
 
-            int mapX = Mathf.FloorToInt((posicion.x - terreno.transform.position.x) / terreno.terrainData.size.x * terreno.terrainData.alphamapWidth);
-            int mapZ = Mathf.FloorToInt((posicion.z - terreno.transform.position.z) / terreno.terrainData.size.z * terreno.terrainData.alphamapHeight);
+            int mapX = Mathf.RoundToInt((posicion.x / data.size.x) * data.alphamapWidth);
+            int mapZ = Mathf.RoundToInt((posicion.z / data.size.z) * data.alphamapHeight);
 
-            int size = 15; // tamaño del área a pintar
-            int paintSize = size * 2 + 1; // tamaño del área a pintar (diámetro)
 
             //clamp para evitar que se salga del terreno
-            int StartX = Mathf.Clamp(mapX - size, 0, terreno.terrainData.alphamapWidth - paintSize);
-            int StartZ = Mathf.Clamp(mapZ - size, 0, terreno.terrainData.alphamapHeight - paintSize);
+            int StartX = Mathf.Clamp(mapX - size, 0, data.alphamapWidth - paintSize);
+            int StartZ = Mathf.Clamp(mapZ - size, 0, data.alphamapHeight - paintSize);
 
-            float[,,] alphas = terreno.terrainData.GetAlphamaps(StartX, StartZ, paintSize, paintSize);
+            float[,,] alphas = data.GetAlphamaps(StartX, StartZ, paintSize, paintSize);
 
-
-            for (int x = 0; x < paintSize; x++) //for (int x = -size; x <= size; x++)
+            for (int x = 0; x < paintSize; x++) 
             {
-                for (int z = 0; z < paintSize; z++)//for (int z = -size; z <= size; z++)
+                for (int z = 0; z < paintSize; z++)
                 {
-                    //int px = mapX + x;
-                    //int pz = mapZ + z;
-
-                    //if (px >= 0 && px < terreno.terrainData.alphamapWidth && pz >= 0 && pz < terreno.terrainData.alphamapHeight)
-                    //{
-                    for (int i = 0; i < terreno.terrainData.alphamapLayers; i++)
+                    float dist = Vector2.Distance (new Vector2(x, z), new Vector2(size, size)); // Distancia al centro del área afectada
+                    if (dist <= size)
                     {
-                        //alphas[pz, px, i] = (i == indiceCapaHumedad) ? 1f : 0f;
-                        alphas[z, x, i] = (i == indiceCapaHumedad) ? 1f : 0f;
+                        for (int i = 0; i < data.alphamapLayers; i++)
+                            alphas[z, x, i] = (i == indiceCapaHumedad) ? 1f : 0f;
                     }
-                    //}
+                        
                 }
             }
-
-            terreno.terrainData.SetAlphamaps(StartX, StartZ, alphas);
+            data.SetAlphamaps(StartX, StartZ, alphas);
         }
     }
 }

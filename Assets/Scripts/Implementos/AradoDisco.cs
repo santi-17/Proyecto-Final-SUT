@@ -15,7 +15,7 @@ public class AradoDisco : MonoBehaviour
     public int materialAradoIndex = 1; // Índice del material del arado en el array de materiales
 
     public float profundidadSurco = 0.002f; // Profundidad del arado en el terreno
-    public int size = 50; // Tamaño del área afectada por el arado
+    public int size = 70; // Tamaño del área afectada por el arado
 
     bool aradoActivo = false; // Estado del arado
 
@@ -37,7 +37,6 @@ public class AradoDisco : MonoBehaviour
     void Start()
     {
         ultimaPosicion = transform.position;
-        //Terrain terrain = GetComponent<Terrain>();
         if (particulasTierra != null)
         {
             instanciaParticulas = Instantiate(particulasTierra, transform);
@@ -53,9 +52,7 @@ public class AradoDisco : MonoBehaviour
         if (Input.GetKeyDown(activarArado))
         {
             aradoActivo = !aradoActivo; // Cambiar el estado del arado
-            Debug.Log("Arado de disco " + (aradoActivo ? "activado" : "desactivado"));
             if (movimientoArado != null) StopCoroutine(movimientoArado);
-
             float destinoY = aradoActivo ? alturaTrabajo : alturaReposo;
             movimientoArado = StartCoroutine(MoverArado(destinoY));
         }
@@ -113,9 +110,6 @@ public class AradoDisco : MonoBehaviour
 
             if (terrain != null)
             {
-                // Si el rayo detecta un terreno, activar el arado
-                //Debug.Log("Disquera usa el terreno en: " + hit.point);
-                // Aquí puedes agregar la lógica para arar el terreno, como cambiar su textura o estado
 
                 Vector3 terrainPos = hit.point - terrain.transform.position;
                 TerrainData data = terrain.terrainData;
@@ -123,7 +117,6 @@ public class AradoDisco : MonoBehaviour
                 int heightmapX = (int)((terrainPos.x / data.size.x) * data.heightmapResolution);
                 int heightmapZ = (int)((terrainPos.z / data.size.z) * data.heightmapResolution);
 
-                //int size = 5; // tamaño del área pintada
                 // Asegurarse de que el área afectada no se salga de los límites del heightmap
                 int startX = Mathf.Clamp(heightmapX - size / 2, 0, data.heightmapResolution - 1);
                 int startZ = Mathf.Clamp(heightmapZ - size / 2, 0, data.heightmapResolution - 1);

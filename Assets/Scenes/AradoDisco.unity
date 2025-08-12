@@ -136,7 +136,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2033895037440936169, guid: 2472f5f2e59cb0f42aa974d204ba7017, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -87
+      value: -92.4
       objectReference: {fileID: 0}
     - target: {fileID: 2384795349400648593, guid: 2472f5f2e59cb0f42aa974d204ba7017, type: 3}
       propertyPath: m_LocalPosition.x
@@ -296,7 +296,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5255175847286546655, guid: a6455d60c55c59741b15f69cca6f0f6c, type: 3}
       propertyPath: size
-      value: 50
+      value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 5255175847286546655, guid: a6455d60c55c59741b15f69cca6f0f6c, type: 3}
       propertyPath: terrain
@@ -317,6 +317,30 @@ PrefabInstance:
     - target: {fileID: 5255175847286546655, guid: a6455d60c55c59741b15f69cca6f0f6c, type: 3}
       propertyPath: profundidadSurco
       value: 0.002
+      objectReference: {fileID: 0}
+    - target: {fileID: 7523834833560495119, guid: a6455d60c55c59741b15f69cca6f0f6c, type: 3}
+      propertyPath: m_Size.x
+      value: 8.41832
+      objectReference: {fileID: 0}
+    - target: {fileID: 7523834833560495119, guid: a6455d60c55c59741b15f69cca6f0f6c, type: 3}
+      propertyPath: m_Size.y
+      value: 4.0404816
+      objectReference: {fileID: 0}
+    - target: {fileID: 7523834833560495119, guid: a6455d60c55c59741b15f69cca6f0f6c, type: 3}
+      propertyPath: m_Size.z
+      value: 5.2983136
+      objectReference: {fileID: 0}
+    - target: {fileID: 7523834833560495119, guid: a6455d60c55c59741b15f69cca6f0f6c, type: 3}
+      propertyPath: m_Center.x
+      value: 0.08905792
+      objectReference: {fileID: 0}
+    - target: {fileID: 7523834833560495119, guid: a6455d60c55c59741b15f69cca6f0f6c, type: 3}
+      propertyPath: m_Center.y
+      value: 1.8906708
+      objectReference: {fileID: 0}
+    - target: {fileID: 7523834833560495119, guid: a6455d60c55c59741b15f69cca6f0f6c, type: 3}
+      propertyPath: m_Center.z
+      value: 0.61558795
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1481,7 +1505,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5255175847286546655, guid: a6455d60c55c59741b15f69cca6f0f6c, type: 3}
       propertyPath: size
-      value: 50
+      value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 5255175847286546655, guid: a6455d60c55c59741b15f69cca6f0f6c, type: 3}
       propertyPath: terrain
@@ -1502,6 +1526,30 @@ PrefabInstance:
     - target: {fileID: 5255175847286546655, guid: a6455d60c55c59741b15f69cca6f0f6c, type: 3}
       propertyPath: profundidadSurco
       value: 0.002
+      objectReference: {fileID: 0}
+    - target: {fileID: 7523834833560495119, guid: a6455d60c55c59741b15f69cca6f0f6c, type: 3}
+      propertyPath: m_Size.x
+      value: 8.393677
+      objectReference: {fileID: 0}
+    - target: {fileID: 7523834833560495119, guid: a6455d60c55c59741b15f69cca6f0f6c, type: 3}
+      propertyPath: m_Size.y
+      value: 4.0404854
+      objectReference: {fileID: 0}
+    - target: {fileID: 7523834833560495119, guid: a6455d60c55c59741b15f69cca6f0f6c, type: 3}
+      propertyPath: m_Size.z
+      value: 5.3229547
+      objectReference: {fileID: 0}
+    - target: {fileID: 7523834833560495119, guid: a6455d60c55c59741b15f69cca6f0f6c, type: 3}
+      propertyPath: m_Center.x
+      value: 0.101379395
+      objectReference: {fileID: 0}
+    - target: {fileID: 7523834833560495119, guid: a6455d60c55c59741b15f69cca6f0f6c, type: 3}
+      propertyPath: m_Center.y
+      value: 1.8906689
+      objectReference: {fileID: 0}
+    - target: {fileID: 7523834833560495119, guid: a6455d60c55c59741b15f69cca6f0f6c, type: 3}
+      propertyPath: m_Center.z
+      value: 0.60326743
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1590,7 +1638,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5255175847286546655, guid: a6455d60c55c59741b15f69cca6f0f6c, type: 3}
       propertyPath: size
-      value: 50
+      value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 5255175847286546655, guid: a6455d60c55c59741b15f69cca6f0f6c, type: 3}
       propertyPath: terrain
@@ -1614,27 +1662,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7523834833560495119, guid: a6455d60c55c59741b15f69cca6f0f6c, type: 3}
       propertyPath: m_Size.x
-      value: 8.383886
+      value: 8.303283
       objectReference: {fileID: 0}
     - target: {fileID: 7523834833560495119, guid: a6455d60c55c59741b15f69cca6f0f6c, type: 3}
       propertyPath: m_Size.y
-      value: 4.14793
+      value: 3.9262695
       objectReference: {fileID: 0}
     - target: {fileID: 7523834833560495119, guid: a6455d60c55c59741b15f69cca6f0f6c, type: 3}
       propertyPath: m_Size.z
-      value: 5.4933395
+      value: 5.291828
       objectReference: {fileID: 0}
     - target: {fileID: 7523834833560495119, guid: a6455d60c55c59741b15f69cca6f0f6c, type: 3}
       propertyPath: m_Center.x
-      value: -0.8030623
+      value: 0.083583355
       objectReference: {fileID: 0}
     - target: {fileID: 7523834833560495119, guid: a6455d60c55c59741b15f69cca6f0f6c, type: 3}
       propertyPath: m_Center.y
-      value: 1.8942089
+      value: 1.8841324
       objectReference: {fileID: 0}
     - target: {fileID: 7523834833560495119, guid: a6455d60c55c59741b15f69cca6f0f6c, type: 3}
       propertyPath: m_Center.z
-      value: 0.60557556
+      value: 0.6257267
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

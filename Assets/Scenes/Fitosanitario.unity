@@ -1085,6 +1085,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a2185682c1ad2b8429e844ee83ae7742, type: 3}
+--- !u!114 &1477937922 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6756188029371357723, guid: a2185682c1ad2b8429e844ee83ae7742, type: 3}
+  m_PrefabInstance: {fileID: 1477937921}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1526837587
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1313,6 +1324,54 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4070170255225430123, guid: 3dac046600e56c44cb390d3c7d59d610, type: 3}
   m_PrefabInstance: {fileID: 1600125890}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1771161216
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1771161218}
+  - component: {fileID: 1771161217}
+  m_Layer: 0
+  m_Name: CampoTracker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1771161217
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1771161216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d4d3ffe52c2de74a98575bc9ca12a73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  terreno: {fileID: 662729301}
+  nombreLayerArado: Grass_B_TerrainLayer
+  progresoActual: 0
+  textoProgreso: {fileID: 1477937922}
+--- !u!4 &1771161218
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1771161216}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.37973976, y: 52.451935, z: -32.31}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2078876729
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1472,7 +1531,8 @@ PrefabInstance:
       propertyPath: nombreDelImplemento
       value: Fitosanitario
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2833805275174089321, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
     m_RemovedGameObjects:
     - {fileID: 411531703901242931, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
     - {fileID: 7831605836725967001, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
@@ -1501,7 +1561,7 @@ PrefabInstance:
       addedObject: {fileID: 1392104916}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1106400200884155378, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
-      insertIndex: 4
+      insertIndex: -1
       addedObject: {fileID: 2087688334}
   m_SourcePrefab: {fileID: 100100000, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
 --- !u!4 &2087688332 stripped
@@ -1537,7 +1597,8 @@ MonoBehaviour:
   - {fileID: 1392104915}
   terreno: {fileID: 662729301}
   indiceCapaHumedad: 2
-  radioFitosanitario: 15
+  radioFitosanitario: 5
+  intervaloDeActualizacion: 0.5
 --- !u!1 &2099093055
 GameObject:
   m_ObjectHideFlags: 0
@@ -1646,3 +1707,4 @@ SceneRoots:
   - {fileID: 982903686}
   - {fileID: 1477937921}
   - {fileID: 1526837587}
+  - {fileID: 1771161218}

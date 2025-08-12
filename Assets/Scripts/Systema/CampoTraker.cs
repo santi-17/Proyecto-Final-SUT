@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CampoTracker : MonoBehaviour
 {
@@ -11,17 +12,14 @@ public class CampoTracker : MonoBehaviour
     private int ancho;
     private int alto;
 
-
     [SerializeField] public TextMeshProUGUI textoProgreso; // Asignalo desde el Inspector
 
+    private string nombreCampo;
     private void Start()
     {
         if (terreno == null) terreno = GetComponent<Terrain>();
-        if (terreno == null)
-        {
-            Debug.LogError("No se encontró el componente Terrain.");
-            return;
-        }
+        
+        nombreCampo = ObtenerNombreCampo();
 
         indexLayerArado = ObtenerIndiceLayerArado();
         ancho = terreno.terrainData.alphamapWidth;
@@ -34,6 +32,24 @@ public class CampoTracker : MonoBehaviour
         }
 
         InvokeRepeating(nameof(CalcularProgreso), 1f, 2f); // cada 2 segundos
+    }
+
+    string ObtenerNombreCampo()
+    {
+        string sceneName = SceneManager.GetActiveScene().name.ToLower();
+
+        if (sceneName.Contains("arado")) 
+            return "Campo Arado";
+        else if (sceneName.Contains("aradodisco"))
+            return "Campo Disquera";
+        else if (sceneName.Contains("sembradora"))
+            return "Campo Sembrado";
+        else if (sceneName.Contains("riego"))
+            return "Campo Regado";
+        else if (sceneName.Contains("fitosanitario"))
+            return "Campo Fitosanitario";
+        else
+            return "Campo Desconocido";
     }
 
     int ObtenerIndiceLayerArado()
@@ -70,7 +86,7 @@ public class CampoTracker : MonoBehaviour
 
         if (textoProgreso != null)
         {
-            textoProgreso.text = $"Campo Arado: {porcentaje:F2}%";
+            textoProgreso.text = $"{nombreCampo}: {porcentaje:F2}%";
         }
     }
 }

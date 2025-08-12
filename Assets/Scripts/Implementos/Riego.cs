@@ -12,13 +12,16 @@ public class Riego : MonoBehaviour
     public ParticleSystem[] aspersores; // Array de las particulas de los aspersores que se activarán al presionar la tecla
     public Terrain terreno; // El terreno donde se aplicará el riego
     public int indiceCapaHumedad = 2; // El índice de la capa de humedad en el terreno
-    public float radioRiego = 15f; // El radio del área de riego
+    public float radioRiego = 5f; // El radio del área de riego
+    public float intervaloDeActualizacion = 0.5f; // Intervalo de actualización del riego
 
+    private TerrainData data;
+    private float tiempoUltimaActualizacion; // Tiempo de la última actualización del riego
 
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("PintarTerreno", 0f, 0.5f); // Cada 0.5 segundos
+        data = terreno.terrainData;
 
     }
 
@@ -31,9 +34,10 @@ public class Riego : MonoBehaviour
             ActivarAspersores(riegoActivo);
         }
 
-        if (riegoActivo)
+        if (riegoActivo && Time.time - tiempoUltimaActualizacion >= intervaloDeActualizacion)
         {
             PintarTerreno();
+            tiempoUltimaActualizacion = Time.time;
         }
 
     }
@@ -49,45 +53,38 @@ public class Riego : MonoBehaviour
 
     void PintarTerreno()
     {
-        if(!riegoActivo) return;
+        //if(!riegoActivo) return;
+        int size = Mathf.RoundToInt((radioRiego / data.size.x) * data.alphamapWidth);
+        int paintSize = size * 2 + 1; // tamaño del área a pintar (diámetro)
+
         foreach (var aspersor in aspersores)
         {
-            Vector3 posicion = aspersor.transform.position;
-            //Vector3Int mapaCoord;
-            //float[,,] alphas = terreno.terrainData.GetAlphamaps(0, 0, terreno.terrainData.alphamapWidth, terreno.terrainData.alphamapHeight);
+            Vector3 posicion = aspersor.transform.position - terreno.transform.position;
 
-            int mapX = Mathf.FloorToInt((posicion.x - terreno.transform.position.x) / terreno.terrainData.size.x * terreno.terrainData.alphamapWidth);
-            int mapZ = Mathf.FloorToInt((posicion.z - terreno.transform.position.z) / terreno.terrainData.size.z * terreno.terrainData.alphamapHeight);
-
-            int size = 15; // tamaño del área a pintar
-            int paintSize = size * 2 + 1; // tamaño del área a pintar (diámetro)
+            int mapX = Mathf.RoundToInt((posicion.x / data.size.x) * data.alphamapWidth);
+            int mapZ = Mathf.RoundToInt((posicion.z / data.size.z) * data.alphamapHeight);
 
             //clamp para evitar que se salga del terreno
-            int StartX = Mathf.Clamp(mapX - size, 0, terreno.terrainData.alphamapWidth - paintSize);
-            int StartZ = Mathf.Clamp(mapZ - size, 0, terreno.terrainData.alphamapHeight - paintSize);
+            int StartX = Mathf.Clamp(mapX - size, 0, data.alphamapWidth - paintSize);
+            int StartZ = Mathf.Clamp(mapZ - size, 0, data.alphamapHeight - paintSize);
 
-            float[,,] alphas = terreno.terrainData.GetAlphamaps(StartX, StartZ, paintSize, paintSize);
+            float[,,] alphas = data.GetAlphamaps(StartX, StartZ, paintSize, paintSize);
 
-
-            for(int x = 0; x < paintSize; x++) //for (int x = -size; x <= size; x++)
+            for(int x = 0; x < paintSize; x++) 
             {
-                for(int z = 0; z < paintSize; z++)//for (int z = -size; z <= size; z++)
+                for (int z = 0; z < paintSize; z++)
                 {
-                    //int px = mapX + x;
-                    //int pz = mapZ + z;
-
-                    //if (px >= 0 && px < terreno.terrainData.alphamapWidth && pz >= 0 && pz < terreno.terrainData.alphamapHeight)
-                    //{
-                        for (int i = 0; i < terreno.terrainData.alphamapLayers; i++)
-                        {
-                        //alphas[pz, px, i] = (i == indiceCapaHumedad) ? 1f : 0f;
-                        alphas[z, x, i] = (i == indiceCapaHumedad) ? 1f : 0f;
+                    float dist = Vector2.Distance(new Vector2(x, z), new Vector2(size, size));
+                    if (dist <= size)
+                    {
+                        // Calcular el índice de la capa de humedad
+                        for (int i = 0; i < data.alphamapLayers; i++)
+                            alphas[z, x, i] = (i== indiceCapaHumedad) ? 1f : 0f; // Establecer la capa de humedad al máximo
                     }
-                    //}
                 }
             }
 
-            terreno.terrainData.SetAlphamaps(StartX, StartZ, alphas);
+            data.SetAlphamaps(StartX, StartZ, alphas);
         }
     }
 }
