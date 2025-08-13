@@ -38,10 +38,10 @@ public class CampoTracker : MonoBehaviour
     {
         string sceneName = SceneManager.GetActiveScene().name.ToLower();
 
-        if (sceneName.Contains("arado")) 
-            return "Campo Arado";
-        else if (sceneName.Contains("aradodisco"))
+        if (sceneName.Contains("aradodisco"))
             return "Campo Disquera";
+        else if (sceneName.Contains("arado")) 
+            return "Campo Arado";
         else if (sceneName.Contains("sembradora"))
             return "Campo Sembrado";
         else if (sceneName.Contains("riego"))
