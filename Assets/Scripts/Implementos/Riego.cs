@@ -7,6 +7,7 @@ public class Riego : MonoBehaviour
 
     public KeyCode teclaActivar = KeyCode.R; // La tecla que se debe presionar para activar el riego
     public bool riegoActivo = false; // El estado del riego, activo o inactivo
+    //public bool estaAcoplado = false; // se setea desde otro script cuando el implemento se acopla
 
 
     public ParticleSystem[] aspersores; // Array de las particulas de los aspersores que se activarán al presionar la tecla
@@ -14,40 +15,47 @@ public class Riego : MonoBehaviour
     public int indiceCapaHumedad = 2; // El índice de la capa de humedad en el terreno
     public float radioRiego = 5f; // El radio del área de riego
     public float intervaloDeActualizacion = 0.5f; // Intervalo de actualización del riego
+    public float velocidadUmbral = 0.1f; // Velocidad mínima para que el riego funcione
 
     private TerrainData data;
     private float tiempoUltimaActualizacion; // Tiempo de la última actualización del riego
+    private Vector3 ultimaPosicion;
+    private float velocidadActual;
 
     // Start is called before the first frame update
     void Start()
     {
         data = terreno.terrainData;
+        ultimaPosicion = transform.position;
 
     }
 
     // Update is called once per frame
     void Update()
     {
+
         if (Input.GetKeyDown(teclaActivar))
         {
             riegoActivo = !riegoActivo;
             ActivarAspersores(riegoActivo);
         }
+        // Calcular velocidad (distancia recorrida por segundo)
+        velocidadActual = (transform.position - ultimaPosicion).magnitude / Time.deltaTime;
+        ultimaPosicion = transform.position;
 
-        if (riegoActivo && Time.time - tiempoUltimaActualizacion >= intervaloDeActualizacion)
+        if (riegoActivo && velocidadActual > velocidadUmbral && Time.time - tiempoUltimaActualizacion >= intervaloDeActualizacion)
         {
             PintarTerreno();
             tiempoUltimaActualizacion = Time.time;
         }
-
     }
 
     void ActivarAspersores(bool activo)
     {
         foreach (var aspersor in aspersores)
         {
-            if (activo) aspersor.Play();
-            else aspersor.Stop();
+            if (activo && !aspersor.isPlaying) aspersor.Play();
+            else if(!activo && aspersor.isPlaying) aspersor.Stop();
         }
     }
 

@@ -441,11 +441,6 @@ Terrain:
   m_CorrespondingSourceObject: {fileID: 3388245850750387782, guid: 7a18ec1a5e1355e4899b22b7f1555b14, type: 3}
   m_PrefabInstance: {fileID: 273688539}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &273688541 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8872854658078635172, guid: 7a18ec1a5e1355e4899b22b7f1555b14, type: 3}
-  m_PrefabInstance: {fileID: 273688539}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &349138291
 GameObject:
   m_ObjectHideFlags: 0
@@ -476,7 +471,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   terreno: {fileID: 911129247}
-  nombreLayerArado: TerrainLayer_B
+  nombreLayerArado: TerrenoSembradoLayer
   progresoActual: 0
   textoProgreso: {fileID: 1314121072}
 --- !u!4 &349138293
@@ -950,7 +945,7 @@ TerrainCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_TerrainData: {fileID: 15600000, guid: 83b61286ff2064c4da27fd537f4de51d, type: 2}
+  m_TerrainData: {fileID: 15600000, guid: 69f69318eb8a3ec4c9d91b636ec6f888, type: 2}
   m_EnableTreeColliders: 1
 --- !u!218 &911129247
 Terrain:
@@ -1458,6 +1453,10 @@ PrefabInstance:
       propertyPath: m_text
       value: 'Campo Sembrado : 0.00%'
       objectReference: {fileID: 0}
+    - target: {fileID: 6756188029371357723, guid: a2185682c1ad2b8429e844ee83ae7742, type: 3}
+      propertyPath: m_margin.w
+      value: 20.033813
+      objectReference: {fileID: 0}
     - target: {fileID: 6936375095357368960, guid: a2185682c1ad2b8429e844ee83ae7742, type: 3}
       propertyPath: m_Name
       value: Canvas
@@ -1591,7 +1590,7 @@ PrefabInstance:
     - target: {fileID: 8383695889898328813, guid: e273ea97a61cb5142bc15b954c59b28c, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 273688541}
+      objectReference: {fileID: 1745230550}
     - target: {fileID: 8599992733453081531, guid: e273ea97a61cb5142bc15b954c59b28c, type: 3}
       propertyPath: m_Name
       value: MiniMapCamera
@@ -1647,7 +1646,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3868488079298014214, guid: 4dab9c2a687282a4d89c6c1f74b3775c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 49.999985
+      value: 49.6
       objectReference: {fileID: 0}
     - target: {fileID: 3868488079298014214, guid: 4dab9c2a687282a4d89c6c1f74b3775c, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1681,9 +1680,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4458446377666026846, guid: 4dab9c2a687282a4d89c6c1f74b3775c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 4531872219769632444, guid: 4dab9c2a687282a4d89c6c1f74b3775c, type: 3}
       propertyPath: m_Name
       value: Seeder C
+      objectReference: {fileID: 0}
+    - target: {fileID: 9044162428712566811, guid: 4dab9c2a687282a4d89c6c1f74b3775c, type: 3}
+      propertyPath: m_Size.x
+      value: 6.3173504
+      objectReference: {fileID: 0}
+    - target: {fileID: 9044162428712566811, guid: 4dab9c2a687282a4d89c6c1f74b3775c, type: 3}
+      propertyPath: m_Center.x
+      value: -0.0781374
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1771,7 +1782,7 @@ TerrainCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_TerrainData: {fileID: 15600000, guid: e46c1f2f79d606c4daca0596714d2736, type: 2}
+  m_TerrainData: {fileID: 15600000, guid: 51bbaf3a8ba5bc745b2b77d157abe8af, type: 2}
   m_EnableTreeColliders: 1
 --- !u!4 &1684598804
 Transform:
@@ -1793,6 +1804,11 @@ Rigidbody:
   m_CorrespondingSourceObject: {fileID: 3558406741897152668, guid: 2472f5f2e59cb0f42aa974d204ba7017, type: 3}
   m_PrefabInstance: {fileID: 1769186664}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1745230550 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2384795349400648593, guid: 2472f5f2e59cb0f42aa974d204ba7017, type: 3}
+  m_PrefabInstance: {fileID: 1769186664}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1769186664
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1807,7 +1823,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2384795349400648593, guid: 2472f5f2e59cb0f42aa974d204ba7017, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.0056448746
+      value: 1.4
       objectReference: {fileID: 0}
     - target: {fileID: 2384795349400648593, guid: 2472f5f2e59cb0f42aa974d204ba7017, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1815,7 +1831,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2384795349400648593, guid: 2472f5f2e59cb0f42aa974d204ba7017, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.97895414
+      value: -5.1
       objectReference: {fileID: 0}
     - target: {fileID: 2384795349400648593, guid: 2472f5f2e59cb0f42aa974d204ba7017, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2095,7 +2111,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3868488079298014214, guid: 4dab9c2a687282a4d89c6c1f74b3775c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 50
+      value: 49.6
       objectReference: {fileID: 0}
     - target: {fileID: 3868488079298014214, guid: 4dab9c2a687282a4d89c6c1f74b3775c, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2129,9 +2145,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4458446377666026846, guid: 4dab9c2a687282a4d89c6c1f74b3775c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 4531872219769632444, guid: 4dab9c2a687282a4d89c6c1f74b3775c, type: 3}
       propertyPath: m_Name
       value: Seeder B
+      objectReference: {fileID: 0}
+    - target: {fileID: 9044162428712566811, guid: 4dab9c2a687282a4d89c6c1f74b3775c, type: 3}
+      propertyPath: m_Size.x
+      value: 6.2407837
+      objectReference: {fileID: 0}
+    - target: {fileID: 9044162428712566811, guid: 4dab9c2a687282a4d89c6c1f74b3775c, type: 3}
+      propertyPath: m_Center.x
+      value: -0.08543396
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2173,7 +2201,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   terreno: {fileID: 1684598802}
-  nombreLayerArado: TerrainLayer_B
+  nombreLayerArado: TerrenoSembradoLayer
   progresoActual: 0
   textoProgreso: {fileID: 1314121073}
 --- !u!4 &1946685634

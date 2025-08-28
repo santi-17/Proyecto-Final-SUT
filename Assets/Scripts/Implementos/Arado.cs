@@ -10,7 +10,7 @@ public class Arado : MonoBehaviour
     [SerializeField] private Transform puntoRaycast; // Punto desde donde se lanzará el rayo para detectar el terreno
     [SerializeField] private Terrain terrain; // Referencia al Terrain que se va a modificar
     [SerializeField] private ParticleSystem particulasTierra; // Partículas de tierra que se reproducirán al arar
-    [SerializeField] private CampoTracker campoTracker; // Referencia al CampoTracker para marcar celdas aradas
+    
 
     private ParticleSystem instanciaParticulas; // Instancia de las partículas de tierra
 
@@ -35,9 +35,6 @@ public class Arado : MonoBehaviour
 
     private Vector3 ultimaPosicion;
     private float velocidadDeMovimiento;
-
-
-
 
     // Start is called before the first frame update
     void Start()

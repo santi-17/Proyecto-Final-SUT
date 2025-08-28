@@ -5,11 +5,11 @@ using UnityEngine;
 public class Sembradora : MonoBehaviour
 {
     public KeyCode activarSembradora = KeyCode.H; // Tecla para activar el arado
-    public Terrain terreno;
+    [SerializeField] private Terrain terreno;
     public TerrainLayer capaSembrada;
     public float velocidadSembrado = 5f;
     public ParticleSystem particulasSembrado;
-    public Transform puntoRaycast;
+    [SerializeField] private Transform puntoRaycast;
     public float distanciaDeteccion = 5f;
     [SerializeField] private float anchoSembradoraMetros = 9f;
 
@@ -23,7 +23,6 @@ public class Sembradora : MonoBehaviour
     //spawn de semillas 
     public GameObject prefabSemilla; // Prefab visual de la semilla
     [SerializeField] private float radioPozo = 0.5f;
-    [SerializeField] private float profundidadPozo = 0.001f; // Ojo, estos valores son proporcionales a la altura total del terrain
     private Vector3 ultimaPosicionSembrada;
     public float distanciaEntreSemillas = 2.0f;
 
@@ -201,58 +200,5 @@ public class Sembradora : MonoBehaviour
             alturas
         );
     }
-
-
-
-    //private void HacerPozoEnTerreno(Vector3 posicion, float radio, float profundidad)
-    //{
-    //    Vector3 terrainPosition = posicion - terreno.transform.position;
-
-    //    int mapX = Mathf.RoundToInt((terrainPosition.x / terreno.terrainData.size.x) * terrainHeightmapWidth);
-    //    int mapZ = Mathf.RoundToInt((terrainPosition.z / terreno.terrainData.size.z) * terrainHeightmapHeight);
-
-    //    int pozoRadius = Mathf.RoundToInt(radio * terrainHeightmapWidth / terreno.terrainData.size.x);
-
-    //    float[,] heights = data.GetHeights(
-    //        mapX - pozoRadius / 2,
-    //        mapZ - pozoRadius / 2,
-    //        pozoRadius,
-    //        pozoRadius
-    //    );
-
-    //    for (int x = 0; x < pozoRadius; x++)
-    //    {
-    //        for (int z = 0; z < pozoRadius; z++)
-    //        {
-    //            float distance = Vector2.Distance(new Vector2(x, z), new Vector2(pozoRadius / 2, pozoRadius / 2));
-    //            float falloff = Mathf.Clamp01(1f - distance / (pozoRadius / 2f));
-    //            heights[x, z] -= profundidad * falloff;
-    //        }
-    //    }
-
-    //    data.SetHeights(
-    //        mapX - pozoRadius / 2,
-    //        mapZ - pozoRadius / 2,
-    //        heights
-    //    );
-    //}
-
-    //private void HacerSurcos(Vector3 posicionCentral, float anchoTotal, float espacioEntreSurcos, float profundidad)
-    //{
-    //    int cantidadSurcos = Mathf.FloorToInt(anchoTotal / espacioEntreSurcos);
-    //    Vector3 direccionDerecha = transform.forward;
-
-    //    for (int i = 0; i < cantidadSurcos; i++)
-    //    {
-    //        float offset = (-anchoTotal / 2f) + (i * espacioEntreSurcos);
-    //        Vector3 posicionSurco = posicionCentral + direccionDerecha * offset;
-
-    //        // Generar pozo en esa posición
-    //        HacerPozoEnTerreno(posicionSurco, 0.3f, profundidad);
-    //    }
-    //}
-   
-    
-    
 
 }

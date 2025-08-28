@@ -215,7 +215,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   terreno: {fileID: 1525468191}
-  nombreLayerArado: TerrainLayer_B
+  nombreLayerArado: Grass_B_TerrainLayer
   progresoActual: 0
   textoProgreso: {fileID: 105805141}
 --- !u!1001 &105805137
@@ -779,7 +779,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2384795349400648593, guid: 2472f5f2e59cb0f42aa974d204ba7017, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.0056448746
+      value: -0.7
       objectReference: {fileID: 0}
     - target: {fileID: 2384795349400648593, guid: 2472f5f2e59cb0f42aa974d204ba7017, type: 3}
       propertyPath: m_LocalPosition.y
@@ -787,7 +787,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2384795349400648593, guid: 2472f5f2e59cb0f42aa974d204ba7017, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.97895414
+      value: -16.75
       objectReference: {fileID: 0}
     - target: {fileID: 2384795349400648593, guid: 2472f5f2e59cb0f42aa974d204ba7017, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1609,7 +1609,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   terreno: {fileID: 1207226745}
-  nombreLayerArado: TerrainLayer_B
+  nombreLayerArado: Grass_B_TerrainLayer
   progresoActual: 0
   textoProgreso: {fileID: 105805140}
 --- !u!1 &1593942401
@@ -1774,6 +1774,10 @@ PrefabInstance:
       propertyPath: terreno
       value: 
       objectReference: {fileID: 1525468191}
+    - target: {fileID: 2833805275174089321, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
+      propertyPath: radioRiego
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2035,6 +2039,10 @@ PrefabInstance:
       propertyPath: terreno
       value: 
       objectReference: {fileID: 1207226745}
+    - target: {fileID: 2833805275174089321, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
+      propertyPath: radioRiego
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

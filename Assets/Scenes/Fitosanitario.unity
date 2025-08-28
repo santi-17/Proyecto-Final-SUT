@@ -122,6 +122,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!198 &11711649 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 2236679304960071103, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
+  m_PrefabInstance: {fileID: 1978274059}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &20299484
 GameObject:
   m_ObjectHideFlags: 0
@@ -258,7 +263,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   terreno: {fileID: 690072742}
-  nombreLayerArado: TerrainLayer_B
+  nombreLayerArado: Grass_B_TerrainLayer
   progresoActual: 0
   textoProgreso: {fileID: 1477937924}
 --- !u!4 &230850444
@@ -276,6 +281,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!198 &410041684 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 8508212421593778965, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
+  m_PrefabInstance: {fileID: 1978274059}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &424769064
 GameObject:
   m_ObjectHideFlags: 0
@@ -382,6 +392,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!198 &452945248 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 5654493372905416161, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
+  m_PrefabInstance: {fileID: 1208272906}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &532006690
 GameObject:
   m_ObjectHideFlags: 0
@@ -412,7 +427,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   terreno: {fileID: 1125406781}
-  nombreLayerArado: TerrainLayer_B
+  nombreLayerArado: Grass_B_TerrainLayer
   progresoActual: 0
   textoProgreso: {fileID: 1477937925}
 --- !u!4 &532006692
@@ -593,6 +608,16 @@ ParticleSystem:
 Transform:
   m_CorrespondingSourceObject: {fileID: 4070170255225430123, guid: 3dac046600e56c44cb390d3c7d59d610, type: 3}
   m_PrefabInstance: {fileID: 735370003}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &905686480 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 1153769586166886240, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
+  m_PrefabInstance: {fileID: 1978274059}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &969218923 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 2236679304960071103, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
+  m_PrefabInstance: {fileID: 1208272906}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &982903682
 GameObject:
@@ -1124,13 +1149,157 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 411531703901242931, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
+      propertyPath: m_Name
+      value: ParticulaFitosanitario (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 774418263917788396, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
+      propertyPath: m_Name
+      value: ParticulasFitosanitario(6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 885590473849134494, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
+      propertyPath: m_Name
+      value: ParticulaFitosanitario (4)
+      objectReference: {fileID: 0}
     - target: {fileID: 1106400200884155378, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
       propertyPath: m_Name
       value: SistemaRiego C
       objectReference: {fileID: 0}
+    - target: {fileID: 1153769586166886240, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.key0.b
+      value: 0.44309154
+      objectReference: {fileID: 0}
+    - target: {fileID: 1153769586166886240, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.key0.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1153769586166886240, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.key0.r
+      value: 0.09019607
+      objectReference: {fileID: 0}
+    - target: {fileID: 1153769586166886240, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.key1.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1153769586166886240, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.key1.r
+      value: 0.93021417
+      objectReference: {fileID: 0}
+    - target: {fileID: 1654639405068701202, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.key0.b
+      value: 0.44309154
+      objectReference: {fileID: 0}
+    - target: {fileID: 1654639405068701202, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.key0.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1654639405068701202, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.key0.r
+      value: 0.09019607
+      objectReference: {fileID: 0}
+    - target: {fileID: 1654639405068701202, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.key1.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1654639405068701202, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.key1.r
+      value: 0.93021417
+      objectReference: {fileID: 0}
+    - target: {fileID: 2236679304960071103, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.key0.b
+      value: 0.44309154
+      objectReference: {fileID: 0}
+    - target: {fileID: 2236679304960071103, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.key0.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2236679304960071103, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.key0.r
+      value: 0.09019607
+      objectReference: {fileID: 0}
+    - target: {fileID: 2236679304960071103, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.key1.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2236679304960071103, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.key1.r
+      value: 0.93021417
+      objectReference: {fileID: 0}
+    - target: {fileID: 5654493372905416161, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.key0.b
+      value: 0.44309154
+      objectReference: {fileID: 0}
+    - target: {fileID: 5654493372905416161, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.key0.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5654493372905416161, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.key0.r
+      value: 0.09019607
+      objectReference: {fileID: 0}
+    - target: {fileID: 5654493372905416161, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.key1.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5654493372905416161, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.key1.r
+      value: 0.93021417
+      objectReference: {fileID: 0}
+    - target: {fileID: 5727594814520140479, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.key0.b
+      value: 0.44309154
+      objectReference: {fileID: 0}
+    - target: {fileID: 5727594814520140479, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.key0.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5727594814520140479, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.key0.r
+      value: 0.09019607
+      objectReference: {fileID: 0}
+    - target: {fileID: 5727594814520140479, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.key1.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5727594814520140479, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.key1.r
+      value: 0.93021417
+      objectReference: {fileID: 0}
+    - target: {fileID: 6108149785986299501, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
+      propertyPath: m_Name
+      value: ParticulasFitosanitario(3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6179162160071127347, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
+      propertyPath: m_Name
+      value: ParticulasFitosanitario(5)
+      objectReference: {fileID: 0}
     - target: {fileID: 6833447032876092616, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
       propertyPath: nombreDelImplemento
       value: Fitosanitario
+      objectReference: {fileID: 0}
+    - target: {fileID: 7831605836725967001, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
+      propertyPath: m_Name
+      value: ParticulasFitosanitario(2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8508212421593778965, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.key0.b
+      value: 0.44309154
+      objectReference: {fileID: 0}
+    - target: {fileID: 8508212421593778965, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.key0.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8508212421593778965, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.key0.r
+      value: 0.09019607
+      objectReference: {fileID: 0}
+    - target: {fileID: 8508212421593778965, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.key1.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8508212421593778965, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.key1.r
+      value: 0.93021417
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2833805275174089321, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
@@ -1161,16 +1330,32 @@ MonoBehaviour:
   teclaActivar: 116
   fitosanitarioActivo: 0
   aspersores:
-  - {fileID: 1310045597}
-  - {fileID: 1133830847}
-  - {fileID: 1600125891}
-  - {fileID: 2078876730}
-  - {fileID: 735370004}
-  - {fileID: 1392104915}
+  - {fileID: 969218923}
+  - {fileID: 1274449185}
+  - {fileID: 452945248}
+  - {fileID: 1698763971}
+  - {fileID: 1303903945}
+  - {fileID: 1535200050}
   terreno: {fileID: 690072742}
   indiceCapaHumedad: 2
   radioFitosanitario: 5
   intervaloDeActualizacion: 0.5
+  velocidadUmbral: 0.1
+--- !u!198 &1243240468 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 5727594814520140479, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
+  m_PrefabInstance: {fileID: 1978274059}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &1274449185 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 8508212421593778965, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
+  m_PrefabInstance: {fileID: 1208272906}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &1303903945 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 5727594814520140479, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
+  m_PrefabInstance: {fileID: 1208272906}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1310045596
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1604,6 +1789,16 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cf832358067b64d4c84b06334e8b5228, type: 3}
+--- !u!198 &1535200050 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 1153769586166886240, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
+  m_PrefabInstance: {fileID: 1208272906}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &1536492644 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 1654639405068701202, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
+  m_PrefabInstance: {fileID: 1978274059}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1548676399
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1622,7 +1817,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2384795349400648593, guid: 2472f5f2e59cb0f42aa974d204ba7017, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.0056448746
+      value: -7
       objectReference: {fileID: 0}
     - target: {fileID: 2384795349400648593, guid: 2472f5f2e59cb0f42aa974d204ba7017, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1630,7 +1825,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2384795349400648593, guid: 2472f5f2e59cb0f42aa974d204ba7017, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.97895414
+      value: -21.9
       objectReference: {fileID: 0}
     - target: {fileID: 2384795349400648593, guid: 2472f5f2e59cb0f42aa974d204ba7017, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1886,6 +2081,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!198 &1698763971 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 1654639405068701202, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
+  m_PrefabInstance: {fileID: 1208272906}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1771161216
 GameObject:
   m_ObjectHideFlags: 0
@@ -1934,6 +2134,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!198 &1888346955 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 5654493372905416161, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
+  m_PrefabInstance: {fileID: 1978274059}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1978274059
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1982,17 +2187,161 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 411531703901242931, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
+      propertyPath: m_Name
+      value: ParticulasFitosanitario (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 774418263917788396, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
+      propertyPath: m_Name
+      value: ParticulasFitosanitario (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 885590473849134494, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
+      propertyPath: m_Name
+      value: ParticulasFitosanitario(4)
+      objectReference: {fileID: 0}
     - target: {fileID: 1106400200884155378, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
       propertyPath: m_Name
       value: SistemaRiego B
+      objectReference: {fileID: 0}
+    - target: {fileID: 1153769586166886240, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.key0.b
+      value: 0.44309154
+      objectReference: {fileID: 0}
+    - target: {fileID: 1153769586166886240, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.key0.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1153769586166886240, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.key0.r
+      value: 0.09019607
+      objectReference: {fileID: 0}
+    - target: {fileID: 1153769586166886240, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.key1.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1153769586166886240, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.key1.r
+      value: 0.93021417
+      objectReference: {fileID: 0}
+    - target: {fileID: 1654639405068701202, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.key0.b
+      value: 0.44309154
+      objectReference: {fileID: 0}
+    - target: {fileID: 1654639405068701202, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.key0.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1654639405068701202, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.key0.r
+      value: 0.09019607
+      objectReference: {fileID: 0}
+    - target: {fileID: 1654639405068701202, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.key1.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1654639405068701202, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.key1.r
+      value: 0.93021417
+      objectReference: {fileID: 0}
+    - target: {fileID: 2236679304960071103, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.key0.b
+      value: 0.44309154
+      objectReference: {fileID: 0}
+    - target: {fileID: 2236679304960071103, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.key0.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2236679304960071103, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.key0.r
+      value: 0.09019607
+      objectReference: {fileID: 0}
+    - target: {fileID: 2236679304960071103, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.key1.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2236679304960071103, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.key1.r
+      value: 0.93021417
       objectReference: {fileID: 0}
     - target: {fileID: 2833805275174089321, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5654493372905416161, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.key0.b
+      value: 0.44309154
+      objectReference: {fileID: 0}
+    - target: {fileID: 5654493372905416161, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.key0.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5654493372905416161, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.key0.r
+      value: 0.09019607
+      objectReference: {fileID: 0}
+    - target: {fileID: 5654493372905416161, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.key1.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5654493372905416161, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.key1.r
+      value: 0.93021417
+      objectReference: {fileID: 0}
+    - target: {fileID: 5727594814520140479, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.key0.b
+      value: 0.44309154
+      objectReference: {fileID: 0}
+    - target: {fileID: 5727594814520140479, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.key0.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5727594814520140479, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.key0.r
+      value: 0.09019607
+      objectReference: {fileID: 0}
+    - target: {fileID: 5727594814520140479, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.key1.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5727594814520140479, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.key1.r
+      value: 0.93021417
+      objectReference: {fileID: 0}
+    - target: {fileID: 6108149785986299501, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
+      propertyPath: m_Name
+      value: ParticulasFitosanitario(3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6179162160071127347, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
+      propertyPath: m_Name
+      value: ParticulasFitosanitarop (5)
+      objectReference: {fileID: 0}
     - target: {fileID: 6833447032876092616, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
       propertyPath: nombreDelImplemento
       value: Fitosanitario
+      objectReference: {fileID: 0}
+    - target: {fileID: 7831605836725967001, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
+      propertyPath: m_Name
+      value: ParticulasFitosanitario (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8508212421593778965, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.key0.b
+      value: 0.44309154
+      objectReference: {fileID: 0}
+    - target: {fileID: 8508212421593778965, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.key0.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8508212421593778965, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.key0.r
+      value: 0.09019607
+      objectReference: {fileID: 0}
+    - target: {fileID: 8508212421593778965, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.key1.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8508212421593778965, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.key1.r
+      value: 0.93021417
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2833805275174089321, guid: 02d1defbcb18d074a9b66afa65b6b00c, type: 3}
@@ -2023,16 +2372,17 @@ MonoBehaviour:
   teclaActivar: 116
   fitosanitarioActivo: 0
   aspersores:
-  - {fileID: 1310045597}
-  - {fileID: 1133830847}
-  - {fileID: 1600125891}
-  - {fileID: 2078876730}
-  - {fileID: 735370004}
-  - {fileID: 1392104915}
+  - {fileID: 11711649}
+  - {fileID: 410041684}
+  - {fileID: 1888346955}
+  - {fileID: 1536492644}
+  - {fileID: 1243240468}
+  - {fileID: 905686480}
   terreno: {fileID: 1125406781}
   indiceCapaHumedad: 2
   radioFitosanitario: 5
   intervaloDeActualizacion: 0.5
+  velocidadUmbral: 0.1
 --- !u!1 &1985074831
 GameObject:
   m_ObjectHideFlags: 0
@@ -2425,6 +2775,7 @@ MonoBehaviour:
   indiceCapaHumedad: 2
   radioFitosanitario: 5
   intervaloDeActualizacion: 0.5
+  velocidadUmbral: 0.1
 --- !u!1 &2099093055
 GameObject:
   m_ObjectHideFlags: 0

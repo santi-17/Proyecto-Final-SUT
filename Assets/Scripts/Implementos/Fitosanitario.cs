@@ -14,10 +14,12 @@ public class Fitosanitario : MonoBehaviour
     public int indiceCapaHumedad = 2; // El índice de la capa de humedad en el terreno
     public float radioFitosanitario = 5f; // El radio del área del fitosanitario
     public float intervaloDeActualizacion = 0.5f; // Intervalo de actualización del fitosanitario
+    public float velocidadUmbral = 0.1f; // Velocidad mínima para que el riego funcione
 
-    private TerrainData data; 
+    private TerrainData data;
     private float tiempoUltimaActualizacion; // Tiempo de la última actualización del fitosanitario 
-
+    private Vector3 ultimaPosicion;
+    private float velocidadActual;
 
     // Start is called before the first frame update
     void Start()
@@ -33,8 +35,11 @@ public class Fitosanitario : MonoBehaviour
             fitosanitarioActivo = !fitosanitarioActivo;
             ActivarAspersores(fitosanitarioActivo);
         }
+        // Calcular velocidad (distancia recorrida por segundo)
+        velocidadActual = (transform.position - ultimaPosicion).magnitude / Time.deltaTime;
+        ultimaPosicion = transform.position;
 
-        if (fitosanitarioActivo && Time.time - tiempoUltimaActualizacion >= intervaloDeActualizacion)
+        if (fitosanitarioActivo && velocidadActual > velocidadUmbral && Time.time - tiempoUltimaActualizacion >= intervaloDeActualizacion)
         {
             PintarTerreno();
             tiempoUltimaActualizacion = Time.time;
