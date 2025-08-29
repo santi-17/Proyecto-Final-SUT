@@ -239,6 +239,7 @@ GameObject:
   - component: {fileID: 524983232}
   - component: {fileID: 524983230}
   - component: {fileID: 524983231}
+  - component: {fileID: 524983233}
   m_Layer: 3
   m_Name: Terrain C
   m_TagString: Untagged
@@ -321,6 +322,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &524983233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 524983229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31ba0dba1d1c581449ed0d78a174f7e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: "Mision 3: Zona hort\xEDcola de Canelones.\nSuelo franco-limoso con
+    humedad tras riego, clima templado."
 --- !u!1 &560054341
 GameObject:
   m_ObjectHideFlags: 0
@@ -332,6 +347,7 @@ GameObject:
   - component: {fileID: 560054344}
   - component: {fileID: 560054343}
   - component: {fileID: 560054342}
+  - component: {fileID: 560054345}
   m_Layer: 3
   m_Name: Terrain
   m_TagString: Untagged
@@ -414,6 +430,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &560054345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 560054341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31ba0dba1d1c581449ed0d78a174f7e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: "Mision 1: Litoral Oeste tras lluvia ligera.\nSuelo franco-arcilloso
+    profundo, clima h\xFAmedo moderado."
 --- !u!1 &621432961
 GameObject:
   m_ObjectHideFlags: 0
@@ -818,78 +848,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 518b18fcb5027bb42ad0703797be7fa1, type: 3}
---- !u!1 &859235543
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 859235544}
-  - component: {fileID: 859235546}
-  - component: {fileID: 859235545}
-  m_Layer: 5
-  m_Name: fondo
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &859235544
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 859235543}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.9322447, y: 1.9084622, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6236057040663868306}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 403.7, y: 145.6}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &859235545
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 859235543}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.6952696, b: 0.042452812, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Texture: {fileID: 0}
-  m_UVRect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
---- !u!222 &859235546
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 859235543}
-  m_CullTransparentMesh: 1
 --- !u!1 &1015745130
 GameObject:
   m_ObjectHideFlags: 0
@@ -1298,7 +1256,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3049972759451345195, guid: 2472f5f2e59cb0f42aa974d204ba7017, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1751986894}
   m_SourcePrefab: {fileID: 100100000, guid: 2472f5f2e59cb0f42aa974d204ba7017, type: 3}
 --- !u!114 &1751986888 stripped
 MonoBehaviour:
@@ -1327,11 +1288,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ea42ea3a33f40949a8dfb8cc4d9b7f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1751986891 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3049972759451345195, guid: 2472f5f2e59cb0f42aa974d204ba7017, type: 3}
+  m_PrefabInstance: {fileID: 1751986887}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1751986893 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2384795349400648593, guid: 2472f5f2e59cb0f42aa974d204ba7017, type: 3}
   m_PrefabInstance: {fileID: 1751986887}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1751986894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1751986891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9ae3ec1d1805334cbbf86bfd60931f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  terrainNameText: {fileID: 1852632732}
+  raycastDistance: 10
 --- !u!198 &1761835295 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 3734391354860008561, guid: c3b81736a648a974694eb2c65e9e0fc8, type: 3}
@@ -1385,6 +1365,140 @@ MonoBehaviour:
   nombreLayerArado: TerrainLayer_B
   progresoActual: 0
   textoProgreso: {fileID: 791993298}
+--- !u!1 &1852632730
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1852632731}
+  - component: {fileID: 1852632733}
+  - component: {fileID: 1852632732}
+  m_Layer: 5
+  m_Name: textoTerrain
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1852632731
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1852632730}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6236057040663868306}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 261}
+  m_SizeDelta: {x: 200, y: 50}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1852632732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1852632730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: texto terreno
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 20
+  m_fontSizeBase: 20
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 256
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: -215.50412, y: 0, z: -205.1806, w: -49.69449}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &1852632733
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1852632730}
+  m_CullTransparentMesh: 1
 --- !u!1 &1914789641
 GameObject:
   m_ObjectHideFlags: 0
@@ -1396,6 +1510,7 @@ GameObject:
   - component: {fileID: 1914789644}
   - component: {fileID: 1914789643}
   - component: {fileID: 1914789642}
+  - component: {fileID: 1914789645}
   m_Layer: 3
   m_Name: Terrain B
   m_TagString: Untagged
@@ -1478,6 +1593,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1914789645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1914789641}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31ba0dba1d1c581449ed0d78a174f7e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  description: 'Mision 2: Norte en sequia prolongada .
+
+    Suelo Suelo arenoso,
+    clima caluroso y seco.'
 --- !u!1 &1953434675
 GameObject:
   m_ObjectHideFlags: 0
@@ -1618,7 +1749,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -140, y: -140}
+  m_AnchoredPosition: {x: -140, y: -91}
   m_SizeDelta: {x: 170, y: 170}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1986528577
@@ -2176,14 +2307,15 @@ PrefabInstance:
       value: -221
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 8222614270597666912, guid: a2185682c1ad2b8429e844ee83ae7742, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 1353851201071807181, guid: a2185682c1ad2b8429e844ee83ae7742, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 859235544}
+      addedObject: {fileID: 1986528576}
     - targetCorrespondingSourceObject: {fileID: 1353851201071807181, guid: a2185682c1ad2b8429e844ee83ae7742, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1986528576}
+      addedObject: {fileID: 1852632731}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a2185682c1ad2b8429e844ee83ae7742, type: 3}
 --- !u!224 &6236057040663868306 stripped
