@@ -14,7 +14,6 @@ public class HUDController : MonoBehaviour
     public float maxRpm = 6000f; // RPM máximo del motor
 
 
-    [SerializeField] private CampoTracker campoTracker;
     [SerializeField] private TextMeshProUGUI progresoText;
 
 
@@ -38,13 +37,11 @@ public class HUDController : MonoBehaviour
         //rpm.text = "RPM: " + rmpActual.ToString("F0"); // Actualizar el texto de RPM
         rpm.text = $"RPM: {rmpActual:F0}"; // Actualizar el texto de RPM con formato
 
-        // Actualizar el progreso del campo
-        //progresoText.text = "Progreso: " + (campoTracker.ObtenerProgreso() * 100f).ToString("F2") + "%";
-
+        
         //seteo el tiempo transcurrido en la sesion
         tiempoTranscurrido += Time.deltaTime;
         System.TimeSpan tiempo = System.TimeSpan.FromSeconds(tiempoTranscurrido);
-        tiempoText.text = $"Tiempo {tiempo.Minutes:D2}:{tiempo.Seconds:D2}";
+        //tiempoText.text = $"Tiempo {tiempo.Minutes:D2}:{tiempo.Seconds:D2}";
         
     }
 }
