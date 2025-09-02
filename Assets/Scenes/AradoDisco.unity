@@ -456,8 +456,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31ba0dba1d1c581449ed0d78a174f7e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: "Misi\xF3n 1 \u2013 Preparando soja en litoral\r\nSuelo franco-arcilloso
-    tras arado, clima templado seco.\r"
+  description: "Misi\xF3n 1: Suelo franco-arcilloso tras arado.\r"
 --- !u!1 &471197131
 GameObject:
   m_ObjectHideFlags: 0
@@ -1406,8 +1405,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31ba0dba1d1c581449ed0d78a174f7e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: "Misi\xF3n 2 \u2013 Hortalizas de ra\xEDz\r\nContexto: Suelo arenoso
-    mullido, clima h\xFAmedo.\r"
+  description: "Misi\xF3n 2: Suelo arenoso mullido.\r"
 --- !u!1 &702482281
 GameObject:
   m_ObjectHideFlags: 0
@@ -2311,8 +2309,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31ba0dba1d1c581449ed0d78a174f7e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: "Misi\xF3n 3 \u2013 Pastura en suelos pesados\r\nContexto: Suelo arcilloso
-    compactado, clima h\xFAmedo.\r"
+  description: "Misi\xF3n 3: Suelo arcilloso compactado.\r"
 --- !u!1001 &1765251690
 PrefabInstance:
   m_ObjectHideFlags: 0

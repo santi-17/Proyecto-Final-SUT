@@ -551,8 +551,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31ba0dba1d1c581449ed0d78a174f7e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: "Misi\xF3n 3 \u2013 Huerta de tomate con plaga\r\nContexto: Suelo
-    liviano de horticultura, clima c\xE1lido y h\xFAmedo.\r"
+  description: "Misi\xF3n 3: Suelo liviano de horticultura.\r"
 --- !u!1001 &735370003
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -952,8 +951,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31ba0dba1d1c581449ed0d78a174f7e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: "Misi\xF3n 2 \u2013 Trigo con roya\r\nContexto: Suelo f\xE9rtil h\xFAmedo,
-    clima lluvioso.\r"
+  description: "Misi\xF3n 2: Suelo f\xE9rtil h\xFAmedo.\r"
 --- !u!1001 &1133830846
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2763,8 +2761,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31ba0dba1d1c581449ed0d78a174f7e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: "Misi\xF3n 1 \u2013 Soja con malezas\r\nContexto: Suelo franco-arcilloso,
-    clima templado.\r"
+  description: "Misi\xF3n 1: Suelo franco-arcilloso.\r"
 --- !u!1001 &2078876729
 PrefabInstance:
   m_ObjectHideFlags: 0

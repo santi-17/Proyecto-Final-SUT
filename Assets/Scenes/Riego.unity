@@ -566,8 +566,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31ba0dba1d1c581449ed0d78a174f7e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: "Misi\xF3n 1 \u2013 Lechuga en verano\r\nContexto: Suelo arenoso,
-    clima muy caluroso.\r"
+  description: "Misi\xF3n 1 : Suelo arenoso.\r"
 --- !u!1001 &370087489
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1371,8 +1370,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31ba0dba1d1c581449ed0d78a174f7e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: "Misi\xF3n 2 \u2013 Trigo en invierno\r\nContexto: Suelo arcilloso
-    del sur, clima fr\xEDo y h\xFAmedo.\r"
+  description: "Misi\xF3n 2 : Suelo arcilloso del sur.\r"
 --- !u!1001 &1298885219
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1779,8 +1777,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31ba0dba1d1c581449ed0d78a174f7e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: "Misi\xF3n 3 \u2013 Ma\xEDz en verano\r\nContexto: Suelo profundo
-    franco, clima c\xE1lido seco.\r"
+  description: "Misi\xF3n 3: Suelo profundo franco.\r"
 --- !u!1 &1548080356
 GameObject:
   m_ObjectHideFlags: 0

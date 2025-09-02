@@ -461,8 +461,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31ba0dba1d1c581449ed0d78a174f7e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: "Misi\xF3n 1 \u2013 Trigo en invierno\r\nContexto: Suelo franco-arcilloso
-    del sur, clima fresco h\xFAmedo.\r"
+  description: "Misi\xF3n 1: Suelo franco-arcilloso del sur.\r"
 --- !u!1 &349138291
 GameObject:
   m_ObjectHideFlags: 0
@@ -1171,8 +1170,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31ba0dba1d1c581449ed0d78a174f7e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: "Misi\xF3n 3 \u2013 Huerta de zanahorias\r\nContexto: Suelo arenoso
-    con riego previo, clima templado.\r"
+  description: "Misi\xF3n 3: Suelo arenoso con riego previo.\r"
 --- !u!1 &915383437
 GameObject:
   m_ObjectHideFlags: 0
@@ -1999,8 +1997,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31ba0dba1d1c581449ed0d78a174f7e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: "Misi\xF3n 2 \u2013 Soja en verano\r\nContexto: Suelo franco-limoso
-    del litoral, clima caluroso.\r"
+  description: "Misi\xF3n 2: Suelo franco-limoso del litoral.\r"
 --- !u!54 &1745230549 stripped
 Rigidbody:
   m_CorrespondingSourceObject: {fileID: 3558406741897152668, guid: 2472f5f2e59cb0f42aa974d204ba7017, type: 3}

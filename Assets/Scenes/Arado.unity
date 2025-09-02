@@ -467,8 +467,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31ba0dba1d1c581449ed0d78a174f7e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: "Mision 3: Zona hort\xEDcola de Canelones.\nSuelo franco-limoso con
-    humedad tras riego, clima templado."
+  description: 'Mision 3: Suelo franco-limoso con humedad tras riego.'
 --- !u!1 &535981345
 GameObject:
   m_ObjectHideFlags: 0
@@ -624,8 +623,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31ba0dba1d1c581449ed0d78a174f7e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: "Mision 1: Litoral Oeste tras lluvia ligera.\nSuelo franco-arcilloso
-    profundo, clima h\xFAmedo moderado."
+  description: 'Mision 1: Suelo franco-arcilloso profundo.'
 --- !u!1 &621432961
 GameObject:
   m_ObjectHideFlags: 0
@@ -1965,10 +1963,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31ba0dba1d1c581449ed0d78a174f7e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  description: 'Mision 2: Norte en sequia prolongada .
-
-    Suelo Suelo arenoso,
-    clima caluroso y seco.'
+  description: 'Mision 2: Suelo Suelo arenoso.'
 --- !u!1 &1953434675
 GameObject:
   m_ObjectHideFlags: 0
