@@ -10,7 +10,6 @@ public class HUDController : MonoBehaviour
     
     public TextMeshProUGUI velocidad; // Referencia al componente TextMeshProUGUI para mostrar la velocidad
     public TextMeshProUGUI rpm; // Referencia al componente TextMeshProUGUI para mostrar el nivel de combustible
-    public TextMeshProUGUI tiempoText; 
     public float maxRpm = 6000f; // RPM máximo del motor
 
 
