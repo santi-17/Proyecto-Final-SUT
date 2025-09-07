@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SimulacionApiClient : MonoBehaviour
 {
+
     [System.Serializable]
     public class ResultadoSimulacionDto
     {
@@ -34,13 +35,13 @@ public class SimulacionApiClient : MonoBehaviour
         using (UnityEngine.Networking.UnityWebRequest request = new UnityEngine.Networking.UnityWebRequest(url, "POST"))
         {
             byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonData);
-            
+
             request.uploadHandler = new UnityEngine.Networking.UploadHandlerRaw(bodyRaw);
             request.downloadHandler = new UnityEngine.Networking.DownloadHandlerBuffer();
             request.SetRequestHeader("Content-Type", "application/json");
 
             yield return request.SendWebRequest();
-            
+
             if (request.result == UnityEngine.Networking.UnityWebRequest.Result.ConnectionError || request.result == UnityEngine.Networking.UnityWebRequest.Result.ProtocolError)
             {
                 Debug.LogError("Error al enviar resultado: " + request.error);
@@ -51,15 +52,55 @@ public class SimulacionApiClient : MonoBehaviour
             }
         }
     }
-    // Start is called before the first frame update
-    void Start()
+    [System.Serializable]
+    public class SimulacionCreateDto
     {
-        
+        public string moduloSlug;
+        public bool cobertura;
+    }
+    [System.Serializable]
+    public class SimulacionCreateResponseDto
+    {
+        public int simulacionId;
+        public int moduloiD;
+        public int panelControlId;
+        public bool cobertura;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void CrearSimulacion(string moduloSlug)
     {
-        
+        SimulacionCreateDto dto = new SimulacionCreateDto
+        {
+            moduloSlug = moduloSlug,
+            cobertura = false // o true si quieres
+        };
+        StartCoroutine(PostCrearSimulacion(dto));
+    }
+
+    private IEnumerator PostCrearSimulacion(SimulacionCreateDto dto)
+    {
+        string url = "http://localhost:5200/api/simulador"; // POST para crear simulacion
+        string jsonData = JsonUtility.ToJson(dto);
+        using (UnityEngine.Networking.UnityWebRequest request = new UnityEngine.Networking.UnityWebRequest(url, "POST"))
+        {
+            byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonData);
+            request.uploadHandler = new UnityEngine.Networking.UploadHandlerRaw(bodyRaw);
+            request.downloadHandler = new UnityEngine.Networking.DownloadHandlerBuffer();
+            request.SetRequestHeader("Content-Type", "application/json");
+            yield return request.SendWebRequest();
+            if (request.result == UnityEngine.Networking.UnityWebRequest.Result.ConnectionError || request.result == UnityEngine.Networking.UnityWebRequest.Result.ProtocolError)
+            {
+                Debug.LogError("Error al crear simulación: " + request.error);
+            }
+            else
+            {
+                Debug.Log("Simulación creada: " + request.downloadHandler.text);
+                // Parsear respuesta para obtener simulacionId
+                SimulacionCreateResponseDto response = JsonUtility.FromJson<SimulacionCreateResponseDto>(request.downloadHandler.text);
+                // Guardar el id para usarlo luego
+                //simulacionId = response.simulacionId;
+            }
+        }
+
     }
 }
