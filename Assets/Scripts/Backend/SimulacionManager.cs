@@ -13,6 +13,16 @@ public class SimulacionManager : MonoBehaviour
 
     private string moduloSlug; // nombre de la escena actual
 
+    // Clase para parsear respuesta API
+    [System.Serializable]
+    public class RespuestaSimulacionApi
+    {
+        public int simulacionId;
+        public int moduloiD;
+        public int panelControlId;
+        public bool cobertura;
+    }
+
     void Start()
     {
         moduloSlug = SceneManager.GetActiveScene().name; // obtener nombre de la escena
@@ -20,6 +30,7 @@ public class SimulacionManager : MonoBehaviour
 
     public void EnviarSimulacion()
     {
+        Debug.Log("EnviarSimulacion llamado");
         //deshabilitar boton para evitar multiples envios
         if (enviarButton != null)
             enviarButton.interactable = false;
@@ -73,8 +84,20 @@ public class SimulacionManager : MonoBehaviour
             else
             {
                 Debug.Log("Simulación enviada correctamente: " + request.downloadHandler.text);
-                // Aquí puedes parsear la respuesta si quieres obtener el id generado
+
+                //respuesta de la API 
+                var respuesta = JsonUtility.FromJson<RespuestaSimulacionApi>(request.downloadHandler.text);
+
+                //guardar los datos de la escena para el resultado
+                ResultadoSimulacionData.Aprobado = respuesta.cobertura;
+                ResultadoSimulacionData.ModuloNombre = dto.moduloSlug;
+                ResultadoSimulacionData.EscenaAnterior = SceneManager.GetActiveScene().name;
+
+                //cargo la escena resultado 
+                SceneManager.LoadScene("ResultadoSimulacion");
             }
         }
     }
+
+
 }
