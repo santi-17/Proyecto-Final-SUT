@@ -43,8 +43,8 @@ public class SimulacionManager : MonoBehaviour
 
         SimulacionCreateDTO dto = new SimulacionCreateDTO
         {
-            moduloSlug = moduloSlug,
-            aprobado = aprobado
+            ModuloSlug = moduloSlug,
+            Cobertura = aprobado
         };
 
         StartCoroutine(PostSimulacion(dto));
@@ -90,7 +90,7 @@ public class SimulacionManager : MonoBehaviour
 
                 //guardar los datos de la escena para el resultado
                 ResultadoSimulacionData.Aprobado = respuesta.cobertura;
-                ResultadoSimulacionData.ModuloNombre = dto.moduloSlug;
+                ResultadoSimulacionData.ModuloNombre = dto.ModuloSlug;
                 ResultadoSimulacionData.EscenaAnterior = SceneManager.GetActiveScene().name;
 
                 //cargo la escena resultado 
