@@ -12,6 +12,7 @@ public class SimulacionManager : MonoBehaviour
     public Button enviarButton;
 
     private string moduloSlug; // nombre de la escena actual
+    private int userId; // id del usuario
 
     // Clase para parsear respuesta API
     [System.Serializable]
@@ -23,11 +24,26 @@ public class SimulacionManager : MonoBehaviour
         public bool cobertura;
     }
 
+    [System.Obsolete]
     void Start()
     {
         moduloSlug = SceneManager.GetActiveScene().name; // obtener nombre de la escena
+        //Notificar a react que el gameObject esta listo
+        Application.ExternalCall("onSimulacionManagerReady");
     }
-
+    public void SetUserId(string id)
+    {
+        Debug.Log("SetUser Id llamado con id: " + id);
+        if (int.TryParse(id, out int parsedId))
+        {
+            userId = parsedId;
+            Debug.Log("User  Id recibido y parseado: " + userId);
+        }
+        else
+        {
+            Debug.LogWarning("User Id inválido recibido: " + id);
+        }
+    }
     public void EnviarSimulacion()
     {
         Debug.Log("EnviarSimulacion llamado");
@@ -44,7 +60,8 @@ public class SimulacionManager : MonoBehaviour
         SimulacionCreateDTO dto = new SimulacionCreateDTO
         {
             ModuloSlug = moduloSlug,
-            Cobertura = aprobado
+            Cobertura = aprobado,
+            UsuarioId = userId
         };
 
         StartCoroutine(PostSimulacion(dto));
@@ -64,6 +81,7 @@ public class SimulacionManager : MonoBehaviour
     {
         string url = "http://localhost:5200/api/simulador/resultadoSimulacion"; // URL de la API para crear simulacion
         string json = JsonUtility.ToJson(dto);
+        Debug.Log("JSON a enviar: " + json);
 
         using (UnityWebRequest request = new UnityWebRequest(url, "POST"))
         {
@@ -74,9 +92,9 @@ public class SimulacionManager : MonoBehaviour
 
             yield return request.SendWebRequest();
 
-            if (request.result == UnityWebRequest.Result.ConnectionError || request.result == UnityWebRequest.Result.ProtocolError)
+            if (request.result != UnityWebRequest.Result.Success)
             {
-                Debug.LogError("Error al enviar simulación: " + request.error);
+                Debug.LogError("Error al enviar simulación: " + request.error + "-" + request.downloadHandler.text);
                 // Rehabilitar el botón para permitir reintentos
                 if (enviarButton != null)
                     enviarButton.interactable = true;

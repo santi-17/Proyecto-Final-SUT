@@ -2479,7 +2479,7 @@ GameObject:
   - component: {fileID: 1636628229}
   - component: {fileID: 1636628228}
   m_Layer: 0
-  m_Name: ApiControlerSimulacionManager
+  m_Name: SimulacionManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
