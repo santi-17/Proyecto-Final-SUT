@@ -1,65 +1,63 @@
+﻿using System;
 using System.Collections;
-using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class SimulacionApiClient : MonoBehaviour
 {
-    [System.Serializable]
-    public class ResultadoSimulacionDto
+    [Serializable]
+    public class SimulacionCreateDto
     {
-        public int simualcionId;
-        public float cobertura1;
-        public float cobertura2;
-        public float cobertura3;
+        // nombres  que espera el backend 
+        public int moduloId;
+        public int usuarioId;
+        public float tiempoSimulacion; // segundos con decimales
+        public int cobertura1;         // 0..100
+        public int cobertura2;         // 0..100
+        public int cobertura3;         // 0..100
     }
 
-    public void EnviarResultado(int simulacionId, float c1, float c2, float c3)
+    // se llama cuando termine la simulación
+    public void EnviarSimulacion(int moduloId, int usuarioId, float tiempoSegundos, int c1, int c2, int c3)
     {
-        ResultadoSimulacionDto resultado = new ResultadoSimulacionDto
+        var dto = new SimulacionCreateDto
         {
-            simualcionId = simulacionId,
+            moduloId = moduloId,
+            usuarioId = usuarioId,
+            tiempoSimulacion = tiempoSegundos,
             cobertura1 = c1,
             cobertura2 = c2,
             cobertura3 = c3
         };
 
-        StartCoroutine(PostResultado(resultado));
+        StartCoroutine(PostSimulacion(dto));
     }
 
-    private IEnumerator PostResultado(ResultadoSimulacionDto resultado)
+    private IEnumerator PostSimulacion(SimulacionCreateDto dto)
     {
-        string url = "http://localhost:5200/api/simulador/resultadoSimulacion"; // Reemplaza con la URL real de la API
-        string jsonData = JsonUtility.ToJson(resultado);
+        
+        const string url = "http://localhost:5200/api/simulaciones";
 
-        using (UnityEngine.Networking.UnityWebRequest request = new UnityEngine.Networking.UnityWebRequest(url, "POST"))
+        string json = JsonUtility.ToJson(dto);
+        byte[] body = Encoding.UTF8.GetBytes(json);
+
+        using (var req = new UnityWebRequest(url, "POST"))
         {
-            byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(jsonData);
-            
-            request.uploadHandler = new UnityEngine.Networking.UploadHandlerRaw(bodyRaw);
-            request.downloadHandler = new UnityEngine.Networking.DownloadHandlerBuffer();
-            request.SetRequestHeader("Content-Type", "application/json");
+            req.uploadHandler = new UploadHandlerRaw(body);
+            req.downloadHandler = new DownloadHandlerBuffer();
+            req.SetRequestHeader("Content-Type", "application/json");
 
-            yield return request.SendWebRequest();
-            
-            if (request.result == UnityEngine.Networking.UnityWebRequest.Result.ConnectionError || request.result == UnityEngine.Networking.UnityWebRequest.Result.ProtocolError)
+            yield return req.SendWebRequest();
+
+            if (req.result != UnityWebRequest.Result.Success)
             {
-                Debug.LogError("Error al enviar resultado: " + request.error);
+                Debug.LogError($"[POST /api/simulaciones] {req.responseCode} {req.error}\n{req.downloadHandler.text}");
             }
             else
             {
-                Debug.Log("Resultado enviado exitosamente: " + request.downloadHandler.text);
+                Debug.Log($"[POST /api/simulaciones] OK {req.responseCode}\n{req.downloadHandler.text}");
             }
         }
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
