@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Fitosanitario.unity
     guid: 1a9d80f502c01f744aab1b785341bec9
+  - enabled: 1
+    path: Assets/Scenes/ResultadoSimulacion.unity
+    guid: 50bb36d3623f43042b2cb591aedd2bb7
   m_configObjects: {}

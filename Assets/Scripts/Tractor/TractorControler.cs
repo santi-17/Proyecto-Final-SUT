@@ -10,7 +10,7 @@ public class TractorControler : MonoBehaviour
     private bool isBreaking;
 
     // Settings
-    [SerializeField] private AnimationCurve torqueCurve; // Maximum speed in km/h
+    //[SerializeField] private AnimationCurve torqueCurve; // Maximum speed in km/h
     [SerializeField] private float maxRPM = 6000f; // Maximum RPM of the engine
     [SerializeField] private float motorForce = 3000f;
     [SerializeField] private Transmision transmision; // Assuming Transmision is a class that handles gear ratios and torque
@@ -64,7 +64,8 @@ public class TractorControler : MonoBehaviour
     {
         //float torque = verticalInput * motorForce * transmision.GetTorque();
         float rpm = rb.velocity.magnitude * 60f / (2f * Mathf.PI * frontLeftWheelCollider.radius); // Calculate RPM based on wheel speed
-        float torque = torqueCurve.Evaluate(rpm / maxRPM) * transmision.GetTorque() * verticalInput * motorForce;
+        //float torque = torqueCurve.Evaluate(rpm / maxRPM) * transmision.GetTorque() * verticalInput * motorForce;
+        float torque = transmision.GetTorque() * verticalInput * motorForce;
         //float appliedForce = verticalInput * motorForce;
         frontLeftWheelCollider.motorTorque = torque;
         frontRightWheelCollider.motorTorque = torque;
