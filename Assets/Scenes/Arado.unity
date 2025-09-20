@@ -325,6 +325,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bbf9ae4abf1e2d48aeb4e2a9bc8eecc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CampoTrackerA: {fileID: 1415985780}
+  CampoTrackerB: {fileID: 1749196816}
+  CampoTrackerC: {fileID: 1768484475}
   porcentajeTerreno1Text: {fileID: 655392947}
   porcentajeTerreno2Text: {fileID: 1626035166}
   porcentajeTerreno3Text: {fileID: 791993298}
