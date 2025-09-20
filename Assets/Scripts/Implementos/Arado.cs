@@ -112,9 +112,6 @@ public class Arado : MonoBehaviour
 
     private void ArarTerreno()
     {
-
-
-
         if (Physics.Raycast(puntoRaycast.position, Vector3.down, out RaycastHit hit, distanciaDeteccion))
         {
             Debug.DrawRay(puntoRaycast.position, Vector3.down * distanciaDeteccion, Color.red);
@@ -133,19 +130,26 @@ public class Arado : MonoBehaviour
                 int startX = Mathf.Clamp(heightmapX - size / 2, 0, data.heightmapResolution - 1);
                 int startZ = Mathf.Clamp(heightmapZ - size / 2, 0, data.heightmapResolution - 1);
 
-                //pinto la textura del terreno
+                // Ajustar tamaño para no salir del heightmap
+                int heightmapWidth = Mathf.Min(size, data.heightmapResolution - startX);
+                int heightmapHeight = Mathf.Min(size, data.heightmapResolution - startZ);
 
+                //pinto la textura del terreno
                 int alphamapX = (int)((terrainPos.x / data.size.x) * data.alphamapWidth);
                 int alphamapZ = (int)((terrainPos.z / data.size.z) * data.alphamapHeight);
 
                 int startAlphaX = Mathf.Clamp(alphamapX - size / 2, 0, data.alphamapWidth - 1);
                 int startAlphaZ = Mathf.Clamp(alphamapZ - size / 2, 0, data.alphamapHeight - 1);
 
-                float[,,] splatmap = data.GetAlphamaps(startAlphaX, startAlphaZ, size, size);
+                // Ajustar tamaño para alphamap
+                int alphamapWidth = Mathf.Min(size, data.alphamapWidth - startAlphaX);
+                int alphamapHeight = Mathf.Min(size, data.alphamapHeight - startAlphaZ);
 
-                for (int x = 0; x < size; x++)
+                float[,,] splatmap = data.GetAlphamaps(startAlphaX, startAlphaZ, alphamapWidth, alphamapHeight);
+
+                for (int x = 0; x < alphamapWidth; x++)
                 {
-                    for (int z = 0; z < size; z++)
+                    for (int z = 0; z < alphamapHeight; z++)
                     {
                         for (int i = 0; i < data.alphamapLayers; i++)
                             splatmap[x, z, i] = 0;
@@ -156,13 +160,20 @@ public class Arado : MonoBehaviour
                 data.SetAlphamaps(startAlphaX, startAlphaZ, splatmap);
 
                 //2. deformar el terreno (heigthmap)
-                float[,] heights = data.GetHeights(startX, startZ, size, size);
-                float mitad =  size / 2f;
-                for (int x = 0; x < size; x++)
+                float[,] heights = data.GetHeights(startX, startZ, heightmapWidth, heightmapHeight);
+                float mitadX = heightmapWidth / 2f;
+                float mitadZ = heightmapHeight / 2f;
+                //float[,] heights = data.GetHeights(startX, startZ, , size);
+                //float mitad =  size / 2f;
+                for (int x = 0; x < heightmapWidth; x++)
                 {
-                    for (int z = 0; z < size; z++)
+                    for (int z = 0; z < heightmapHeight; z++)
                     {
-                        float distanciaCentro = Mathf.Abs(x - mitad) / mitad; // Distancia al centro del área afectada
+                        //float distanciaCentro = Mathf.Abs(x - mitad) / mitad; // Distancia al centro del área afectada
+                        float distanciaCentroX = Mathf.Abs(x - mitadX) / mitadX;
+                        float distanciaCentroZ = Mathf.Abs(z - mitadZ) / mitadZ;
+                        float distanciaCentro = Mathf.Max(distanciaCentroX, distanciaCentroZ);
+
                         float deformacion = 0f; //Mathf.Clamp01(1f - distanciaCentro); // Normalizar la deformación entre 0 y 1
 
                         if (distanciaCentro < 0.2f)

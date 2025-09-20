@@ -10,10 +10,6 @@ public class SimulacionManager : MonoBehaviour
     public TextMeshProUGUI porcentajeTerreno1Text;
     public TextMeshProUGUI porcentajeTerreno2Text;
     public TextMeshProUGUI porcentajeTerreno3Text;
-    //public Button enviarButton;
-
-    //private string moduloSlug; // nombre de la escena actual
-    //private int userId; // id del usuario
 
     // Clase para parsear respuesta API
     [System.Serializable]
@@ -24,36 +20,14 @@ public class SimulacionManager : MonoBehaviour
         public float porcentajeCobertura3;
     }
 
-    //public class RespuestaSimulacionApi
-    //{
-    //    public int simulacionId;
-    //    public int moduloiD;
-    //    public int panelControlId;
-    //    public bool cobertura;
-    //}
-    //void Start()
-    //{
-    //    moduloSlug = SceneManager.GetActiveScene().name; // obtener nombre de la escena
-    //    //Notificar a react que el gameObject esta listo
-    //    Application.ExternalCall("onSimulacionManagerReady");
-    //}
-    //public void SetUserId(string id)
-    //{
-    //    Debug.Log("SetUser Id llamado con id: " + id);
-    //    if (int.TryParse(id, out int parsedId))
-    //    {
-    //        userId = parsedId;
-    //        Debug.Log("User  Id recibido y parseado: " + userId);
-    //    }
-    //    else
-    //    {
-    //        Debug.LogWarning("User Id inválido recibido: " + id);
-    //    }
-    //}
+
+#if UNITY_WEBGL && !UNITY_EDITOR
     [DllImport("__Internal")]
-    private static extern void onUnitySendData(string jsonData);
-    public void EnviarDatosSimulacion()
+    private static extern void onUnitySendData(string json);
+#endif
+    public IEnumerator EnviarDatosSimulacion()
     {
+        yield return new WaitForEndOfFrame();
         Debug.Log("EnviarSimulacion llamado");
 
         float c1 = ExtraerPorcentaje(porcentajeTerreno1Text.text);
@@ -73,11 +47,11 @@ public class SimulacionManager : MonoBehaviour
         //Enviar a React Llamo a la funcion en React los datos
         //Application.ExternalCall("onUnitySendData", json);
         //onUnitySendData(json);
-        #if UNITY_WEBGL && !UNITY_EDITOR
+#if UNITY_WEBGL && !UNITY_EDITOR
             onUnitySendData(json);
-        #else
-            Debug.Log("Simulación datos: " + json);
-        #endif
+#else
+        Debug.Log("[UNITY->JS] " + json);
+#endif
     }
 
     private float ExtraerPorcentaje(string texto)
@@ -89,46 +63,5 @@ public class SimulacionManager : MonoBehaviour
             return val;
         return 0f;
     }
-
-    //private IEnumerator PostSimulacion(SimulacionCreateDTO dto)
-    //{
-    //    string url = "http://localhost:5200/api/simulador/resultadoSimulacion"; // URL de la API para crear simulacion
-    //    string json = JsonUtility.ToJson(dto);
-    //    Debug.Log("JSON a enviar: " + json);
-
-    //    using (UnityWebRequest request = new UnityWebRequest(url, "POST"))
-    //    {
-    //        byte[] bodyRaw = System.Text.Encoding.UTF8.GetBytes(json);
-    //        request.uploadHandler = new UploadHandlerRaw(bodyRaw);
-    //        request.downloadHandler = new DownloadHandlerBuffer();
-    //        request.SetRequestHeader("Content-Type", "application/json");
-
-    //        yield return request.SendWebRequest();
-
-    //        if (request.result != UnityWebRequest.Result.Success)
-    //        {
-    //            Debug.LogError("Error al enviar simulación: " + request.error + "-" + request.downloadHandler.text);
-    //            // Rehabilitar el botón para permitir reintentos
-    //            if (enviarButton != null)
-    //                enviarButton.interactable = true;
-    //        }
-    //        else
-    //        {
-    //            Debug.Log("Simulación enviada correctamente: " + request.downloadHandler.text);
-
-    //            //respuesta de la API 
-    //            var respuesta = JsonUtility.FromJson<RespuestaSimulacionApi>(request.downloadHandler.text);
-
-    //            //guardar los datos de la escena para el resultado
-    //            ResultadoSimulacionData.Aprobado = respuesta.cobertura;
-    //            ResultadoSimulacionData.ModuloNombre = dto.ModuloSlug;
-    //            ResultadoSimulacionData.EscenaAnterior = SceneManager.GetActiveScene().name;
-
-    //            //cargo la escena resultado 
-    //            SceneManager.LoadScene("ResultadoSimulacion");
-    //        }
-    //    }
-    //}
-
 
 }
