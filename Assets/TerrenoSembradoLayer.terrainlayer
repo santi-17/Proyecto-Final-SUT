@@ -7,15 +7,15 @@ TerrainLayer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: TerrenoSembradoLayer
-  m_DiffuseTexture: {fileID: 2800000, guid: 87735acf16005914dba9087627517773, type: 3}
-  m_NormalMapTexture: {fileID: 0}
-  m_MaskMapTexture: {fileID: 0}
-  m_TileSize: {x: 2, y: 2}
+  m_DiffuseTexture: {fileID: 2800000, guid: 5e227e44474e3d64ea8547dec8fc9987, type: 3}
+  m_NormalMapTexture: {fileID: 2800000, guid: 5e8b639fa0a792244ba10d9a94a1675e, type: 3}
+  m_MaskMapTexture: {fileID: 2800000, guid: 3c03bed2f5178574eb7e4d489dc9db8c, type: 3}
+  m_TileSize: {x: 10, y: 10}
   m_TileOffset: {x: 0, y: 0}
   m_Specular: {r: 0, g: 0, b: 0, a: 0}
-  m_Metallic: 0
+  m_Metallic: 0.5
   m_Smoothness: 0
-  m_NormalScale: 1
+  m_NormalScale: 3
   m_DiffuseRemapMin: {x: 0, y: 0, z: 0, w: 0}
   m_DiffuseRemapMax: {x: 1, y: 1, z: 1, w: 1}
   m_MaskMapRemapMin: {x: 0, y: 0, z: 0, w: 0}

@@ -11,10 +11,11 @@ public class Fitosanitario : MonoBehaviour
 
     public ParticleSystem[] aspersores; // Array de las particulas de los aspersores que se activarán al presionar la tecla
     public Terrain terreno; // El terreno donde se aplicará el fitosanitario
-    public int indiceCapaHumedad = 2; // El índice de la capa de humedad en el terreno
+    public int indiceCapaHumedad = 1; // El índice de la capa de humedad en el terreno
     public float radioFitosanitario = 5f; // El radio del área del fitosanitario
     public float intervaloDeActualizacion = 0.5f; // Intervalo de actualización del fitosanitario
     public float velocidadUmbral = 0.1f; // Velocidad mínima para que el riego funcione
+    //public float intensidadRiego = 0.8f; // Intensidad del riego, es para una transición más suave de la textura entre una y otra
 
     private TerrainData data;
     private float tiempoUltimaActualizacion; // Tiempo de la última actualización del fitosanitario 
@@ -23,8 +24,21 @@ public class Fitosanitario : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {  
+    {
+        if (terreno == null)
+        {
+            terreno = FindObjectOfType<Terrain>(); // Auto-busca el Terrain si no está asignado
+        }
         data = terreno.terrainData;
+        // Verificación: Asegura que haya al menos 2 capas (0 y 1)
+        if (data.alphamapLayers < 2)
+        {
+            Debug.LogError("[Fitosanitario] El Terrain Data no tiene suficientes capas. Necesitas al menos 2 (base + humedad).");
+        }
+        else
+        {
+            Debug.Log($"[Fitosanitario] Configurado para pintar en capa {indiceCapaHumedad} (total de capas: {data.alphamapLayers}).");
+        }
     }
 
     // Update is called once per frame
@@ -34,7 +48,9 @@ public class Fitosanitario : MonoBehaviour
         {
             fitosanitarioActivo = !fitosanitarioActivo;
             ActivarAspersores(fitosanitarioActivo);
+            Debug.Log($"[Fitosanitario] Activado: {fitosanitarioActivo}");
         }
+
         // Calcular velocidad (distancia recorrida por segundo)
         velocidadActual = (transform.position - ultimaPosicion).magnitude / Time.deltaTime;
         ultimaPosicion = transform.position;
@@ -82,10 +98,25 @@ public class Fitosanitario : MonoBehaviour
                     float dist = Vector2.Distance (new Vector2(x, z), new Vector2(size, size)); // Distancia al centro del área afectada
                     if (dist <= size)
                     {
+                    //    float mezcla = 1f - (dist / size); // Mezcla basada en la distancia al centro
+                    //    mezcla *= intensidadRiego; // Aplica la intensidad del riego
+
                         for (int i = 0; i < data.alphamapLayers; i++)
+                        {
+                            //if (i == indiceCapaHumedad)
+                            //{
+                            //    // Aumenta la capa de humedad
+                            //    alphas[z, x, i] = Mathf.Lerp(alphas[z, x, i], 1f, mezcla);
+                            //}
+                            //else
+                            //{
+                            //    // Reduce las otras capas proporcionalmente
+                            //    alphas[z, x, i] = Mathf.Lerp(alphas[z, x, i], 0f, mezcla * 0.5f); // 0.5f para no eliminar completament
+                            //    //alphas[z, x, i] *= (1f - mezcla); // Reduce las otras capas
+                            //}
                             alphas[z, x, i] = (i == indiceCapaHumedad) ? 1f : 0f;
+                        }
                     }
-                        
                 }
             }
             data.SetAlphamaps(StartX, StartZ, alphas);
