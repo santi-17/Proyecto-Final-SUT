@@ -19,7 +19,7 @@ public class TractorControler : MonoBehaviour
     [SerializeField] public float steeringSpeed = 5f;
 
     //Rigidbody
-    [SerializeField] private Rigidbody rb; // Reference to the Rigidbody component of the tractor
+    public Rigidbody rb; // Reference to the Rigidbody component of the tractor
 
     // Wheel Colliders
     [SerializeField] private WheelCollider frontLeftWheelCollider, frontRightWheelCollider;

@@ -690,6 +690,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tractor
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 9357ca63e2b23b7478730e25208b214d, type: 3}
+      propertyPath: m_TagString
+      value: Tractor
+      objectReference: {fileID: 0}
     - target: {fileID: 3760648493716301875, guid: 9357ca63e2b23b7478730e25208b214d, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -746,10 +750,16 @@ PrefabInstance:
       addedObject: {fileID: 5655075069669071454}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9357ca63e2b23b7478730e25208b214d, type: 3}
       insertIndex: -1
+      addedObject: {fileID: 1199215539523609342}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9357ca63e2b23b7478730e25208b214d, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 4650270988014064182}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9357ca63e2b23b7478730e25208b214d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6153846761313657822}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9357ca63e2b23b7478730e25208b214d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6165503090249870088}
   m_SourcePrefab: {fileID: 100100000, guid: 9357ca63e2b23b7478730e25208b214d, type: 3}
 --- !u!4 &1287288773659532721 stripped
 Transform:
@@ -824,6 +834,23 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 76.245255, y: 66.402985, z: 126.09715}
   m_Center: {x: -0.34489334, y: 9.145128, z: 6.5594316}
+--- !u!114 &1199215539523609342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3049972759451345195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b0273d67685df14db94dfede23215a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tractor: {fileID: 6153846761313657822}
+  engineStartClip: {fileID: 8300000, guid: 155403feea6880c4c8a117f0943377e8, type: 3}
+  engineIdleClip: {fileID: 8300000, guid: 92fc7f1b0a9050942b1be66a2b1059b4, type: 3}
+  minPitch: 0.8
+  maxPitch: 2
 --- !u!114 &4650270988014064182
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -852,39 +879,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b7eab84433183e47aeed8b92c2e547a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  torqueCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0.0046353936
-      value: 0.20062013
-      inSlope: 4.1684175
-      outSlope: 4.1684175
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.14599116
-      value: 0.78985
-      inSlope: 1.8944567
-      outSlope: 1.8944567
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1.0291748
-      value: 0.45467833
-      inSlope: -0.37950394
-      outSlope: -0.37950394
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
   maxRPM: 6000
   motorForce: 3000
   transmision: {fileID: 873328303323227116}
@@ -900,6 +894,102 @@ MonoBehaviour:
   frontRightWheelTransform: {fileID: 5220108876580809789}
   rearLeftWheelTransform: {fileID: 2427791439870267672}
   rearRightWheelTransform: {fileID: 1287288773659532721}
+--- !u!82 &6165503090249870088
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3049972759451345195}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!4 &5220108876580809789 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -1233059834852773817, guid: 9357ca63e2b23b7478730e25208b214d, type: 3}
