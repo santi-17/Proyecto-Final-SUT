@@ -9743,6 +9743,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bbf9ae4abf1e2d48aeb4e2a9bc8eecc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  terrenos:
+  - {fileID: 313149438}
+  - {fileID: 1207226748}
+  - {fileID: 1525468194}
   CampoTrackerA: {fileID: 90222837}
   CampoTrackerB: {fileID: 1548080358}
   CampoTrackerC: {fileID: 94362922}

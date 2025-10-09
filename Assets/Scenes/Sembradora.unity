@@ -678,6 +678,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bbf9ae4abf1e2d48aeb4e2a9bc8eecc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  terrenos:
+  - {fileID: 273688543}
+  - {fileID: 1684598806}
+  - {fileID: 911129250}
   CampoTrackerA: {fileID: 724525846}
   CampoTrackerB: {fileID: 1946685633}
   CampoTrackerC: {fileID: 349138292}
