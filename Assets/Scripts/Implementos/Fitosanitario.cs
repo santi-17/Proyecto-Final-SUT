@@ -28,17 +28,29 @@ public class Fitosanitario : MonoBehaviour
         if (terreno == null)
         {
             terreno = FindObjectOfType<Terrain>(); // Auto-busca el Terrain si no está asignado
+            if (terreno == null)
+            {
+                Debug.LogError("[Fitosanitario] No se encontró ningún Terrain en la escena. Asigna uno manualmente.");
+                enabled = false;
+                return;
+            }
         }
         data = terreno.terrainData;
+        if (data == null)
+        {
+            Debug.LogError("[Fitosanitario] El Terrain no tiene TerrainData asignado.");
+            enabled = false;
+            return;
+        }
+        if (aspersores == null || aspersores.Length == 0)
+            Debug.LogWarning("[Fitosanitario] No hay aspersores asignados. El fitosanitario no tendrá efecto visual.");
         // Verificación: Asegura que haya al menos 2 capas (0 y 1)
-        if (data.alphamapLayers < 2)
+        if (data.alphamapLayers <= indiceCapaHumedad)
         {
-            Debug.LogError("[Fitosanitario] El Terrain Data no tiene suficientes capas. Necesitas al menos 2 (base + humedad).");
+            Debug.LogWarning($"[Fitosanitario] Índice de capa {indiceCapaHumedad} fuera de rango (capas totales: {data.alphamapLayers}). Se usará 0.");
+            indiceCapaHumedad = Mathf.Clamp(indiceCapaHumedad, 0, data.alphamapLayers - 1);
         }
-        else
-        {
-            Debug.Log($"[Fitosanitario] Configurado para pintar en capa {indiceCapaHumedad} (total de capas: {data.alphamapLayers}).");
-        }
+        ultimaPosicion = transform.position;
     }
 
     // Update is called once per frame
@@ -50,9 +62,9 @@ public class Fitosanitario : MonoBehaviour
             ActivarAspersores(fitosanitarioActivo);
             Debug.Log($"[Fitosanitario] Activado: {fitosanitarioActivo}");
         }
-
+        if(ultimaPosicion != Vector3.zero)
+            velocidadActual = (transform.position - ultimaPosicion).magnitude / Mathf.Max(Time.deltaTime, 0.0001f) ;
         // Calcular velocidad (distancia recorrida por segundo)
-        velocidadActual = (transform.position - ultimaPosicion).magnitude / Time.deltaTime;
         ultimaPosicion = transform.position;
 
         if (fitosanitarioActivo && velocidadActual > velocidadUmbral && Time.time - tiempoUltimaActualizacion >= intervaloDeActualizacion)
@@ -65,29 +77,44 @@ public class Fitosanitario : MonoBehaviour
 
     void ActivarAspersores(bool activo)
     {
+        if (aspersores == null) return;
         foreach (var aspersor in aspersores)
         {
-            if (activo) aspersor.Play();
-            else aspersor.Stop();
+            if (aspersor == null) continue;
+
+            if (activo && !aspersor.isPlaying) aspersor.Play();
+            else if (!activo && aspersor.isPlaying) aspersor.Stop();
         }
     }
 
     void PintarTerreno()
     {
-        int size = Mathf.RoundToInt((radioFitosanitario / data.size.x) * data.alphamapWidth); // tamaño del área a pintar
-        int paintSize = size * 2 + 1; // tamaño del área a pintar (diámetro)
+        if (terreno == null || data == null)
+        {
+            Debug.LogError("[Fitosanitario] No hay terrain valido para pintar.");
+            return;
+        }
+        float sizeX = Mathf.Max(data.size.x, 0.0001f);
+        float sizeZ = Mathf.Max(data.size.z, 0.0001f);
+
+        int paintRadius = Mathf.RoundToInt((radioFitosanitario / sizeX) * data.alphamapWidth); // tamaño del área a pintar
+        paintRadius = Mathf.Max(paintRadius, 1); // Asegura que el radio sea al menos 1
+        int paintSize = paintRadius * 2 + 1; // tamaño del área a pintar (diámetro)
      
         foreach (var aspersor in aspersores)
         {
+            if (aspersor == null) continue;
             Vector3 posicion = aspersor.transform.position - terreno.transform.position;
 
-            int mapX = Mathf.RoundToInt((posicion.x / data.size.x) * data.alphamapWidth);
-            int mapZ = Mathf.RoundToInt((posicion.z / data.size.z) * data.alphamapHeight);
+            int mapX = Mathf.RoundToInt((posicion.x / sizeX) * data.alphamapWidth);
+            int mapZ = Mathf.RoundToInt((posicion.z / sizeZ) * data.alphamapHeight);
 
 
             //clamp para evitar que se salga del terreno
-            int StartX = Mathf.Clamp(mapX - size, 0, data.alphamapWidth - paintSize);
-            int StartZ = Mathf.Clamp(mapZ - size, 0, data.alphamapHeight - paintSize);
+            int StartX = Mathf.Clamp(mapX - paintRadius, 0, data.alphamapWidth - paintSize);
+            int StartZ = Mathf.Clamp(mapZ - paintRadius, 0, data.alphamapHeight - paintSize);
+
+            if (StartX < 0 || StartZ < 0) continue;
 
             float[,,] alphas = data.GetAlphamaps(StartX, StartZ, paintSize, paintSize);
 
@@ -95,25 +122,11 @@ public class Fitosanitario : MonoBehaviour
             {
                 for (int z = 0; z < paintSize; z++)
                 {
-                    float dist = Vector2.Distance (new Vector2(x, z), new Vector2(size, size)); // Distancia al centro del área afectada
-                    if (dist <= size)
+                    float dist = Vector2.Distance (new Vector2(x, z), new Vector2(paintRadius, paintRadius)); // Distancia al centro del área afectada
+                    if (dist <= paintRadius)
                     {
-                    //    float mezcla = 1f - (dist / size); // Mezcla basada en la distancia al centro
-                    //    mezcla *= intensidadRiego; // Aplica la intensidad del riego
-
                         for (int i = 0; i < data.alphamapLayers; i++)
                         {
-                            //if (i == indiceCapaHumedad)
-                            //{
-                            //    // Aumenta la capa de humedad
-                            //    alphas[z, x, i] = Mathf.Lerp(alphas[z, x, i], 1f, mezcla);
-                            //}
-                            //else
-                            //{
-                            //    // Reduce las otras capas proporcionalmente
-                            //    alphas[z, x, i] = Mathf.Lerp(alphas[z, x, i], 0f, mezcla * 0.5f); // 0.5f para no eliminar completament
-                            //    //alphas[z, x, i] *= (1f - mezcla); // Reduce las otras capas
-                            //}
                             alphas[z, x, i] = (i == indiceCapaHumedad) ? 1f : 0f;
                         }
                     }

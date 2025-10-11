@@ -8766,7 +8766,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1388781262986532009, guid: a2185682c1ad2b8429e844ee83ae7742, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 174
+      value: 129.5
       objectReference: {fileID: 0}
     - target: {fileID: 1565510101092704842, guid: a2185682c1ad2b8429e844ee83ae7742, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -8774,7 +8774,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1565510101092704842, guid: a2185682c1ad2b8429e844ee83ae7742, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 220.5
+      value: 176
       objectReference: {fileID: 0}
     - target: {fileID: 1722115589538047707, guid: a2185682c1ad2b8429e844ee83ae7742, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -8806,7 +8806,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4107410638788833860, guid: a2185682c1ad2b8429e844ee83ae7742, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -200
+      value: -163
       objectReference: {fileID: 0}
     - target: {fileID: 4507445429938707969, guid: a2185682c1ad2b8429e844ee83ae7742, type: 3}
       propertyPath: transmission
@@ -8817,12 +8817,56 @@ PrefabInstance:
       value: 'Campo Fitosanitario : 0.00%'
       objectReference: {fileID: 0}
     - target: {fileID: 4718376607098918367, guid: a2185682c1ad2b8429e844ee83ae7742, type: 3}
+      propertyPath: m_margin.x
+      value: -40.860718
+      objectReference: {fileID: 0}
+    - target: {fileID: 4718376607098918367, guid: a2185682c1ad2b8429e844ee83ae7742, type: 3}
+      propertyPath: m_margin.y
+      value: -4.927246
+      objectReference: {fileID: 0}
+    - target: {fileID: 4718376607098918367, guid: a2185682c1ad2b8429e844ee83ae7742, type: 3}
       propertyPath: m_margin.z
-      value: -47.14154
+      value: -36.996613
+      objectReference: {fileID: 0}
+    - target: {fileID: 4718376607098918367, guid: a2185682c1ad2b8429e844ee83ae7742, type: 3}
+      propertyPath: m_VerticalAlignment
+      value: 512
+      objectReference: {fileID: 0}
+    - target: {fileID: 4718376607098918367, guid: a2185682c1ad2b8429e844ee83ae7742, type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4738866259885207377, guid: a2185682c1ad2b8429e844ee83ae7742, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -35.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 5462742401438533692, guid: a2185682c1ad2b8429e844ee83ae7742, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -19
       objectReference: {fileID: 0}
     - target: {fileID: 6756188029371357723, guid: a2185682c1ad2b8429e844ee83ae7742, type: 3}
       propertyPath: m_text
       value: 'Campo Fitosanotario : 0.00%'
+      objectReference: {fileID: 0}
+    - target: {fileID: 6756188029371357723, guid: a2185682c1ad2b8429e844ee83ae7742, type: 3}
+      propertyPath: m_margin.w
+      value: 12.972992
+      objectReference: {fileID: 0}
+    - target: {fileID: 6756188029371357723, guid: a2185682c1ad2b8429e844ee83ae7742, type: 3}
+      propertyPath: m_margin.x
+      value: -41.12863
+      objectReference: {fileID: 0}
+    - target: {fileID: 6756188029371357723, guid: a2185682c1ad2b8429e844ee83ae7742, type: 3}
+      propertyPath: m_margin.z
+      value: -26.272247
+      objectReference: {fileID: 0}
+    - target: {fileID: 6756188029371357723, guid: a2185682c1ad2b8429e844ee83ae7742, type: 3}
+      propertyPath: m_VerticalAlignment
+      value: 512
+      objectReference: {fileID: 0}
+    - target: {fileID: 6756188029371357723, guid: a2185682c1ad2b8429e844ee83ae7742, type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6936375095357368960, guid: a2185682c1ad2b8429e844ee83ae7742, type: 3}
       propertyPath: m_Name
@@ -8834,7 +8878,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8267183289713856222, guid: a2185682c1ad2b8429e844ee83ae7742, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 269
+      value: 224.5
       objectReference: {fileID: 0}
     - target: {fileID: 8932669151092163873, guid: a2185682c1ad2b8429e844ee83ae7742, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -8842,15 +8886,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8932669151092163873, guid: a2185682c1ad2b8429e844ee83ae7742, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -277.9
+      value: -228.9
       objectReference: {fileID: 0}
     - target: {fileID: 8941734362811389441, guid: a2185682c1ad2b8429e844ee83ae7742, type: 3}
       propertyPath: m_text
       value: 'Campo Fitosanitario : 0.00%'
       objectReference: {fileID: 0}
     - target: {fileID: 8941734362811389441, guid: a2185682c1ad2b8429e844ee83ae7742, type: 3}
+      propertyPath: m_margin.x
+      value: -47.428543
+      objectReference: {fileID: 0}
+    - target: {fileID: 8941734362811389441, guid: a2185682c1ad2b8429e844ee83ae7742, type: 3}
+      propertyPath: m_margin.y
+      value: -6.2542725
+      objectReference: {fileID: 0}
+    - target: {fileID: 8941734362811389441, guid: a2185682c1ad2b8429e844ee83ae7742, type: 3}
       propertyPath: m_margin.z
-      value: -54.694946
+      value: -42.70752
+      objectReference: {fileID: 0}
+    - target: {fileID: 8941734362811389441, guid: a2185682c1ad2b8429e844ee83ae7742, type: 3}
+      propertyPath: m_VerticalAlignment
+      value: 512
+      objectReference: {fileID: 0}
+    - target: {fileID: 8941734362811389441, guid: a2185682c1ad2b8429e844ee83ae7742, type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 9124060190353398634, guid: a2185682c1ad2b8429e844ee83ae7742, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -8858,7 +8918,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9124060190353398634, guid: a2185682c1ad2b8429e844ee83ae7742, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -240
+      value: -191
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -9434,7 +9494,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2384795349400648593, guid: 2472f5f2e59cb0f42aa974d204ba7017, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -121.1
+      value: -4.1
       objectReference: {fileID: 0}
     - target: {fileID: 2384795349400648593, guid: 2472f5f2e59cb0f42aa974d204ba7017, type: 3}
       propertyPath: m_LocalPosition.y
@@ -9743,7 +9803,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 259}
+  m_AnchoredPosition: {x: 0, y: 214.6}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1614110105

@@ -1,98 +1,166 @@
-using System;
+Ôªøusing System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+
+[Serializable]
+public class ConfiguracionArado
+{
+    public string nombreMision;
+    public string tipoArado;
+    public string descripcionSuelo;
+    public float profundidadSurco;
+    public int materialAradoIndex;
+    public Color colorParticulas;
+    public float tiempoEntreArados;
+}
 
 public class Arado : MonoBehaviour
 {
+    public KeyCode activarArado = KeyCode.F;
+    [SerializeField] private Transform puntoRaycast;
+    [SerializeField] private Terrain terrain;
+    [SerializeField] private ParticleSystem particulasTierra;
+    [SerializeField] private Transform modeloVisual;
 
-    public KeyCode activarArado = KeyCode.F; // Tecla para activar el arado
-    [SerializeField] private Transform puntoRaycast; // Punto desde donde se lanzar· el rayo para detectar el terreno
-    [SerializeField] private Terrain terrain; // Referencia al Terrain que se va a modificar
-    [SerializeField] private ParticleSystem particulasTierra; // PartÌculas de tierra que se reproducir·n al arar
-    
+    [Header("Configuraci√≥n General")]
+    public float distanciaDeteccion = 5f;
+    public LayerMask Suelo;
+    public int size = 70;
 
-    private ParticleSystem instanciaParticulas; // Instancia de las partÌculas de tierra
-
-    public float distanciaDeteccion = 5f; // Distancia de detecciÛn del arado
-    public LayerMask Suelo; // Capa del suelo para detectar colisiones
-    public int materialAradoIndex = 1; // Õndice del material del arado en el array de materiales
-
-    public float profundidadSurco = 0.0003f; // Profundidad del arado en el terreno
-    public int size = 70; // TamaÒo del ·rea afectada por el arado
-
-    bool aradoActivo = false; // Estado del arado
-
-    //para uqe se mueva el arado es una animacion 
-    [SerializeField] private Transform modeloVisual; // Parte visual del arado que se baja
-    [SerializeField] private float alturaReposo = 0f; // Altura original del arado
-    [SerializeField] private float alturaTrabajo = -0.7f; // Altura cuando est· arando
-    [SerializeField] private float velocidadMovimiento = 2f; // Velocidad de bajada/subida
-
+    private bool aradoActivo = false;
     private Coroutine movimientoArado;
-    private float tiempoEntreArados = 0.1f; // Tiempo entre cada arado
     private float temporizadorArado = 0f;
-
     private Vector3 ultimaPosicion;
     private float velocidadDeMovimiento;
+    private ParticleSystem instanciaParticulas;
 
-    // Start is called before the first frame update
+    [Header("Animaci√≥n Visual")]
+    [SerializeField] private float alturaReposo = 0f;
+    [SerializeField] private float alturaTrabajo = -0.7f;
+    [SerializeField] private float velocidadMovimiento = 2f;
+
+    [Header("Configuraciones por misi√≥n")]
+    public int misionActual = 1;
+    public List<ConfiguracionArado> configuraciones = new List<ConfiguracionArado>();
+
+    [Header("Etiqueta visual")]
+    [SerializeField] private TextMeshPro etiquetaTipoArado;
+    [SerializeField] private Vector3 offsetEtiqueta = new Vector3(0, 3.5f, 0);
+
+    private ConfiguracionArado configActiva;
+
     void Start()
     {
-        //Terrain terrain = GetComponent<Terrain>();
+        if (terrain == null)
+        {
+            Debug.LogError("[Arado] No se asign√≥ un Terrain.");
+            enabled = false;
+            return;
+        }
+
+        // Crear configuraciones si no existen
+        if (configuraciones.Count == 0)
+        {
+            configuraciones.AddRange(new[]
+            {
+                new ConfiguracionArado {
+                    nombreMision = "Litoral Oeste (Vertedera)",
+                    tipoArado = "Vertedera",
+                    descripcionSuelo = "Franco-arcilloso profundo, h√∫medo moderado",
+                    profundidadSurco = 0.0030f,
+                    materialAradoIndex = 1,
+                    colorParticulas = new Color(0.25f, 0.15f, 0.05f),
+                    tiempoEntreArados = 0.1f
+                },
+                new ConfiguracionArado {
+                    nombreMision = "Norte Seco (Cincel)",
+                    tipoArado = "Cincel",
+                    descripcionSuelo = "Arenoso, clima caluroso y seco",
+                    profundidadSurco = 0.0025f,
+                    materialAradoIndex = 1,
+                    colorParticulas = new Color(0.7f, 0.6f, 0.4f),
+                    tiempoEntreArados = 0.15f
+                },
+                new ConfiguracionArado {
+                    nombreMision = "Zona Hort√≠cola (Superficial)",
+                    tipoArado = "Superficial",
+                    descripcionSuelo = "Franco-limoso h√∫medo, templado",
+                    profundidadSurco = 0.00017f,
+                    materialAradoIndex = 1,
+                    colorParticulas = new Color(0.4f, 0.3f, 0.15f),
+                    tiempoEntreArados = 0.08f
+                }
+            });
+        }
+
+        int index = Mathf.Clamp(misionActual - 1, 0, configuraciones.Count - 1);
+        configActiva = configuraciones[index];
+
+        Debug.Log($"[Arado] Misi√≥n: {configActiva.nombreMision}");
+
         if (particulasTierra != null)
         {
             instanciaParticulas = Instantiate(particulasTierra, transform);
+            var main = instanciaParticulas.main;
+            main.startColor = configActiva.colorParticulas;
             instanciaParticulas.Stop();
         }
-        
+
+        if (etiquetaTipoArado == null)
+        {
+            GameObject textoObj = new GameObject("EtiquetaTipoArado");
+            textoObj.transform.SetParent(transform);
+            textoObj.transform.localPosition = offsetEtiqueta;
+
+            etiquetaTipoArado = textoObj.AddComponent<TextMeshPro>();
+            etiquetaTipoArado.alignment = TextAlignmentOptions.Center;
+            etiquetaTipoArado.fontSize = 8f;
+            etiquetaTipoArado.color = Color.yellow;
+        }
+
+        etiquetaTipoArado.text = configActiva.tipoArado;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        velocidadDeMovimiento = (transform.position - ultimaPosicion).magnitude / Time.deltaTime;
+        float dt = Mathf.Max(Time.deltaTime, 0.0001f);
+        velocidadDeMovimiento = (transform.position - ultimaPosicion).magnitude / dt;
         ultimaPosicion = transform.position;
+
         if (Input.GetKeyDown(activarArado))
         {
             aradoActivo = !aradoActivo;
-            Debug.Log("Arado " + (aradoActivo ? "activado" : "desactivado"));
+            Debug.Log($"[Arado] {(aradoActivo ? "Activado" : "Desactivado")} ({configActiva.tipoArado})");
 
             if (movimientoArado != null) StopCoroutine(movimientoArado);
-
-            float destinoY = aradoActivo ? alturaTrabajo : alturaReposo;
-            movimientoArado = StartCoroutine(MoverArado(destinoY));
+            movimientoArado = StartCoroutine(MoverArado(aradoActivo ? alturaTrabajo : alturaReposo));
         }
 
+        if (!aradoActivo) return;
+        if (velocidadDeMovimiento < 0.1f) return;
 
-        if (!aradoActivo)
+        if (instanciaParticulas != null)
         {
-            terrain.Flush();
-            return; // Si el arado no est· activo, salir del mÈtodo
-        }
-        if (velocidadMovimiento < 0.1f) { return; }
-
-        // Si el arado est· activo, reproducir las partÌculas de tierra
-        if (aradoActivo && instanciaParticulas != null && !instanciaParticulas.isPlaying) // Verifica si las partÌculas no est·n reproduciÈndose
-        {
-            instanciaParticulas.transform.position = puntoRaycast.position; // Asegurarse de que las partÌculas se posicionen correctamente
-            instanciaParticulas.Play(); // Reproducir las partÌculas de tierra
-        }
-        else if (!aradoActivo && instanciaParticulas != null && instanciaParticulas.isPlaying) // Si el arado no est· activo, detener las partÌculas
-        {
-            instanciaParticulas.Stop(); // Detener las partÌculas de tierra
+            if (aradoActivo && !instanciaParticulas.isPlaying) instanciaParticulas.Play();
+            if (!aradoActivo && instanciaParticulas.isPlaying) instanciaParticulas.Stop();
         }
 
-        if (aradoActivo)
+        temporizadorArado -= Time.deltaTime;
+        if (temporizadorArado <= 0f)
         {
-            temporizadorArado -= Time.deltaTime;
-            if (temporizadorArado <= 0f)
-            {
-                if (velocidadDeMovimiento > 0.1f) ArarTerreno();
-                else return;
-
-                temporizadorArado = tiempoEntreArados;
-            }
+            ArarTerreno();
+            temporizadorArado = configActiva.tiempoEntreArados;
+        }
+    }
+    void LateUpdate()
+    {
+        if (etiquetaTipoArado != null && Camera.main != null)
+        {
+            // Hacer que mire hacia la c√°mara, pero no al rev√©s
+            etiquetaTipoArado.transform.LookAt(Camera.main.transform);
+            etiquetaTipoArado.transform.Rotate(0, 180f, 0); // üîÑ Invierte el texto para que no se vea al rev√©s
         }
     }
 
@@ -100,7 +168,6 @@ public class Arado : MonoBehaviour
     {
         Vector3 inicio = modeloVisual.localPosition;
         Vector3 destino = new Vector3(inicio.x, destinoY, inicio.z);
-
         float t = 0;
         while (t < 1)
         {
@@ -112,97 +179,70 @@ public class Arado : MonoBehaviour
 
     private void ArarTerreno()
     {
-        if (Physics.Raycast(puntoRaycast.position, Vector3.down, out RaycastHit hit, distanciaDeteccion))
+        if (!Physics.Raycast(puntoRaycast.position, Vector3.down, out RaycastHit hit, distanciaDeteccion))
+            return;
+
+        Vector3 terrainPos = hit.point - terrain.transform.position;
+        TerrainData data = terrain.terrainData;
+
+        // --- PINTADO (TEXTURA) ---
+        float sizeX = Mathf.Max(data.size.x, 0.0001f);
+        float sizeZ = Mathf.Max(data.size.z, 0.0001f);
+
+        int alphamapX = (int)((terrainPos.x / sizeX) * data.alphamapWidth);
+        int alphamapZ = (int)((terrainPos.z / sizeZ) * data.alphamapHeight);
+
+        int startAlphaX = Mathf.Clamp(alphamapX - size / 2, 0, data.alphamapWidth - 1);
+        int startAlphaZ = Mathf.Clamp(alphamapZ - size / 2, 0, data.alphamapHeight - 1);
+
+        int alphamapWidth = Mathf.Min(size, data.alphamapWidth - startAlphaX);
+        int alphamapHeight = Mathf.Min(size, data.alphamapHeight - startAlphaZ);
+
+        float[,,] splatmap = data.GetAlphamaps(startAlphaX, startAlphaZ, alphamapWidth, alphamapHeight);
+
+        for (int x = 0; x < alphamapWidth; x++)
         {
-            Debug.DrawRay(puntoRaycast.position, Vector3.down * distanciaDeteccion, Color.red);
-
-            //Terrain terrain = hit.collider.GetComponent<Terrain>();
-            if (terrain != null)
+            for (int z = 0; z < alphamapHeight; z++)
             {
-                // AquÌ puedes agregar la lÛgica para arar el terreno, como cambiar su textura o estado
-                Vector3 terrainPos = hit.point - terrain.transform.position;
-                TerrainData data = terrain.terrainData;
+                for (int i = 0; i < data.alphamapLayers; i++)
+                    splatmap[x, z, i] = 0;
 
-                int heightmapX = (int)((terrainPos.x / data.size.x) * data.heightmapResolution);
-                int heightmapZ = (int)((terrainPos.z / data.size.z) * data.heightmapResolution);
-
-                // Asegurarse de que el ·rea afectada no se salga de los lÌmites del heightmap
-                int startX = Mathf.Clamp(heightmapX - size / 2, 0, data.heightmapResolution - 1);
-                int startZ = Mathf.Clamp(heightmapZ - size / 2, 0, data.heightmapResolution - 1);
-
-                // Ajustar tamaÒo para no salir del heightmap
-                int heightmapWidth = Mathf.Min(size, data.heightmapResolution - startX);
-                int heightmapHeight = Mathf.Min(size, data.heightmapResolution - startZ);
-
-                //pinto la textura del terreno
-                int alphamapX = (int)((terrainPos.x / data.size.x) * data.alphamapWidth);
-                int alphamapZ = (int)((terrainPos.z / data.size.z) * data.alphamapHeight);
-
-                int startAlphaX = Mathf.Clamp(alphamapX - size / 2, 0, data.alphamapWidth - 1);
-                int startAlphaZ = Mathf.Clamp(alphamapZ - size / 2, 0, data.alphamapHeight - 1);
-
-                // Ajustar tamaÒo para alphamap
-                int alphamapWidth = Mathf.Min(size, data.alphamapWidth - startAlphaX);
-                int alphamapHeight = Mathf.Min(size, data.alphamapHeight - startAlphaZ);
-
-                float[,,] splatmap = data.GetAlphamaps(startAlphaX, startAlphaZ, alphamapWidth, alphamapHeight);
-
-                for (int x = 0; x < alphamapWidth; x++)
-                {
-                    for (int z = 0; z < alphamapHeight; z++)
-                    {
-                        for (int i = 0; i < data.alphamapLayers; i++)
-                            splatmap[x, z, i] = 0;
-
-                        splatmap[x, z, materialAradoIndex] = 1;
-                    }
-                }
-                data.SetAlphamaps(startAlphaX, startAlphaZ, splatmap);
-
-                //2. deformar el terreno (heigthmap)
-                float[,] heights = data.GetHeights(startX, startZ, heightmapWidth, heightmapHeight);
-                float mitadX = heightmapWidth / 2f;
-                float mitadZ = heightmapHeight / 2f;
-                //float[,] heights = data.GetHeights(startX, startZ, , size);
-                //float mitad =  size / 2f;
-                for (int x = 0; x < heightmapWidth; x++)
-                {
-                    for (int z = 0; z < heightmapHeight; z++)
-                    {
-                        //float distanciaCentro = Mathf.Abs(x - mitad) / mitad; // Distancia al centro del ·rea afectada
-                        float distanciaCentroX = Mathf.Abs(x - mitadX) / mitadX;
-                        float distanciaCentroZ = Mathf.Abs(z - mitadZ) / mitadZ;
-                        float distanciaCentro = Mathf.Max(distanciaCentroX, distanciaCentroZ);
-
-                        float deformacion = 0f; //Mathf.Clamp01(1f - distanciaCentro); // Normalizar la deformaciÛn entre 0 y 1
-
-                        if (distanciaCentro < 0.2f)
-                        {
-                            deformacion = -profundidadSurco * (1f - distanciaCentro * 5f); // DeformaciÛn m·xima en el centro, disminuye hacia los bordes
-                        }
-                        else if (distanciaCentro < 0.6f)
-                        {
-                            deformacion = profundidadSurco * 0.5f * (1 -Mathf.Abs (distanciaCentro - 0.4f) * 5f); // DeformaciÛn menor hacia los bordes
-                        }
-                        //heights[z, x] -= profundidadSurco * (x / (float)size);
-                        heights[z, x] = Mathf.Clamp01(heights[z, x] + deformacion); // Asegurarse de que la altura no se salga de los lÌmites
-                    }
-                }
-
-                data.SetHeights(startX, startZ, heights);
-
+                splatmap[x, z, configActiva.materialAradoIndex] = 1;
             }
-            else
-            {
-                Debug.LogWarning("El objeto no tiene un Renderer para cambiar el material.");
-            }
-
         }
-        else
+        data.SetAlphamaps(startAlphaX, startAlphaZ, splatmap);
+
+        // --- DEFORMACI√ìN (ALTURA) ---
+        int heightmapX = (int)((terrainPos.x / sizeX) * data.heightmapResolution);
+        int heightmapZ = (int)((terrainPos.z / sizeZ) * data.heightmapResolution);
+
+        int startX = Mathf.Clamp(heightmapX - size / 2, 0, data.heightmapResolution - 1);
+        int startZ = Mathf.Clamp(heightmapZ - size / 2, 0, data.heightmapResolution - 1);
+
+        int heightmapWidth = Mathf.Min(size, data.heightmapResolution - startX);
+        int heightmapHeight = Mathf.Min(size, data.heightmapResolution - startZ);
+
+        float[,] heights = data.GetHeights(startX, startZ, heightmapWidth, heightmapHeight);
+        float mitadX = Mathf.Max(heightmapWidth / 2f, 0.0001f);
+        float mitadZ = Mathf.Max(heightmapHeight / 2f, 0.0001f);
+
+        for (int x = 0; x < heightmapWidth; x++)
         {
-            // Si no se detecta el suelo, desactivar el arado
-            Debug.Log("No hay suelo debajo del arado");
+            for (int z = 0; z < heightmapHeight; z++)
+            {
+                float distanciaCentroX = Mathf.Abs(x - mitadX) / mitadX;
+                float distanciaCentroZ = Mathf.Abs(z - mitadZ) / mitadZ;
+                float distanciaCentro = Mathf.Max(distanciaCentroX, distanciaCentroZ);
+
+                float deformacion = 0f;
+                if (distanciaCentro < 0.2f)
+                    deformacion = -configActiva.profundidadSurco * (1f - distanciaCentro * 5f);
+                else if (distanciaCentro < 0.6f)
+                    deformacion = configActiva.profundidadSurco * 0.5f * (1 - Mathf.Abs(distanciaCentro - 0.4f) * 5f);
+
+                heights[z, x] = Mathf.Clamp01(heights[z, x] + deformacion);
+            }
         }
+        data.SetHeights(startX, startZ, heights);
     }
-
 }

@@ -53,7 +53,7 @@ public class Cultivo : MonoBehaviour
     {
         if (aplastado) return;
 
-        if (collision.gameObject.CompareTag("Tractor") || collision.gameObject.CompareTag("Implemento"))
+        if (collision.gameObject.CompareTag("Tractor") || collision.gameObject.CompareTag("Implement"))
         {
             aplastado = true;
 
