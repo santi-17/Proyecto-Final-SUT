@@ -248,27 +248,29 @@ public class SimulacionManager : MonoBehaviour
 
     private float[] Flatten(float[,] input)
     {
-        int w = input.GetLength(0);
-        int h = input.GetLength(1);
-        float[] flat = new float[w * h];
+        //Inverti el h y el w  
+        int h = input.GetLength(0);
+        int w = input.GetLength(1);
+        float[] flat = new float[h * w];
         int k = 0;
         for (int y = 0; y < h; y++)
             for (int x = 0; x < w; x++)
-                flat[k++] = input[x, y];
+                flat[k++] = input[y, x];
         return flat;
     }
 
     private float[] Flatten(float[,,] input)
     {
-        int w = input.GetLength(0);
-        int h = input.GetLength(1);
+        //Inverti el h y el w 
+        int h = input.GetLength(0);
+        int w = input.GetLength(1);
         int l = input.GetLength(2);
-        float[] flat = new float[w * h * l];
+        float[] flat = new float[h * w * l];
         int k = 0;
         for (int y = 0; y < h; y++)
             for (int x = 0; x < w; x++)
                 for (int z = 0; z < l; z++)
-                    flat[k++] = input[x, y, z];
+                    flat[k++] = input[y, x, z];
         return flat;
     }
 }

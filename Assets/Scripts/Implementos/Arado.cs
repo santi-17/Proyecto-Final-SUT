@@ -69,7 +69,7 @@ public class Arado : MonoBehaviour
                     nombreMision = "Litoral Oeste (Vertedera)",
                     tipoArado = "Vertedera",
                     descripcionSuelo = "Franco-arcilloso profundo, húmedo moderado",
-                    profundidadSurco = 0.0030f,
+                    profundidadSurco = 0.0020f,
                     materialAradoIndex = 1,
                     colorParticulas = new Color(0.25f, 0.15f, 0.05f),
                     tiempoEntreArados = 0.1f
@@ -78,7 +78,7 @@ public class Arado : MonoBehaviour
                     nombreMision = "Norte Seco (Cincel)",
                     tipoArado = "Cincel",
                     descripcionSuelo = "Arenoso, clima caluroso y seco",
-                    profundidadSurco = 0.0025f,
+                    profundidadSurco = 0.0015f,
                     materialAradoIndex = 1,
                     colorParticulas = new Color(0.7f, 0.6f, 0.4f),
                     tiempoEntreArados = 0.15f
@@ -87,7 +87,7 @@ public class Arado : MonoBehaviour
                     nombreMision = "Zona Hortícola (Superficial)",
                     tipoArado = "Superficial",
                     descripcionSuelo = "Franco-limoso húmedo, templado",
-                    profundidadSurco = 0.00017f,
+                    profundidadSurco = 0.00007f,
                     materialAradoIndex = 1,
                     colorParticulas = new Color(0.4f, 0.3f, 0.15f),
                     tiempoEntreArados = 0.08f

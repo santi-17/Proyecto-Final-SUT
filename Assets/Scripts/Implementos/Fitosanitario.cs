@@ -1,30 +1,44 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Fitosanitario : MonoBehaviour
 {
+    public enum MisionFitosanitario { Mision1, Mision2, Mision3 }
+    public MisionFitosanitario misionActual = MisionFitosanitario.Mision1;
+
     public KeyCode teclaActivar = KeyCode.T; // La tecla que se debe presionar para activar el fitosanitario
     public bool fitosanitarioActivo = false; // El estado del fitosanitario, activo o inactivo
 
 
     public ParticleSystem[] aspersores; // Array de las particulas de los aspersores que se activarán al presionar la tecla
     public Terrain terreno; // El terreno donde se aplicará el fitosanitario
-    public int indiceCapaHumedad = 1; // El índice de la capa de humedad en el terreno
-    public float radioFitosanitario = 5f; // El radio del área del fitosanitario
-    public float intervaloDeActualizacion = 0.5f; // Intervalo de actualización del fitosanitario
-    public float velocidadUmbral = 0.1f; // Velocidad mínima para que el riego funcione
-    //public float intensidadRiego = 0.8f; // Intensidad del riego, es para una transición más suave de la textura entre una y otra
+    [SerializeField] private Vector3 offsetEtiqueta = new Vector3(0, 3.5f, 0); // Offset para la etiqueta de estado del fitosanitario
+
+    private int indiceCapaHumedad = 1; // El índice de la capa de humedad en el terreno
+    private float radioFitosanitario; // El radio del área del fitosanitario
+    private float intervaloDeActualizacion; // Intervalo de actualización del fitosanitario
+    private float velocidadUmbral; // Velocidad mínima para que el riego funcione
+    private string cultivo;
+    private string producto;
+    private string tipoProducto;
+    private string momentoAplicacion;
+    private string suelo;
+    private string clima;
 
     private TerrainData data;
     private float tiempoUltimaActualizacion; // Tiempo de la última actualización del fitosanitario 
     private Vector3 ultimaPosicion;
     private float velocidadActual;
+    private TMP_Text etiquetaFitosanitario;
 
     // Start is called before the first frame update
     void Start()
     {
+        ConfigurarMision();
+
         if (terreno == null)
         {
             terreno = FindObjectOfType<Terrain>(); // Auto-busca el Terrain si no está asignado
@@ -50,6 +64,18 @@ public class Fitosanitario : MonoBehaviour
             Debug.LogWarning($"[Fitosanitario] Índice de capa {indiceCapaHumedad} fuera de rango (capas totales: {data.alphamapLayers}). Se usará 0.");
             indiceCapaHumedad = Mathf.Clamp(indiceCapaHumedad, 0, data.alphamapLayers - 1);
         }
+
+        // Crear etiqueta visual
+        GameObject etiquetaObj = new GameObject("EtiquetaFitosanitario"); 
+        etiquetaObj.transform.SetParent(transform);
+        etiquetaObj.transform.localPosition = offsetEtiqueta;
+
+        etiquetaFitosanitario = etiquetaObj.AddComponent<TextMeshPro>();
+        etiquetaFitosanitario.alignment = TextAlignmentOptions.Center;
+        etiquetaFitosanitario.fontSize = 8f;
+        etiquetaFitosanitario.color = new Color(0.1f, 0.9f, 0.3f);
+        etiquetaFitosanitario.text = $"{tipoProducto}\n{producto}\n{cultivo}\nMomento: {momentoAplicacion}";
+
         ultimaPosicion = transform.position;
     }
 
@@ -75,6 +101,14 @@ public class Fitosanitario : MonoBehaviour
 
     }
 
+    private void LateUpdate()
+    {
+        if (etiquetaFitosanitario != null && Camera.main != null)
+        {
+            etiquetaFitosanitario.transform.LookAt(Camera.main.transform); // Hace que la etiqueta siempre mire a la cámara
+            etiquetaFitosanitario.transform.Rotate(0, 180f, 0); // Ajuste para que no quede invertido
+        }
+    }
     void ActivarAspersores(bool activo)
     {
         if (aspersores == null) return;
@@ -133,6 +167,46 @@ public class Fitosanitario : MonoBehaviour
                 }
             }
             data.SetAlphamaps(StartX, StartZ, alphas);
+        }
+    }
+
+    private void ConfigurarMision()
+    {
+        switch (misionActual)
+        {
+            case MisionFitosanitario.Mision1:
+                radioFitosanitario = 6f;
+                intervaloDeActualizacion = 0.4f;
+                velocidadUmbral = 0.05f;
+                cultivo = "Soja con malezas";
+                producto = "Glifosato";
+                tipoProducto = "Herbicida Sistémicco";
+                momentoAplicacion = "Pre-siembra";
+                suelo = "Franco-arcilloso";
+                clima = "Templado";
+                break;
+            case MisionFitosanitario.Mision2:
+                radioFitosanitario = 7f;
+                intervaloDeActualizacion = 0.6f;
+                velocidadUmbral = 0.1f;
+                cultivo = "Trigo con roya";
+                producto = "Triazoles";
+                tipoProducto = "Fungicida";
+                momentoAplicacion = "Al aparecer síntomas";
+                suelo = "Fértil y húmedo";
+                clima = "Lluvioso";
+                break;
+            case MisionFitosanitario.Mision3:
+                radioFitosanitario = 5f;
+                intervaloDeActualizacion = 0.5f;
+                velocidadUmbral = 0.08f;
+                cultivo = "Huerta de tomate con plaga";
+                producto = "De contacto";
+                tipoProducto = "Insecticida";
+                momentoAplicacion = "Al detectar plaga";
+                suelo = "Liviano de horticultura";
+                clima = "Cálido y húmedo";
+                break;
         }
     }
 }
