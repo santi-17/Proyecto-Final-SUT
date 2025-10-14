@@ -41,8 +41,9 @@ public class Arado : MonoBehaviour
     [SerializeField] private float alturaTrabajo = -0.7f;
     [SerializeField] private float velocidadMovimiento = 2f;
 
-    [Header("Configuraciones por misión")]
-    public int misionActual = 1;
+    //[Header("Configuraciones por misión")]
+    public enum MisionArado { Mision1, Mision2, Mision3 };
+    public MisionArado misionActual = MisionArado.Mision1;
     public List<ConfiguracionArado> configuraciones = new List<ConfiguracionArado>();
 
     [Header("Etiqueta visual")]
@@ -69,7 +70,7 @@ public class Arado : MonoBehaviour
                     nombreMision = "Litoral Oeste (Vertedera)",
                     tipoArado = "Vertedera",
                     descripcionSuelo = "Franco-arcilloso profundo, húmedo moderado",
-                    profundidadSurco = 0.0020f,
+                    profundidadSurco = 0.0015f,
                     materialAradoIndex = 1,
                     colorParticulas = new Color(0.25f, 0.15f, 0.05f),
                     tiempoEntreArados = 0.1f
@@ -78,7 +79,7 @@ public class Arado : MonoBehaviour
                     nombreMision = "Norte Seco (Cincel)",
                     tipoArado = "Cincel",
                     descripcionSuelo = "Arenoso, clima caluroso y seco",
-                    profundidadSurco = 0.0015f,
+                    profundidadSurco = 0.0010f,
                     materialAradoIndex = 1,
                     colorParticulas = new Color(0.7f, 0.6f, 0.4f),
                     tiempoEntreArados = 0.15f
@@ -95,7 +96,7 @@ public class Arado : MonoBehaviour
             });
         }
 
-        int index = Mathf.Clamp(misionActual - 1, 0, configuraciones.Count - 1);
+        int index = Mathf.Clamp((int) misionActual, 0, configuraciones.Count - 1);
         configActiva = configuraciones[index];
 
         Debug.Log($"[Arado] Misión: {configActiva.nombreMision}");

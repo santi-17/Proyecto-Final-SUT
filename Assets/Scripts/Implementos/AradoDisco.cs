@@ -114,19 +114,19 @@ public class AradoDisco : MonoBehaviour
             case MisionDisquera.Mision1:
                 tipoDisco = "Dentado";
                 cultivoObjetivo = "Soja";
-                profundidadSurco = 0.40f;
+                profundidadSurco = 0.30f;
                 size = 60;
                 break;
             case MisionDisquera.Mision2:
                 tipoDisco = "Ondulado";
                 cultivoObjetivo = "Zanahoria";
-                profundidadSurco = 0.25f;
+                profundidadSurco = 0.20f;
                 size = 60;
                 break;
             case MisionDisquera.Mision3:
                 tipoDisco = "Pesado";
                 cultivoObjetivo = "Pastura";
-                profundidadSurco = 0.45f;
+                profundidadSurco = 0.35f;
                 size = 60;
                 break;
         }

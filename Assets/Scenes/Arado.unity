@@ -1131,6 +1131,10 @@ PrefabInstance:
       propertyPath: etiquetaTipoArado
       value: 
       objectReference: {fileID: 219647698}
+    - target: {fileID: 6831501045932217748, guid: 518b18fcb5027bb42ad0703797be7fa1, type: 3}
+      propertyPath: configuraciones.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9151451307579563944, guid: 518b18fcb5027bb42ad0703797be7fa1, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.074
@@ -1670,7 +1674,7 @@ PrefabInstance:
       objectReference: {fileID: 1749196816}
     - target: {fileID: 6831501045932217748, guid: 518b18fcb5027bb42ad0703797be7fa1, type: 3}
       propertyPath: misionActual
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6831501045932217748, guid: 518b18fcb5027bb42ad0703797be7fa1, type: 3}
       propertyPath: modeloVisual
@@ -2814,7 +2818,7 @@ PrefabInstance:
       objectReference: {fileID: 1768484475}
     - target: {fileID: 6831501045932217748, guid: 518b18fcb5027bb42ad0703797be7fa1, type: 3}
       propertyPath: misionActual
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6831501045932217748, guid: 518b18fcb5027bb42ad0703797be7fa1, type: 3}
       propertyPath: modeloVisual
