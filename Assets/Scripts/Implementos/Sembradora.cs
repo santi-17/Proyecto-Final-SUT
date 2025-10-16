@@ -174,7 +174,9 @@ public class Sembradora : MonoBehaviour
     {
         if (!Physics.Raycast(puntoRaycast.position, Vector3.down, out RaycastHit hit, distanciaDeteccion))
             return;
-
+        Terrain hitTerrain = hit.collider.GetComponent<Terrain>();
+        if (hitTerrain == null || hitTerrain != terreno)
+            return;
         if (!hit.collider.TryGetComponent(out Terrain _))
             return;
 

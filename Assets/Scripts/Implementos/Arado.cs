@@ -183,6 +183,10 @@ public class Arado : MonoBehaviour
         if (!Physics.Raycast(puntoRaycast.position, Vector3.down, out RaycastHit hit, distanciaDeteccion))
             return;
 
+        Terrain hitTerrain = hit.collider.GetComponent<Terrain>();
+        if (hitTerrain == null || hitTerrain != terrain)
+            return;
+
         Vector3 terrainPos = hit.point - terrain.transform.position;
         TerrainData data = terrain.terrainData;
 
@@ -207,8 +211,9 @@ public class Arado : MonoBehaviour
             {
                 for (int i = 0; i < data.alphamapLayers; i++)
                     splatmap[x, z, i] = 0;
-
-                splatmap[x, z, configActiva.materialAradoIndex] = 1;
+                int layerMask = Math.Clamp(configActiva.materialAradoIndex, 0 , data.alphamapLayers - 1);
+                splatmap[x,z,layerMask] = 1;
+                //splatmap[x, z, configActiva.materialAradoIndex] = 1;
             }
         }
         data.SetAlphamaps(startAlphaX, startAlphaZ, splatmap);

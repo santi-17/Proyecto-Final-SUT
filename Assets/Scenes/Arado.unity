@@ -1096,6 +1096,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 560054343}
     - target: {fileID: 6831501045932217748, guid: 518b18fcb5027bb42ad0703797be7fa1, type: 3}
+      propertyPath: terreno
+      value: 
+      objectReference: {fileID: 560054343}
+    - target: {fileID: 6831501045932217748, guid: 518b18fcb5027bb42ad0703797be7fa1, type: 3}
       propertyPath: campoTracker
       value: 
       objectReference: {fileID: 1415985780}
@@ -1107,6 +1111,10 @@ PrefabInstance:
       propertyPath: alturaTrabajo
       value: -0.7
       objectReference: {fileID: 0}
+    - target: {fileID: 6831501045932217748, guid: 518b18fcb5027bb42ad0703797be7fa1, type: 3}
+      propertyPath: puntoContacto
+      value: 
+      objectReference: {fileID: 1071321481}
     - target: {fileID: 6831501045932217748, guid: 518b18fcb5027bb42ad0703797be7fa1, type: 3}
       propertyPath: cuchillaDerecha
       value: 
