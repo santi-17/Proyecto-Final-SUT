@@ -39,7 +39,7 @@ public class Sembradora : MonoBehaviour
 
     [Header("Animación")]
     private float alturaReposo = 0f;
-    private float alturaTrabajo = -1f;
+    private float alturaTrabajo = -0.8f;
     private float velocidadMovimiento = 2f;
 
     void Start()
@@ -134,7 +134,7 @@ public class Sembradora : MonoBehaviour
                 cultivoObjetivo = "Trigo";
                 profundidadSiembra = 0.03f;
                 distanciaEntreSemillas = 1.5f;
-                anchoSembradora = 10f;
+                anchoSembradora = 12f;
                 break;
 
             case MisionSiembra.Mision2:
@@ -143,7 +143,7 @@ public class Sembradora : MonoBehaviour
                 cultivoObjetivo = "Soja";
                 profundidadSiembra = 0.05f;
                 distanciaEntreSemillas = 2.0f;
-                anchoSembradora = 11f;
+                anchoSembradora = 13f;
                 break;
 
             case MisionSiembra.Mision3:
@@ -152,7 +152,7 @@ public class Sembradora : MonoBehaviour
                 cultivoObjetivo = "Zanahoria";
                 profundidadSiembra = 0.01f;
                 distanciaEntreSemillas = 1.0f;
-                anchoSembradora = 8f;
+                anchoSembradora = 10f;
                 break;
         }
     }
