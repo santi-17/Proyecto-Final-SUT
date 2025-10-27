@@ -1,6 +1,7 @@
+using System;
 using System.Collections;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 
 public class AradoDisco : MonoBehaviour
 {
@@ -41,6 +42,10 @@ public class AradoDisco : MonoBehaviour
 
     [Header("Etiqueta visual")]
     [SerializeField] private Vector3 offsetEtiqueta = new Vector3(0, 3.5f, 0);
+
+    [Header("UI")]
+    [SerializeField] private GameObject cartelAdvertencia;
+    [SerializeField] private TextMeshProUGUI textoAdvertencia;
 
     void Start()
     {
@@ -150,11 +155,26 @@ public class AradoDisco : MonoBehaviour
         if (terreno == null) return;
         if(!Physics.Raycast(puntoRaycast.position, Vector3.down, out RaycastHit hit, distanciaDeteccion))
             return;
-        
-        Terrain hitTerrain = hit.collider.GetComponent<Terrain>();
-        if (hitTerrain == null || hitTerrain != terreno)
+
+        if (hit.collider == null)
+        {
+            Debug.LogWarning("[Disquera] El Raycast no golpeó nada.");
             return;
-       
+        }
+
+        Terrain hitTerrain = hit.collider.GetComponent<Terrain>();
+        if (hitTerrain == null) return;
+
+        // No limitar al terrain asignado, detectar cualquier terrain
+        TerrainInfo info = hitTerrain.GetComponent<TerrainInfo>();
+        if (info == null) return;
+
+        if (disqueraActiva && !string.Equals(info.tipoEsperado, tipoDisco, StringComparison.OrdinalIgnoreCase))
+        {
+            MostrarAdvertencia($"Atención: este terreno requiere una disquera tipo '{info.tipoEsperado}', no '{tipoDisco}'. " + System.Environment.NewLine + "¡Por Favor cambia la herramienta!");
+
+            return;
+        }
         TerrainData data = terreno.terrainData;
         Vector3 pos = hit.point - terreno.transform.position;
 
@@ -206,11 +226,39 @@ public class AradoDisco : MonoBehaviour
                 float divisor = Mathf.Max(widthH / 2f, 0.0001f);
                 float falloff = Mathf.Clamp01(1f - (distanciaCentro / divisor)); // Factor de caída basado en la distancia al centro
 
-                float variacion = Random.Range(0.9f, 1.1f);
+                float variacion = UnityEngine.Random.Range(0.9f, 1.1f);
                 heights[z, x] = Mathf.Clamp01(heights[z, x] - profNorm * falloff * variacion);
             }
         }
         data.SetHeights(startHX, startHZ, heights);
         
+    }
+
+    private void MostrarAdvertencia(string mensaje)
+    {
+        if (cartelAdvertencia == null || textoAdvertencia == null)
+        {
+            Debug.LogError("[Arado] No se asignó el CartelAdvertencia o el TextoAdvertencia en el inspector.");
+            return;
+        }
+
+        textoAdvertencia.text = mensaje;
+        if (cartelAdvertencia != null)
+            Debug.Log("[Arado] Se activó cartel de advertencia: " + mensaje);
+        else
+            Debug.LogWarning("[Arado] CartelAdvertencia no asignado en inspector.");
+
+        cartelAdvertencia.SetActive(true);
+
+        // Si ya hay una corrutina de ocultar en curso, la reiniciamos
+        StopCoroutine(nameof(EsconderCartel));
+        StartCoroutine(EsconderCartel(5f));
+    }
+
+    private IEnumerator EsconderCartel(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        if (cartelAdvertencia != null)
+            cartelAdvertencia.SetActive(false);
     }
 }

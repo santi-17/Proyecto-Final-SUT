@@ -50,6 +50,10 @@ public class Arado : MonoBehaviour
     [SerializeField] private TextMeshPro etiquetaTipoArado;
     [SerializeField] private Vector3 offsetEtiqueta = new Vector3(0, 3.5f, 0);
 
+    [Header("UI")]
+    [SerializeField] private GameObject cartelAdvertencia;
+    [SerializeField] private TextMeshProUGUI textoAdvertencia;
+
     private ConfiguracionArado configActiva;
 
     void Start()
@@ -118,7 +122,7 @@ public class Arado : MonoBehaviour
             etiquetaTipoArado = textoObj.AddComponent<TextMeshPro>();
             etiquetaTipoArado.alignment = TextAlignmentOptions.Center;
             etiquetaTipoArado.fontSize = 8f;
-            etiquetaTipoArado.color = Color.yellow;
+            etiquetaTipoArado.color = Color.white;
         }
 
         etiquetaTipoArado.text = configActiva.tipoArado;
@@ -182,10 +186,27 @@ public class Arado : MonoBehaviour
     {
         if (!Physics.Raycast(puntoRaycast.position, Vector3.down, out RaycastHit hit, distanciaDeteccion))
             return;
+        //Debug.DrawRay(puntoRaycast.position, Vector3.down * distanciaDeteccion, Color.red, 1f);
+
+        if (hit.collider == null)
+        {
+            Debug.LogWarning("[Arado] El Raycast no golpeó nada.");
+            return;
+        }
 
         Terrain hitTerrain = hit.collider.GetComponent<Terrain>();
-        if (hitTerrain == null || hitTerrain != terrain)
+        if (hitTerrain == null) return;
+        
+        // No limitar al terrain asignado, detectar cualquier terrain
+        TerrainInfo info = hitTerrain.GetComponent<TerrainInfo>();
+        if (info == null) return;
+
+        if (aradoActivo && !string.Equals(info.tipoEsperado, configActiva.tipoArado, StringComparison.OrdinalIgnoreCase))
+        {
+            MostrarAdvertencia($"Atención: este terreno requiere un arado tipo '{info.tipoEsperado}', no '{configActiva.tipoArado}'. " + System.Environment.NewLine + "¡Por Favor cambia la herramienta!");
+
             return;
+        }
 
         Vector3 terrainPos = hit.point - terrain.transform.position;
         TerrainData data = terrain.terrainData;
@@ -251,4 +272,34 @@ public class Arado : MonoBehaviour
         }
         data.SetHeights(startX, startZ, heights);
     }
+
+    private void MostrarAdvertencia(string mensaje)
+    {
+        if (cartelAdvertencia == null || textoAdvertencia == null)
+        {
+            Debug.LogError("[Arado] No se asignó el CartelAdvertencia o el TextoAdvertencia en el inspector.");
+            return;
+        }
+
+        textoAdvertencia.text = mensaje;
+        if (cartelAdvertencia != null)
+            Debug.Log("[Arado] Se activó cartel de advertencia: " + mensaje);
+        else
+            Debug.LogWarning("[Arado] CartelAdvertencia no asignado en inspector.");
+
+        cartelAdvertencia.SetActive(true);
+
+        // Si ya hay una corrutina de ocultar en curso, la reiniciamos
+        StopCoroutine(nameof(EsconderCartel));
+        StartCoroutine(EsconderCartel(5f));
+    }
+
+    private IEnumerator EsconderCartel(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        if (cartelAdvertencia != null)
+            cartelAdvertencia.SetActive(false);
+    }
+
+
 }

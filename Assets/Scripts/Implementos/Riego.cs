@@ -1,7 +1,9 @@
-using System.Collections;
+Ôªøusing System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.EventSystems;
+using System;
 
 public class Riego : MonoBehaviour
 {
@@ -15,9 +17,9 @@ public class Riego : MonoBehaviour
     [Header("Referencias")]
     public Terrain terreno;
     public ParticleSystem[] aspersores;
-    [SerializeField] private Vector3 offsetEtiqueta = new Vector3(0, 3.5f, 0);
+    private Vector3 offsetEtiqueta = new Vector3(0, 6f, 0);
 
-    [Header("ConfiguraciÛn de Riego")]
+    [Header("Configuraci√≥n de Riego")]
     public int indiceCapaHumedad = 1;
     private float radioRiego;
     private float intervaloDeActualizacion;
@@ -26,15 +28,17 @@ public class Riego : MonoBehaviour
     private string frecuenciaRiego;
     private string horarioRiego;
     private string cultivo;
-    private string suelo;
-    private string clima;
-
+    
     private TerrainData data;
     private float tiempoUltimaActualizacion;
     private Vector3 ultimaPosicion;
     private float velocidadActual;
 
     private TMP_Text etiquetaRiego;
+
+    [Header("UI")]
+    [SerializeField] private GameObject cartelAdvertencia;
+    [SerializeField] private TextMeshProUGUI textoAdvertencia;
 
     void Start()
     {
@@ -45,7 +49,7 @@ public class Riego : MonoBehaviour
             terreno = FindObjectOfType<Terrain>();
             if (terreno == null)
             {
-                Debug.LogError("[Riego] No se encontrÛ ning˙n Terrain en la escena.");
+                Debug.LogError("[Riego] No se encontr√≥ ning√∫n Terrain en la escena.");
                 enabled = false;
                 return;
             }
@@ -66,8 +70,8 @@ public class Riego : MonoBehaviour
 
         etiquetaRiego = textoObj.AddComponent<TextMeshPro>();
         etiquetaRiego.alignment = TextAlignmentOptions.Center;
-        etiquetaRiego.fontSize = 7f;
-        etiquetaRiego.color = new Color(0.2f, 0.7f, 1f);
+        etiquetaRiego.fontSize = 8f;
+        etiquetaRiego.color = Color.white; //new Color(0.2f, 0.7f, 1f);
         etiquetaRiego.text = $"{tipoRiego}\nFrecuencia: {frecuenciaRiego}\nHorario: {horarioRiego}\nCultivo: {cultivo}";
 
         ultimaPosicion = transform.position;
@@ -78,6 +82,21 @@ public class Riego : MonoBehaviour
         if (Input.GetKeyDown(teclaActivar))
         {
             riegoActivo = !riegoActivo;
+            //RaycastHit hit;
+            //if (!Physics.Raycast(transform.position + Vector3.up, Vector3.down, out hit, 10f))
+            //    return;
+            //Terrain hitTerrain = hit.collider.GetComponent<Terrain>();
+            //if (hitTerrain == null) return;
+            
+            //TerrainInfo info = hitTerrain.GetComponent<TerrainInfo>();
+            //if (info == null) return;
+
+            //if (riegoActivo && (!string.Equals(info.tipoEsperado, tipoRiego, StringComparison.OrdinalIgnoreCase) || !string.Equals(info.cultivoEsperado, cultivo, StringComparison.OrdinalIgnoreCase)))
+            //{
+
+            //    MostrarAdvertencia($"Atenci√≥n: este terreno requiere una regadora '{info.tipoEsperado}' para '{info.cultivoEsperado}', no '{tipoRiego}' para '{cultivo}'.\n¬°Por favor cambia la herramienta o el cultivo!");
+            //    return;
+            //}
             ActivarAspersores(riegoActivo);
             Debug.Log($"[Riego] Activado: {riegoActivo}");
         }
@@ -87,11 +106,48 @@ public class Riego : MonoBehaviour
             velocidadActual = (transform.position - ultimaPosicion).magnitude / Mathf.Max(Time.deltaTime, 0.0001f);
         ultimaPosicion = transform.position;
 
-        if (riegoActivo && velocidadActual > velocidadUmbral && Time.time - tiempoUltimaActualizacion >= intervaloDeActualizacion)
+        //if (riegoActivo && velocidadActual > velocidadUmbral && Time.time - tiempoUltimaActualizacion >= intervaloDeActualizacion)
+        //{
+        //    PintarTerreno();
+        //    tiempoUltimaActualizacion = Time.time;
+        //}
+        if (riegoActivo)
         {
-            PintarTerreno();
-            tiempoUltimaActualizacion = Time.time;
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position + Vector3.up, Vector3.down, out hit, 10f))
+            {
+                Terrain hitTerrain = hit.collider.GetComponent<Terrain>();
+
+                if (hitTerrain == null)
+                {
+                    return;
+                }
+
+                TerrainInfo info = hitTerrain.GetComponent<TerrainInfo>();
+
+                if (info != null &&
+                    (!string.Equals(info.tipoEsperado, tipoRiego, StringComparison.OrdinalIgnoreCase) ||
+                     !string.Equals(info.cultivoEsperado, cultivo, StringComparison.OrdinalIgnoreCase)))
+                {
+                    MostrarAdvertencia($"Atenci√≥n: este terreno requiere una regadora '{info.tipoEsperado}' para '{info.cultivoEsperado}', no '{tipoRiego}' para '{cultivo}'.\n¬°Por favor cambia la herramienta!");
+                    return;
+                }
+
+                //OcultarAdvertencia(); //Si est√° todo bien, ocultar
+
+                // Solo pintar si velocidad > umbral
+                if (velocidadActual > velocidadUmbral && Time.time - tiempoUltimaActualizacion >= intervaloDeActualizacion)
+                {
+                    PintarTerreno(hitTerrain); 
+                    tiempoUltimaActualizacion = Time.time;
+                }
+            }
+            else
+            {
+                MostrarAdvertencia(" No est√°s sobre ning√∫n terreno.");
+            }
         }
+        //else EsconderCartel();
     }
 
     private void LateUpdate()
@@ -114,14 +170,18 @@ public class Riego : MonoBehaviour
         }
     }
 
-    void PintarTerreno()
+    void PintarTerreno(Terrain hitTerrain)
     {
-        if (terreno == null || data == null) return;
+        //if (terreno == null || data == null) return;
+        if(hitTerrain == null) return;
 
-        float sizeX = Mathf.Max(data.size.x, 0.0001f);
-        float sizeZ = Mathf.Max(data.size.z, 0.0001f);
+        TerrainData dataLocal = hitTerrain.terrainData;
+        if (dataLocal == null) return;
 
-        int paintRadius = Mathf.RoundToInt((radioRiego / sizeX) * data.alphamapWidth);
+        float sizeX = Mathf.Max(dataLocal.size.x, 0.0001f);
+        float sizeZ = Mathf.Max(dataLocal.size.z, 0.0001f);
+
+        int paintRadius = Mathf.RoundToInt((radioRiego / sizeX) * dataLocal.alphamapWidth);
         paintRadius = Mathf.Max(paintRadius, 1);
         int paintSize = paintRadius * 2 + 1;
 
@@ -129,14 +189,14 @@ public class Riego : MonoBehaviour
         {
             if (aspersor == null) continue;
 
-            Vector3 posicion = aspersor.transform.position - terreno.transform.position;
-            int mapX = Mathf.RoundToInt((posicion.x / sizeX) * data.alphamapWidth);
-            int mapZ = Mathf.RoundToInt((posicion.z / sizeZ) * data.alphamapHeight);
+            Vector3 posicion = aspersor.transform.position - hitTerrain.transform.position;
+            int mapX = Mathf.RoundToInt((posicion.x / sizeX) * dataLocal.alphamapWidth);
+            int mapZ = Mathf.RoundToInt((posicion.z / sizeZ) * dataLocal.alphamapHeight);
 
-            int startX = Mathf.Clamp(mapX - paintRadius, 0, data.alphamapWidth - paintSize);
-            int startZ = Mathf.Clamp(mapZ - paintRadius, 0, data.alphamapHeight - paintSize);
+            int startX = Mathf.Clamp(mapX - paintRadius, 0, dataLocal.alphamapWidth - paintSize);
+            int startZ = Mathf.Clamp(mapZ - paintRadius, 0, dataLocal.alphamapHeight - paintSize);
 
-            float[,,] alphas = data.GetAlphamaps(startX, startZ, paintSize, paintSize);
+            float[,,] alphas = dataLocal.GetAlphamaps(startX, startZ, paintSize, paintSize);
 
             for (int x = 0; x < paintSize; x++)
             {
@@ -145,13 +205,13 @@ public class Riego : MonoBehaviour
                     float dist = Vector2.Distance(new Vector2(x, z), new Vector2(paintRadius, paintRadius));
                     if (dist <= paintRadius)
                     {
-                        for (int i = 0; i < data.alphamapLayers; i++)
+                        for (int i = 0; i < dataLocal.alphamapLayers; i++)
                             alphas[z, x, i] = (i == indiceCapaHumedad) ? 1f : 0f;
                     }
                 }
             }
 
-            data.SetAlphamaps(startX, startZ, alphas);
+            dataLocal.SetAlphamaps(startX, startZ, alphas);
         }
     }
 
@@ -161,11 +221,9 @@ public class Riego : MonoBehaviour
         {
             case MisionRiego.Mision1:
                 cultivo = "Lechuga";
-                suelo = "Arenoso";
-                clima = "Muy caluroso";
                 tipoRiego = "Goteo";
                 frecuenciaRiego = "Diario";
-                horarioRiego = "MaÒana o atardecer";
+                horarioRiego = "Ma√±ana o atardecer";
                 radioRiego = 3f;
                 intervaloDeActualizacion = 0.3f;
                 velocidadUmbral = 0.05f;
@@ -173,27 +231,47 @@ public class Riego : MonoBehaviour
 
             case MisionRiego.Mision2:
                 cultivo = "Trigo";
-                suelo = "Arcilloso del sur";
-                clima = "FrÌo y muy h˙medo";
-                tipoRiego = "AspersiÛn";
-                frecuenciaRiego = "Cada 10 dÌas";
-                horarioRiego = "Sin restricciÛn";
+                tipoRiego = "Aspersi√≥n";
+                frecuenciaRiego = "Cada 10 d√≠as";
+                horarioRiego = "Sin restricci√≥n";
                 radioRiego = 7f;
                 intervaloDeActualizacion = 0.8f;
                 velocidadUmbral = 0.1f;
                 break;
 
             case MisionRiego.Mision3:
-                cultivo = "MaÌz";
-                suelo = "Franco profundo";
-                clima = "C·lido y seco";
-                tipoRiego = "AspersiÛn";
-                frecuenciaRiego = "Cada 4-5 dÌas";
+                cultivo = "Ma√≠z";
+                tipoRiego = "Aspersi√≥n";
+                frecuenciaRiego = "Cada 4-5 d√≠as";
                 horarioRiego = "Preferencia tarde";
                 radioRiego = 6f;
                 intervaloDeActualizacion = 0.5f;
                 velocidadUmbral = 0.1f;
                 break;
         }
+    }
+
+
+    private void MostrarAdvertencia(string mensaje)
+    {
+        if (cartelAdvertencia == null || textoAdvertencia == null)
+        {
+            Debug.LogError("[Riego] No se asign√≥ el CartelAdvertencia o el TextoAdvertencia en el inspector.");
+            return;
+        }
+
+        textoAdvertencia.text = mensaje;
+        cartelAdvertencia.SetActive(true);
+
+        // Si ya hay una corrutina de ocultar en curso, la reiniciamos
+        StopCoroutine(nameof(EsconderCartel));
+        StartCoroutine(EsconderCartel(5f));
+    }
+
+    private IEnumerator EsconderCartel(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        if (cartelAdvertencia != null)
+            cartelAdvertencia.SetActive(false);
     }
 }
