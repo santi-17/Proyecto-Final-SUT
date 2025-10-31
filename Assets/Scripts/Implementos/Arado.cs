@@ -291,7 +291,7 @@ public class Arado : MonoBehaviour
 
         // Si ya hay una corrutina de ocultar en curso, la reiniciamos
         StopCoroutine(nameof(EsconderCartel));
-        StartCoroutine(EsconderCartel(5f));
+        StartCoroutine(EsconderCartel(10f));
     }
 
     private IEnumerator EsconderCartel(float delay)

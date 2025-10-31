@@ -7,8 +7,6 @@ public class TerrainInfo : MonoBehaviour
     public string description; // Texto descriptivo del terreno
     public string tipoEsperado; // tipo de implemento que corresponde a este terreno
     public string cultivoEsperado;
-    //public Vector3 offset = new Vector3(0, 10f, 0); // Distancia sobre el terreno
-    //public TextMeshProUGUI terrainLabel; // Texto asignado manualmente en el inspector
 
     //private Transform mainCamera;
     private Terrain terrain;

@@ -2,31 +2,7 @@ using UnityEngine;
 
 public class Cultivo : MonoBehaviour
 {
-    //private Rigidbody rb;
-    //private bool aplastado = false;
-
-    //void Start()
-    //{
-    //    rb = GetComponent<Rigidbody>();
-    //    rb.isKinematic = true; // no simula físicas hasta que lo toquen
-    //}
-
-    //private void OnCollisionEnter(Collision collision)
-    //{
-    //    if (aplastado) return;
-
-    //    if (collision.gameObject.CompareTag("Tractor") || collision.gameObject.CompareTag("Implemento"))
-    //    {
-    //        aplastado = true;
-
-    //        // Simular aplastamiento reduciendo altura
-    //        transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y * 0.3f, transform.localScale.z  * 0.3f);
-
-    //        // Opcional: hacer que deje de interactuar
-    //        Destroy(rb); // o rb.isKinematic = true;
-    //        Destroy(GetComponent<Collider>()); // ya no choca más
-    //    }
-    //}
+  
     private bool aplastado = false;
     private Vector3 escalaOriginal;
     private Vector3 escalaAplastada;

@@ -24,11 +24,5 @@ public class MiniMap : MonoBehaviour
         transform.position = newPosition;
         transform.rotation = Quaternion.Euler(90f, player.eulerAngles.y, 0f); // Mantiene la rotación del minimapa
 
-        // Asegúrate de que el jugador no sea nulo
-        //if (player != null)
-        //{
-        //    // Actualiza la posición del minimapa para que siga al jugador
-        //    transform.position = new Vector3(player.position.x, transform.position.y, player.position.z);
-        //}
     }
 }

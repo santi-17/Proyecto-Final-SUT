@@ -14,9 +14,9 @@ public class Sembradora : MonoBehaviour
 
     [Header("Referencias")]
     [SerializeField] private Terrain terreno;
-    [SerializeField] private Transform puntoRaycast;
+    [SerializeField] public Transform puntoRaycast;
     [SerializeField] private Transform modeloVisual;
-    [SerializeField] private ParticleSystem particulasSembrado;
+    [SerializeField] public ParticleSystem particulasSembrado;
     [SerializeField] private GameObject prefabSemilla;
     [SerializeField] private TextMeshPro etiquetaTipoSembradora;
      private Vector3 offsetEtiqueta = new Vector3(0, 5f, 0);

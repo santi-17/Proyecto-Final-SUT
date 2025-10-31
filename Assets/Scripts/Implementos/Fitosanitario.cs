@@ -97,11 +97,6 @@ public class Fitosanitario : MonoBehaviour
         // Calcular velocidad (distancia recorrida por segundo)
         ultimaPosicion = transform.position;
 
-        //if (fitosanitarioActivo && velocidadActual > velocidadUmbral && Time.time - tiempoUltimaActualizacion >= intervaloDeActualizacion)
-        //{
-        //    PintarTerreno();
-        //    tiempoUltimaActualizacion = Time.time;
-        //}
         if (fitosanitarioActivo)
         {
             RaycastHit hit;

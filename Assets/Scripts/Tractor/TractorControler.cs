@@ -144,7 +144,7 @@ public class TractorControler : MonoBehaviour
             tiempoUltimoVuelco = 0f; // Reiniciar el tiempo si el tractor no esta volcado
         
         // Reiniciar el tractor si se presiona la tecla y ha pasado el tiempo necesario desde el ultimo vuelco
-        if (Input.GetKeyDown(teclaReinicio) /*&& Time.time - tiempoUltimoVuelco > tiempoReinicio*/)
+        if (Input.GetKeyDown(teclaReinicio))
         {
             ReiniciarTractor();
         }
@@ -159,9 +159,7 @@ public class TractorControler : MonoBehaviour
     private void ReiniciarTractor()
     {
         // Reiniciar la posicion y rotacion del tractor
-        //Vector3 pos = transform.position; 
-        //pos.y = alturaReinicio;
-
+       
         transform.position = posicionInicial;//new Vector3(transform.position.x, alturaReinicio, transform.position.z);
         transform.rotation = rotacionInicial;//Quaternion.Euler(0f, transform.rotation.eulerAngles.y, 0f);
         

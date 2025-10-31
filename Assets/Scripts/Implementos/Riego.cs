@@ -82,21 +82,6 @@ public class Riego : MonoBehaviour
         if (Input.GetKeyDown(teclaActivar))
         {
             riegoActivo = !riegoActivo;
-            //RaycastHit hit;
-            //if (!Physics.Raycast(transform.position + Vector3.up, Vector3.down, out hit, 10f))
-            //    return;
-            //Terrain hitTerrain = hit.collider.GetComponent<Terrain>();
-            //if (hitTerrain == null) return;
-            
-            //TerrainInfo info = hitTerrain.GetComponent<TerrainInfo>();
-            //if (info == null) return;
-
-            //if (riegoActivo && (!string.Equals(info.tipoEsperado, tipoRiego, StringComparison.OrdinalIgnoreCase) || !string.Equals(info.cultivoEsperado, cultivo, StringComparison.OrdinalIgnoreCase)))
-            //{
-
-            //    MostrarAdvertencia($"Atención: este terreno requiere una regadora '{info.tipoEsperado}' para '{info.cultivoEsperado}', no '{tipoRiego}' para '{cultivo}'.\n¡Por favor cambia la herramienta o el cultivo!");
-            //    return;
-            //}
             ActivarAspersores(riegoActivo);
             Debug.Log($"[Riego] Activado: {riegoActivo}");
         }
@@ -106,11 +91,6 @@ public class Riego : MonoBehaviour
             velocidadActual = (transform.position - ultimaPosicion).magnitude / Mathf.Max(Time.deltaTime, 0.0001f);
         ultimaPosicion = transform.position;
 
-        //if (riegoActivo && velocidadActual > velocidadUmbral && Time.time - tiempoUltimaActualizacion >= intervaloDeActualizacion)
-        //{
-        //    PintarTerreno();
-        //    tiempoUltimaActualizacion = Time.time;
-        //}
         if (riegoActivo)
         {
             RaycastHit hit;
